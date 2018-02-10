@@ -56,7 +56,7 @@ class Trie:
         return {"i": latest_match_i, "d": latest_match_node.data}
 
     def get_data(self, word):
-        if word == '' or word == None:
+        if word == None:
             return False
         current_node = self.head
         for letter in word:

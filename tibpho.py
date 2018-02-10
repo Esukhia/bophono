@@ -15,10 +15,9 @@ def get_trie_from_file(filename, type="roots"):
 roots = get_trie_from_file("data/roots.csv")
 ends = get_trie_from_file("data/ends.csv")
 
-def get_phonetics(str):
+def get_phonetics(str, schema=0):
     global roots, ends
     rootinfo = roots.get_longest_match_with_data(str)
-    print(rootinfo)
     if not rootinfo:
         return None
     enddata = ends.get_data(str[rootinfo['i']:])
@@ -30,4 +29,6 @@ if __name__ == '__main__':
     """ Example use """
     print(get_phonetics('ཀྱང'))
     print(get_phonetics('བག'))
+    print(get_phonetics('བག'))
     print(get_phonetics('བགའ'))
+    print(get_phonetics('ཀ'))
