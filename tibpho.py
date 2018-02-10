@@ -6,7 +6,10 @@ def get_trie_from_file(filename, type="roots"):
     with open(filename, newline='') as csvfile:
         freader = csv.reader(csvfile)
         for row in freader:
-            trie.add(row[0], row[1])
+            if row[0][-1:] == '*':
+                trie.add(row[0][0:-1], row[1], False)
+            else:
+                trie.add(row[0], row[1])
     return trie
 
 roots = get_trie_from_file("data/roots.csv")
@@ -15,6 +18,7 @@ ends = get_trie_from_file("data/ends.csv")
 def get_phonetics(str):
     global roots, ends
     rootinfo = roots.get_longest_match_with_data(str)
+    print(rootinfo)
     if not rootinfo:
         return None
     enddata = ends.get_data(str[rootinfo['i']:])
@@ -25,3 +29,5 @@ def get_phonetics(str):
 if __name__ == '__main__':
     """ Example use """
     print(get_phonetics('ཀྱང'))
+    print(get_phonetics('བག'))
+    print(get_phonetics('བགའ'))
