@@ -20,6 +20,8 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 ## TODO
 
 - ཀཿ་ཐོག
+- ignore wasur, 0F35, 0F37
+- study behavior for ambiguous syllables
 
 ## License
 

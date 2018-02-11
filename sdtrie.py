@@ -35,12 +35,12 @@ class Trie:
         current_node.canbefinal = canbefinal
     
     def get_longest_match_with_data(self, word, bindex=0):
-        if word == '':
-            return None
         current_node = self.head
         wordlen = len(word)
         latest_match_node = None
-        latest_match_i = 0
+        if current_node.data:
+            latest_match_node = current_node
+        latest_match_i = bindex
         for i in range(bindex, wordlen):
             letter = word[i]
             if letter in current_node.children:
