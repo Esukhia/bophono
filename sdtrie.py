@@ -7,7 +7,7 @@ class Node:
         self.label = label
         self.data = data
         self.canbefinal = canbefinal
-        self.children = dict()
+        self.children = {}
     
     def addChild(self, key, data=None, canbefinal=True):
         if not isinstance(key, Node):
@@ -25,7 +25,7 @@ class Trie:
     def __getitem__(self, key):
         return self.head.children[key]
     
-    def add(self, word, data, canbefinal=True):
+    def add(self, word, data=True, canbefinal=True):
         current_node = self.head
         for c in word:
             if c not in current_node.children:
@@ -35,8 +35,8 @@ class Trie:
         current_node.canbefinal = canbefinal
     
     def get_longest_match_with_data(self, word):
-        if word == '' or word == None:
-            return False
+        if word == '':
+            return None
         current_node = self.head
         wordlen = len(word)
         latest_match_node = None
@@ -56,8 +56,6 @@ class Trie:
         return {"i": latest_match_i, "d": latest_match_node.data}
 
     def get_data(self, word):
-        if word == None:
-            return False
         current_node = self.head
         for letter in word:
             if letter in current_node.children:
@@ -65,6 +63,25 @@ class Trie:
             else:
                 return None
         return current_node.data
+
+    def _walk_all_data_rec(self, iterator, node, word, prefix):
+        """ Recursive function walking the tree """
+        # If we're still in the prefix:
+        if len(prefix) > 0:
+            letter = prefix[0]
+            if letter in node.children:
+                child_node = top_node.children[letter]
+                self._walk_all_data_rec(iterator, child_node, word+letter, prefix[1:])
+            return
+        if node.data:
+            iterator(word, node.data)
+        for letter, child_node in node.children.items():
+            self._walk_all_data_rec(iterator, child_node, word+letter, prefix)
+
+    def walk_all_data(self, iterator, prefix=''):
+        """ Iterates over all the data of a trie """
+        self._walk_all_data_rec(iterator, self.head, '', prefix)
+        
 
 if __name__ == '__main__':
     """ Example use """
@@ -77,3 +94,6 @@ if __name__ == '__main__':
     trie.add("te", "te_data", False)
     print(trie.get_longest_match_with_data("tes"))
     print(trie.get_longest_match_with_data("te"))
+    def iteratortest(word, data):
+        print("data for \""+word+"\": "+data)
+    trie.walk_all_data(iteratortest)
