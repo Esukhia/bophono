@@ -34,30 +34,30 @@ class Trie:
         current_node.data = data
         current_node.canbefinal = canbefinal
     
-    def get_longest_match_with_data(self, word):
+    def get_longest_match_with_data(self, word, bindex=0):
         if word == '':
             return None
         current_node = self.head
         wordlen = len(word)
         latest_match_node = None
         latest_match_i = 0
-        i = 0
-        for letter in word:
+        for i in range(bindex, wordlen):
+            letter = word[i]
             if letter in current_node.children:
-                i = i+1
                 current_node = current_node.children[letter]
-                if current_node.data != None and (i < wordlen or current_node.canbefinal):
+                if current_node.data and (i+1 < wordlen or current_node.canbefinal):
                     latest_match_node = current_node
-                    latest_match_i = i
+                    latest_match_i = i+1
             else:
                 break
         if latest_match_node == None:
             return None
         return {"i": latest_match_i, "d": latest_match_node.data}
 
-    def get_data(self, word):
+    def get_data(self, word, bindex=0):
         current_node = self.head
-        for letter in word:
+        for i in range(bindex, len(word)):
+            letter = word[i]
             if letter in current_node.children:
                 current_node = current_node.children[letter]
             else:

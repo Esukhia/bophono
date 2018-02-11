@@ -17,6 +17,10 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 
 ## Running
 
+## TODO
+
+- ཀཿ་ཐོག
+
 ## License
 
-The Python code is Copyright (C) 2018 Elie Roux, provided under [MIT License]().
+The Python code is Copyright (C) 2018 Elie Roux, provided under [MIT License](LICENSE).
