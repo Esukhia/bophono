@@ -1,19 +1,36 @@
 import sdtrie
 import csv
 
-def get_trie_from_file(filename, type="roots"):
+
+Cx_to_vow = {'a': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
+Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
+
+def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
+    if len(unicodeTib) > 2 and unicodeTib[-3] == '/' and unicodeTib[-2] == 'C':
+        vow = Cx_to_vow[unicodeTib[-1:]]
+        for affix in Cx_affix_list:
+            phonVowAffix = endsTrie.get_data(vow+affix)
+            add_association_in_trie(unicodeTib[0:-3]+affix, phonStr+phonVowAffix, trie, phonType)
+        return
+    if unicodeTib.startswith('2:'):
+        trie.add(unicodeTib[2:], '2:'+phonStr)
+    if unicodeTib.endswith('*'):
+        trie.add(unicodeTib[0:-1], phonStr, False)
+    else:
+        trie.add(unicodeTib, phonStr)
+
+
+def get_trie_from_file(filename, phonType="roots", endsTrie=None):
     trie = sdtrie.Trie()
     with open(filename, newline='') as csvfile:
         freader = csv.reader(csvfile)
         for row in freader:
-            if row[0][-1:] == '*':
-                trie.add(row[0][0:-1], row[1], False)
-            else:
-                trie.add(row[0], row[1])
+            add_association_in_trie(row[0], row[1], trie, phonType, endsTrie)
     return trie
 
 roots = get_trie_from_file("data/roots.csv")
-ends = get_trie_from_file("data/ends.csv")
+ends = get_trie_from_file("data/ends.csv", "ends")
+exceptions = get_trie_from_file("data/exceptions.csv", "exceptions", ends)
 
 config = {
     "useLitterary": True
@@ -33,15 +50,22 @@ def get_next_letter_index(tibstr, current, eindex):
             return i
     return -1
 
-def combine(previous, rootinfo, endinfo):
-    if previous:
-        return previous['phon']+rootinfo['d']+endinfo['d']
-    return rootinfo['d']+endinfo['d']
+def combine(previous, rootinfo, endinfo=None):
+    res = previous and previous['phon']+rootinfo['d'] or rootinfo['d']
+    return endinfo and res+endinfo['d'] or res
 
 def get_next_phon(tibstr, bindex, previous, eindex=-1, schema=0):
-    global roots, ends, ignored_chars
+    global roots, ends, exceptions, ignored_chars
     if eindex == -1:
         eindex = len(tibstr)
+    exceptioninfo = exceptions.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
+    if exceptioninfo and (previous or not exceptioninfo['d'].startswith('2:')):
+        # if it starts with '2:' and we're in the first syllable, we ignore it:
+        if exceptioninfo['d'].startswith('2:'):
+            exceptioninfo['d'] = exceptioninfo['d'][2:]
+        newres = combine(previous, exceptioninfo, None)
+        assert(exceptioninfo['i']>bindex)
+        return {'phon': newres, 'i': exceptioninfo['i']}
     rootinfo = roots.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
     if not rootinfo:
         return None
@@ -74,5 +98,5 @@ if __name__ == '__main__':
     print(get_phonetics('བགའ'))
     print(get_phonetics('ཀ'))
     print(get_phonetics('ཀ\u0FAD་ཁ'))
-    print(get_phonetics('རྒྱལ་རྩེ'))
+    print(get_phonetics('ཀ་བོ'))
     

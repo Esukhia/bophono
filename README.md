@@ -20,7 +20,8 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 ## TODO
 
 - ཀཿ་ཐོག
-- study behavior for ambiguous syllables
+- study behavior for ambiguous syllables (probably list some as exceptions)
+- document annotations
 
 ## License
 
