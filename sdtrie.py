@@ -34,18 +34,21 @@ class Trie:
         current_node.data = data
         current_node.canbefinal = canbefinal
     
-    def get_longest_match_with_data(self, word, bindex=0):
+    def get_longest_match_with_data(self, word, bindex=0, eindex=-1, ignored_chars=None):
         current_node = self.head
-        wordlen = len(word)
+        if eindex == -1:
+            eindex = len(word)
         latest_match_node = None
         if current_node.data:
             latest_match_node = current_node
         latest_match_i = bindex
-        for i in range(bindex, wordlen):
+        for i in range(bindex, eindex):
             letter = word[i]
+            if ignored_chars and letter in ignored_chars:
+                continue
             if letter in current_node.children:
                 current_node = current_node.children[letter]
-                if current_node.data and (i+1 < wordlen or current_node.canbefinal):
+                if current_node.data and (i+1 < eindex or current_node.canbefinal):
                     latest_match_node = current_node
                     latest_match_i = i+1
             else:
@@ -54,10 +57,14 @@ class Trie:
             return None
         return {"i": latest_match_i, "d": latest_match_node.data}
 
-    def get_data(self, word, bindex=0):
+    def get_data(self, word, bindex=0, eindex=-1, ignored_chars=None):
         current_node = self.head
-        for i in range(bindex, len(word)):
+        if eindex == -1:
+            eindex = len(word)
+        for i in range(bindex, eindex):
             letter = word[i]
+            if ignored_chars and letter in ignored_chars:
+                continue
             if letter in current_node.children:
                 current_node = current_node.children[letter]
             else:

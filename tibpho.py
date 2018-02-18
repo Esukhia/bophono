@@ -19,15 +19,17 @@ config = {
     "useLitterary": True
 }
 
+ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
+
 def is_tib_letter(c):
     """is a tibetan letter"""
     return c >= '\u0F40' and c <= '\u0FBC'
 
-def get_next_letter_index(tibstr, current):
+def get_next_letter_index(tibstr, current, eindex):
     """finds first letter index in tibstr after current index"""
-    for i in range(current, len(tibstr)):
+    for i in range(current, eindex):
         letter = tibstr[i]
-        if is_tib_letter(letter):
+        if is_tib_letter(letter) and letter not in ignored_chars:
             return i
     return -1
 
@@ -36,16 +38,17 @@ def combine(previous, rootinfo, endinfo):
         return previous['phon']+rootinfo['d']+endinfo['d']
     return rootinfo['d']+endinfo['d']
 
-def get_next_phon(tibstr, bindex, previous, schema=0):
-    global roots, ends
-    rootinfo = roots.get_longest_match_with_data(tibstr, bindex)
+def get_next_phon(tibstr, bindex, previous, eindex=-1, schema=0):
+    global roots, ends, ignored_chars
+    if eindex == -1:
+        eindex = len(tibstr)
+    rootinfo = roots.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
     if not rootinfo:
         return None
-    endinfo = ends.get_longest_match_with_data(tibstr, rootinfo['i'])
+    endinfo = ends.get_longest_match_with_data(tibstr, rootinfo['i'], eindex, ignored_chars)
     if not endinfo:
         return None
-    if endinfo['i'] < len(tibstr) and is_tib_letter(tibstr[endinfo['i']]):
-        print(endinfo['i'])
+    if endinfo['i'] < eindex and is_tib_letter(tibstr[endinfo['i']]) and (tibstr[endinfo['i']] not in ignored_chars):
         return None
     newres = combine(previous, rootinfo, endinfo)
     assert(endinfo['i']>bindex)
@@ -54,12 +57,13 @@ def get_next_phon(tibstr, bindex, previous, schema=0):
 def get_phonetics(tibstr, schema=0):
     i = 0
     res = None
-    while i < len(tibstr) and i >= 0: # > 0 covers the case where next_letter_index returns -1
+    tibstrlen = len(tibstr)
+    while i < tibstrlen and i >= 0: # > 0 covers the case where next_letter_index returns -1
         nextres = get_next_phon(tibstr, i, res)
         if not nextres:
             return res
         res = nextres
-        i = get_next_letter_index(tibstr, nextres['i'])
+        i = get_next_letter_index(tibstr, nextres['i'], tibstrlen)
     return res
 
 if __name__ == '__main__':
@@ -69,4 +73,6 @@ if __name__ == '__main__':
     print(get_phonetics('བག'))
     print(get_phonetics('བགའ'))
     print(get_phonetics('ཀ'))
-    print(get_phonetics('ཀ་ཁ'))
+    print(get_phonetics('ཀ\u0FAD་ཁ'))
+    print(get_phonetics('རྒྱལ་རྩེ'))
+    
