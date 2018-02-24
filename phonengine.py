@@ -1,5 +1,5 @@
 class PhonStateNT:
-    def __init__(self):
+    def __init__(self, options={}):
         self.position = 0
         self.rootconsonant = None
         self.vowel = None
@@ -7,6 +7,7 @@ class PhonStateNT:
         self.end = None
         self.tone = None
         self.phon = ''
+        self.options = options
   
     def getFinal(endstr):
         """ returns the final consonant or '' """
@@ -33,13 +34,14 @@ class PhonStateNT:
         'l': 'l', #p. 441
         'lh': 'l̥ʰ', #p. 441
         'h': 'h', #p. 441
+        'm': 'm', #p. 441
         'n': 'n', #p. 442
         'ng': 'ŋ', #p. 442
         'w': 'w', #p. 443
         'y': 'j' #p. 443
     }
 
-    simpleEndMapping = {
+    simpleEndVowMapping = {
         'ä': 'ɛ', #p. 443
         'ö': 'ø', #p. 444
         'u': 'u', #p. 444
@@ -47,15 +49,52 @@ class PhonStateNT:
         'i': 'i' #p. 444
     }
 
-    def getNextRootPhon(self, nrc): # nrc: nextrootconsonant
+    simpleFinalMapping = {
+        "'": 'ʔ', #p. 435
+        ":": 'ː', #p. 435
+        'm': 'm', #p. 444
+        'ng': 'ŋ', #p. 442
+    }
+
+    def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
+        """ this corresponds to the most common pattern for roots: phon1 at the beginning
+            of high-toned words, phon2 at the beginning of low-tones words, phon1 after
+            some consonnants (if lastcondition is met), and phon3 otherwise"""
+        if position == 1:
+            return tone == '+' and phon1 or phon2
+        return lastcondition and phon1 or phon3
+
+    def getNextRootPhon(nrc, tone, pos, lastfinal): # nrc: nextrootconsonant
         if nrc.startswith('~'):
             # TODO: Do some magic here?
             nrc = nrc[1:]
         if nrc in PhonStateNT.simpleRootMapping:
             return PhonStateNT.simpleRootMapping[nrc]
+        if nrc == 'k':
+            lastcond = (lastfinal == 'p')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'k', 'g', 'g̥')
+        if nrc == 'ky':
+            lastcond = (lastfinal == 'p')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'c', 'ɟ', 'ɟ̥')
+        if nrc == 'tr':
+            lastcond = (lastfinal == 'p' or lastfinal == 'k')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
+        if nrc == 't':
+            lastcond = (lastfinal == 'p' or lastfinal == 'k')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 't', 'd', 'd̥')
+        if nrc == 'p':
+            lastcond = (lastfinal == 'k')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'p', 'b', 'b̥')
+        if nrc == 'c':
+            lastcond = (lastfinal == 'p' or lastfinal == 'k')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'tɕ', 'dʑ', 'ɖ̥ʑ')
+        if nrc == 'ts':
+            lastcond = (lastfinal == 'p' or lastfinal == 'k')
+            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'ts', 'dz', 'dz̥')
+        print("unknown root consonant: "+nrc)
         return nrc
 
-    def doCombineCurEnd(self, endofword, rootconsonant=''):
+    def doCombineCurEnd(self, endofword, rootconsonant='', nextvowel=''):
         """ combined the self.end into the self.phon """
         if not self.end:
             return
@@ -67,6 +106,7 @@ class PhonStateNT:
         if self.end.endswith('~'):
             self.end = self.end[:-1]
         self.final = PhonStateNT.getFinal(self.end)
+        # TODO: option for r and l, replace : with ː
         self.phon += "v"
 
     def combineWith(self, nextroot, nextend):
@@ -79,9 +119,10 @@ class PhonStateNT:
                 nextroot = nextroot[:slashi]
         if self.position == 1:
             self.tone = nextroot[-1]
-        rootconsonant = nextroot[:-1]
-        self.doCombineCurEnd(False, rootconsonant)
-        nextrootphon = self.getNextRootPhon(rootconsonant)
+        nextrootconsonant = nextroot[:-1]
+        nextvowel = ''
+        self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
+        nextrootphon = PhonStateNT.getNextRootPhon(nextrootconsonant, self.tone, self.position, self.final)
         self.phon += nextrootphon
         self.end = nextend
     
