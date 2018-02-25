@@ -131,6 +131,11 @@ class PhonStateNT:
         if self.end.endswith('~'):
             self.end = self.end[:-1]
         self.final = PhonStateNT.getFinal(self.end)
+        # nasal prefix (not in NT)
+        if nrc.startswith('~'):
+            nrc = nrc[1:]
+            if self.position > 1 and self.final not in ['m', 'ng']:# TODO: exlude k too?
+                self.final = 'n'
         ## vowels:
         vowelPhon = ''
         if self.vowel in PhonStateNT.simpleVowMapping:
@@ -158,7 +163,6 @@ class PhonStateNT:
         self.phon += vowelPhon
         if self.position == 1:
             self.phon += self.tone == '+' and self.hightonechar or self.lowtonechar
-        # TODO: option for r and l, replace : with ː
         finalPhon = ''
         if self.final in PhonStateNT.simpleFinalMapping:
             vowelPhon = PhonStateNT.simpleFinalMapping[self.final]
@@ -177,7 +181,7 @@ class PhonStateNT:
                 elif self.vowel in ['e', 'i'] and nrc in ['m', 'ny', 'n', 'ng']:
                     finalPhon = 'ŋ'
                 else:
-                    print("unhandled case, this shouldn't happen")
+                    print("unhandled case, this shouldn't happen, nrc"+nrc+", vowel: "+self.vowel)
             else:
                 finalPhon = 'ʔ'
         elif self.final == 'p':

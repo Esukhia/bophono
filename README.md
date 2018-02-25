@@ -22,6 +22,8 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - ཀཿ་ཐོག
 - study behavior for ambiguous syllables (probably list some as exceptions)
 - document annotations
+- sku zda (kunta)
+- nasalisation dans da nga?
 
 ## License
 
