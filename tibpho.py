@@ -1,5 +1,6 @@
 import sdtrie
 import csv
+import PhonStateNT
 
 
 Cx_to_vow = {'a': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
@@ -51,49 +52,66 @@ def get_next_letter_index(tibstr, current, eindex):
     return -1
 
 def combine(previous, rootinfo, endinfo=None):
+    rootinfod = rootinfo['d']
+    previousendinfod = previous and previous['endinfod'] or None
+    slashi = rootinfod.find('/')
+    if slashi != -1:
+        if previous:
+            rootinfod = rootinfod[slashi+1:]
+        else:
+            rootinfod = rootinfod[:slashi]
+    if previousendinfod:
+        slashi = previousendinfod.find('/')
+        if slashi != -1:
+            previousendinfod = previousendinfod[slashi+1:]
+    curphon = previous and previous['phon'] or ''
+
     res = previous and previous['phon']+rootinfo['d'] or rootinfo['d']
     return endinfo and res+endinfo['d'] or res
 
-def get_next_phon(tibstr, bindex, previous, eindex=-1, schema=0):
+def finishcombination(phonres):
+    if not phonres:
+        return None
+
+def combine_next_phon(tibstr, bindex, state, eindex=-1, schema=0):
     global roots, ends, exceptions, ignored_chars
     if eindex == -1:
         eindex = len(tibstr)
     exceptioninfo = exceptions.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
-    if exceptioninfo and (previous or not exceptioninfo['d'].startswith('2:')):
+    if exceptioninfo and (state.position > 0 or not exceptioninfo['d'].startswith('2:')):
         # if it starts with '2:' and we're in the first syllable, we ignore it:
         if exceptioninfo['d'].startswith('2:'):
             exceptioninfo['d'] = exceptioninfo['d'][2:]
-        newres = combine(previous, exceptioninfo, None)
+        state.combineWithException(exceptioninfo['d'])
         assert(exceptioninfo['i']>bindex)
-        return {'phon': newres, 'i': exceptioninfo['i']}
+        return exceptioninfo['i']
     rootinfo = roots.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
     if not rootinfo:
-        return None
+        return -1
     endinfo = ends.get_longest_match_with_data(tibstr, rootinfo['i'], eindex, ignored_chars)
     if not endinfo:
-        return None
+        return -1
     if endinfo['i'] < eindex and is_tib_letter(tibstr[endinfo['i']]) and (tibstr[endinfo['i']] not in ignored_chars):
-        return None
-    newres = combine(previous, rootinfo, endinfo)
+        return -1
+    state.combineWith(rootinfo['d'], endinfo['d'])
     assert(endinfo['i']>bindex)
-    return {'phon': newres, 'i': endinfo['i']}
+    return endinfo['i']
 
 def get_phonetics(tibstr, schema=0):
     i = 0
-    res = None
+    state = PhonStateNT.PhonStateNT()
     tibstrlen = len(tibstr)
     while i < tibstrlen and i >= 0: # > 0 covers the case where next_letter_index returns -1
-        nextres = get_next_phon(tibstr, i, res)
-        if not nextres:
-            return res
-        res = nextres
-        i = get_next_letter_index(tibstr, nextres['i'], tibstrlen)
-    return res
+        matchlastidx = combine_next_phon(tibstr, i, state)
+        if matchlastidx == -1:
+            break
+        i = get_next_letter_index(tibstr, matchlastidx, tibstrlen)
+    state.finish()
+    return state.phon
 
 if __name__ == '__main__':
     """ Example use """
     print(get_phonetics('ཀྱང'))
-    print(get_phonetics('བག'))
     print(get_phonetics('བག'))
     print(get_phonetics('བགའ'))
     print(get_phonetics('ཀ'))

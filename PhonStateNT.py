@@ -8,6 +8,11 @@ class PhonStateNT:
         self.tone = None
         self.phon = ''
         self.options = options
+        self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u02CA'
+        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CA'
+        self.eatR = 'eatR' in options and options['eatR'] or False
+        self.eatL = 'eatL' in options and options['eatL'] or False
+        self.eatP = 'eatP' in options and options['eatP'] or False
   
     def getFinal(endstr):
         """ returns the final consonant or '' """
@@ -148,7 +153,7 @@ class PhonStateNT:
                     finalPhon = 'k'
                 elif nrc in ['r', 'l']:
                     finalPhon = 'g̥'
-                elif self.vowel in ['o', 'u', 'a'] and nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
+                elif self.vowel not in ['e', 'i'] and nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
                     finalPhon = 'ɣ'
                 elif nrc in ['k', 'ky', 'w', 'y']:
                     finalPhon = ''
@@ -163,9 +168,9 @@ class PhonStateNT:
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
                     finalPhon = 'p'
                 else:
-                    finalPhon = '' # TODO: or 'b̥'?
+                    finalPhon = self.eatP and '' or 'b̥'
             else:
-                finalPhon = 'ʔ' # TODO: option
+                finalPhon = self.eatP and 'ʔ' or 'b̥' # TODO: check
         elif self.final == 'n':
             if not endofword:
                 if nrc in ['t', 'tr']:
@@ -177,19 +182,35 @@ class PhonStateNT:
                 elif nrc == 'ky':
                     finalPhon = 'ɲ'
                 else:
-                    finalPhon = 'n' # TODO: or ''?
+                    finalPhon = '' # TODO: or 'n'?
             else:
                 finalPhon = '' # TODO: or '~'?
+        elif self.final == 'r':
+            finalPhon = self.eatR and 'ː' or 'r'
+        elif self.final == 'l':
+            finalPhon = self.eatL and 'ː' or 'l'
+        elif self.final == '':
+            finalPhon = ''
         else:
             print("unrecognized final: "+self.final)
         self.phon += finalPhon
 
+    def combineWithException(self, exception):
+        syllables = exception.split('|')
+        for syl in syllables:
+            indexplusminus = syl.find('+')
+            if indexplusminus == -1:
+                indexplusminus = syl.find('-')
+            if indexplusminus == -1:
+                print("invalid exception syllable: "+syl)
+                continue
+            self.combineWith(syl[:indexplusminus+1], syl[indexplusminus+1:])
 
     def combineWith(self, nextroot, nextend):
         self.position += 1
         slashi = nextroot.find('/')
         if slashi != -1:
-            if position > 1:
+            if self.position > 1:
                 nextroot = nextroot[slashi+1:]
             else:
                 nextroot = nextroot[:slashi]
