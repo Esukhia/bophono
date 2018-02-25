@@ -13,6 +13,7 @@ class PhonStateNT:
         self.eatR = 'eatR' in options and options['eatR'] or False
         self.eatL = 'eatL' in options and options['eatL'] or False
         self.eatP = 'eatP' in options and options['eatP'] or False
+        self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
   
     def getFinal(endstr):
         """ returns the final consonant or '' """
@@ -28,13 +29,6 @@ class PhonStateNT:
 
     #TODO: remove aspiration on low tones
     simpleRootMapping = {
-        'kh': 'kʰ', #p. 435
-        'khy': 'cʰ', #p. 436
-        'thr': 'ʈʰ', #p. 436
-        'th': 'tʰ', #p. 437
-        'ph': 'pʰ', #p. 438
-        'ch': 'tɕʰ', #p. 439
-        'tsh': 'tsʰ', #p. 439
         'sh': 'ɕ', #p. 440
         'rh': 'ʂ', #p. 440
         's': 's', #p. 440
@@ -73,35 +67,55 @@ class PhonStateNT:
             return tone == '+' and phon1 or phon2
         return lastcondition and phon1 or phon3
 
-    def getNextRootPhon(nrc, tone, pos, lastfinal): # nrc: nextrootconsonant
+    def getNextRootPhon(self, nrc): # nrc: nextrootconsonant
+        # self.tone is the first tone (can be associated with current syllable)
+        # self.position is the position of the syllable we're adding
+        # self.final is the previous final consonnant (if any)
         if nrc.startswith('~'):
             # TODO: Do some magic here?
             nrc = nrc[1:]
+        possibleAspirate = True
+        if self.tone == '-' and not self.aspirateLowTones:
+            possibleAspirate = False
         if nrc in PhonStateNT.simpleRootMapping:
             return PhonStateNT.simpleRootMapping[nrc]
         if nrc == '':
             return ''
+        if nrc == 'kh':
+            return possibleAspirate and 'kʰ' or 'k' #p. 435
+        if nrc == 'khy':
+            return possibleAspirate and 'cʰ' or 'c' #p. 436
+        if nrc == 'thr':
+            return possibleAspirate and 'ʈʰ' or 'ʈ' #p. 436
+        if nrc == 'th':
+            return possibleAspirate and 'tʰ' or 't' #p. 437
+        if nrc == 'ph':
+            return possibleAspirate and 'pʰ' or 'p' #p. 438
+        if nrc == 'ch':
+            return possibleAspirate and 'tɕʰ' or 'tɕ' #p. 439
+        if nrc == 'tsh':
+            return possibleAspirate and 'tsʰ' or 'ts' #p. 439
         if nrc == 'k':
-            lastcond = (lastfinal == 'p')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'k', 'g', 'g̥')
+            lastcond = (self.final == 'p')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̥')
         if nrc == 'ky':
-            lastcond = (lastfinal == 'p')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'c', 'ɟ', 'ɟ̥')
+            lastcond = (self.final == 'p')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̥')
         if nrc == 'tr':
-            lastcond = (lastfinal == 'p' or lastfinal == 'k')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
+            lastcond = (self.final == 'p' or self.final == 'k')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
         if nrc == 't':
-            lastcond = (lastfinal == 'p' or lastfinal == 'k')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 't', 'd', 'd̥')
+            lastcond = (self.final == 'p' or self.final == 'k')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd̥')
         if nrc == 'p':
-            lastcond = (lastfinal == 'k')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'p', 'b', 'b̥')
+            lastcond = (self.final == 'k')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
         if nrc == 'c':
-            lastcond = (lastfinal == 'p' or lastfinal == 'k')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'tɕ', 'dʑ', 'ɖ̥ʑ')
+            lastcond = (self.final == 'p' or self.final == 'k')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'tɕ', 'dʑ', 'ɖ̥ʑ')
         if nrc == 'ts':
-            lastcond = (lastfinal == 'p' or lastfinal == 'k')
-            return PhonStateNT.getNextRootCommonPattern(pos, tone, lastcond, 'ts', 'dz', 'dz̥')
+            lastcond = (self.final == 'p' or self.final == 'k')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ts', 'dz', 'dz̥')
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -143,7 +157,7 @@ class PhonStateNT:
             self.phon += 'w'
         self.phon += vowelPhon
         if self.position == 1:
-            self.phon += self.tone == '+' and '\u02CA' or '\u02CB'
+            self.phon += self.tone == '+' and self.hightonechar or self.lowtonechar
         # TODO: option for r and l, replace : with ː
         finalPhon = ''
         if self.final in PhonStateNT.simpleFinalMapping:
@@ -222,7 +236,7 @@ class PhonStateNT:
         nextrootconsonant = nextroot[:-1]
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
-        nextrootphon = PhonStateNT.getNextRootPhon(nextrootconsonant, self.tone, self.position, self.final)
+        nextrootphon = self.getNextRootPhon(nextrootconsonant)
         self.phon += nextrootphon
         self.end = nextend
     
