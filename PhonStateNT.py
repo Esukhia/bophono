@@ -26,6 +26,7 @@ class PhonStateNT:
             return lastchar
         return ''
 
+    #TODO: remove aspiration on low tones
     simpleRootMapping = {
         'kh': 'kʰ', #p. 435
         'khy': 'cʰ', #p. 436
@@ -33,9 +34,11 @@ class PhonStateNT:
         'th': 'tʰ', #p. 437
         'ph': 'pʰ', #p. 438
         'ch': 'tɕʰ', #p. 439
+        'tsh': 'tsʰ', #p. 439
         'sh': 'ɕ', #p. 440
         'rh': 'ʂ', #p. 440
         's': 's', #p. 440
+        'r': 'r', #p. 441
         'l': 'l', #p. 441
         'lh': 'l̥ʰ', #p. 441
         'h': 'h', #p. 441

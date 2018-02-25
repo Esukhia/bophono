@@ -117,4 +117,11 @@ if __name__ == '__main__':
     print(get_phonetics('ཀ'))
     print(get_phonetics('ཀ\u0FAD་ཁ'))
     print(get_phonetics('ཀ་བོ'))
+    with open('tests.txt', 'r') as f:
+        for line in f:
+            line = line[:-1]
+            if line == '':
+                continue
+            phon = get_phonetics(line)
+            print(line + " -> " + phon)
     
