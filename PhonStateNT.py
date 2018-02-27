@@ -10,6 +10,8 @@ class PhonStateNT:
         self.options = options
         self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u02CA'
         self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CA'
+        self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
+        self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
         self.eatL = 'eatL' in options and options['eatL'] or False
         self.eatP = 'eatP' in options and options['eatP'] or False
@@ -141,22 +143,24 @@ class PhonStateNT:
         if self.vowel in PhonStateNT.simpleVowMapping:
             vowelPhon = PhonStateNT.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
-            if self.position == 1 and self.final != 'p':
+            if (self.position == 1 and self.final != 'p') or self.final == 'ng':
                 vowelPhon = 'a'
             else:
                 vowelPhon = 'ə'
         elif self.vowel == 'e':
-            if self.final != '':
+            if self.final != '' and self.final != 'ng':
                 vowelPhon = 'ɛ'
             else:
                 vowelPhon = 'e'
-        elif self.vowel == 'o':
+        elif self.vowel == 'o' and self.final != 'ng':
             if self.final != '':
                 vowelPhon = 'ɔ'
             else:
                 vowelPhon = 'o'
         else:
             print("unknown vowel: "+self.vowel)
+        if self.final == 'ng':
+            vowelPhon += self.nasalchar
         # add w at beginning of low tone words:
         if self.position == 1 and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
             self.phon += 'w'
@@ -165,7 +169,7 @@ class PhonStateNT:
             self.phon += self.tone == '+' and self.hightonechar or self.lowtonechar
         finalPhon = ''
         if self.final in PhonStateNT.simpleFinalMapping:
-            vowelPhon = PhonStateNT.simpleFinalMapping[self.final]
+            finalPhon = PhonStateNT.simpleFinalMapping[self.final]
         elif self.final == 'k':
             if not endofword: # p. 433
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
@@ -215,6 +219,8 @@ class PhonStateNT:
         else:
             print("unrecognized final: "+self.final)
         self.phon += finalPhon
+        if not endofword:
+            self.phon += self.syllablesepchar
 
     def combineWithException(self, exception):
         syllables = exception.split('|')
@@ -228,7 +234,6 @@ class PhonStateNT:
             self.combineWith(syl[:indexplusminus+1], syl[indexplusminus+1:])
 
     def combineWith(self, nextroot, nextend):
-        self.position += 1
         slashi = nextroot.find('/')
         if slashi != -1:
             if self.position > 1:
@@ -240,6 +245,7 @@ class PhonStateNT:
         nextrootconsonant = nextroot[:-1]
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
+        self.position += 1
         nextrootphon = self.getNextRootPhon(nextrootconsonant)
         self.phon += nextrootphon
         self.end = nextend
