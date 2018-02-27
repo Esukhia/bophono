@@ -24,12 +24,15 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - document annotations
 - sku zda (kunta)
 - kha zas (khabzé)
+- dga' ldan (Ganden)
 - dpal 'bar
+- phebs 'khor
 - nasalisation dans da nga?
 - add POS and position in the function arguments
 - da/sa glottal stop only at end of sentence
 - p. 443: closed syllable = when final has sound (including glottal stop)
 - add tests from THL
+- option for syllable mark
 
 ## License
 

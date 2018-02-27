@@ -1,3 +1,4 @@
+#NT, p. 433, [k] at the beginning of low toned words
 སྐུ
 རྐང་པ
 སྐོར་བ
@@ -5,9 +6,11 @@
 རྐུ་མ
 དཀོན་པོ
 
+#NT, p. 433, [k] at the beginning of syllables after p
 སློབ་ཁང
 ཕེབས་འཁོར
 
+#NT, p. 433, [k] at the end of internal syllables after p, t, tr, ts, c, s, li, shi, le, she
 ལྐུགས་པ
 ཐུག་པ
 གློག་པར
@@ -17,51 +20,62 @@
 བཅུ་གསུམ
 མིག་ཤེལ
 
+#NT, p. 433, [g] at the end of beginning of low-toned words
 དཀའ་པོ
 དཀུ
 སྒོར་མོ
 དགེ་འདུན
 མགུར
 
+#NT, p. 434, [g] at the end of internal syllables after k, ng, n, m, (r), (l) and vowels, and at the end of interior syllables, especially before r, l
 ཡི་གེ
 ཡག་ག
 སྡིགས་ར
 གདམ་ཀ
 
+#NT, p. 434, [ɣ] end of internal syllables before l, m, ny, n, ng, sh, especially if preceded by o, u a
 བག་ལེབ
 ལག་ལེན
 དག་སྣང
+མདོན་ཉེས
 
+#NT, p. 434, [ʔ] end of words
 བཀག
 མིག
 ཤག
 ལོག
 
+#NT, p. 434, [] end of syllables before k, ky, w, y
 ལག་འཁྱེར
 འཕགས་ཡུལ
 སོག་ཡུལ
 
+#NT, p. 434, [ŋ] end of internal syllables before m, ny, n, ng, especially after i, e
 རིག་གནས
 མིག་དམར
 མིག་སྨན
 འཇིགས་མེད
 
+# NT, p. 435, [kh]
 ཁ
 གོ
 ག་འདྲས་ཟེ
 གའུ
 
+#NT, p. 435, ' as ʔ at the end of words
 དུས་ཚོད
 ཁོང་གིས
 ལུས
 ཞུས
 ལོ་རྒྱུས
 
+#NT, p. 435, ky as [c] beginning of high-toned words and beginning of interior syllables after p
 སྐྱོ་པོ
 རྐྱང
 ཞབས་ཀྱུ
 སྐྱབས་སྐྱོར
 
+#NT, p. 435, ky as [ɟ] beginning of high-toned words
 རྒྱ་གར
 རྒྱལ་ཁབ
 

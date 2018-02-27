@@ -111,17 +111,15 @@ def get_phonetics(tibstr, schema=0):
 
 if __name__ == '__main__':
     """ Example use """
-    print(get_phonetics('ཀྱང'))
-    print(get_phonetics('བག'))
-    print(get_phonetics('བགའ'))
-    print(get_phonetics('ཀ'))
-    print(get_phonetics('ཀ\u0FAD་ཁ'))
-    print(get_phonetics('ཀ་བོ'))
+    print(get_phonetics("ཀ་བ"))
     with open('tests.txt', 'r') as f:
         for line in f:
             line = line[:-1]
             if line == '':
                 continue
-            phon = get_phonetics(line)
-            print(line + " -> " + phon)
+            if line.startswith('#'):
+                #print(line[1:])
+                continue
+            #phon = get_phonetics(line)
+            #print(line + " -> " + phon)
     
