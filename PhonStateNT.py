@@ -21,7 +21,7 @@ class PhonStateNT:
         """ returns the final consonant or '' """
         if not endstr:
             return ''
-        simplesuffixes = "mpn'krl"
+        simplesuffixes = ['m', 'p', 'n', "'", 'k', 'r', 'l']
         lastchar = endstr[-1]
         if lastchar == 'g':
             return 'ng'
@@ -152,8 +152,8 @@ class PhonStateNT:
                 vowelPhon = 'ɛ'
             else:
                 vowelPhon = 'e'
-        elif self.vowel == 'o' and self.final != 'ng':
-            if self.final != '':
+        elif self.vowel == 'o':
+            if self.final != '' and self.final != 'ng':
                 vowelPhon = 'ɔ'
             else:
                 vowelPhon = 'o'
@@ -236,11 +236,11 @@ class PhonStateNT:
     def combineWith(self, nextroot, nextend):
         slashi = nextroot.find('/')
         if slashi != -1:
-            if self.position > 1:
+            if self.position > 0:
                 nextroot = nextroot[slashi+1:]
             else:
                 nextroot = nextroot[:slashi]
-        if self.position == 1:
+        if self.position == 0:
             self.tone = nextroot[-1]
         nextrootconsonant = nextroot[:-1]
         nextvowel = ''
