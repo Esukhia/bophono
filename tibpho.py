@@ -111,13 +111,13 @@ def get_phonetics(tibstr, schema=0):
 
 if __name__ == '__main__':
     """ Example use """
-    with open('tests.txt', 'r') as f:
+    with open('tests/nt.txt', 'r') as f:
         for line in f:
             line = line[:-1]
             if line == '':
                 continue
             if line.startswith('#'):
-                #print(line[1:])
+                print(line[1:])
                 continue
             phon = get_phonetics(line)
             print(line + " -> " + phon)

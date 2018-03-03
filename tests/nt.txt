@@ -10,7 +10,7 @@
 སློབ་ཁང
 ཕེབས་འཁོར
 
-#NT, p. 433, [k] at the end of internal syllables after p, t, tr, ts, c, s, li, shi, le, she
+#NT, p. 433, [k] at the end of internal syllables before p, t, tr, ts, c, s, li, shi, le, she
 ལྐུགས་པ
 ཐུག་པ
 གློག་པར
