@@ -1,7 +1,6 @@
 class PhonStateNT:
     def __init__(self, options={}):
         self.position = 0
-        self.rootconsonant = None
         self.vowel = None
         self.final = None
         self.end = None
@@ -15,6 +14,7 @@ class PhonStateNT:
         self.eatR = 'eatR' in options and options['eatR'] or False
         self.eatL = 'eatL' in options and options['eatL'] or False
         self.eatP = 'eatP' in options and options['eatP'] or False
+        self.eatK = 'eatK' in options and options['eatK'] or False
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
   
     def getFinal(endstr):
@@ -173,10 +173,10 @@ class PhonStateNT:
         elif self.final == 'k':
             if not endofword: # p. 433
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
-                    finalPhon = 'k'
+                    finalPhon = self.eatK and 'ʔ' or 'k'
                 elif self.vowel in ['i', 'e'] and nrc in ['l', 'sh']:
                     finalPhon = 'k'
-                elif nrc in ['r', 'l']:
+                elif nrc in ['r']:
                     finalPhon = 'g̥'
                 elif self.vowel not in ['e', 'i'] and nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
                     finalPhon = 'ɣ'
@@ -185,7 +185,7 @@ class PhonStateNT:
                 elif self.vowel in ['e', 'i'] and nrc in ['m', 'ny', 'n', 'ng']:
                     finalPhon = 'ŋ'
                 else:
-                    print("unhandled case, this shouldn't happen, nrc"+nrc+", vowel: "+self.vowel)
+                    print("unhandled case, this shouldn't happen, nrc: "+nrc+", vowel: "+self.vowel)
             else:
                 finalPhon = 'ʔ'
         elif self.final == 'p':
