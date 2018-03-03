@@ -79,180 +79,222 @@
 རྒྱ་གར
 རྒྱལ་ཁབ
 
+#NT, p. 435, ky as [ɟ] beginning of interior syllables after vowels and consonnants m, n, ng, k, r, l
 སངས་རྒྱས
 རྟ་རྒྱུག
 མིག་སྒྱུ
 
+#NT, p. 436, khy as [kʰ]
 ཁྱེད་རང
 ཁྱི
 གྱེན
 
+#NT, p. 436, tr as [ʈ] at beginning of high-tone words and at beginning of interior syllables after p, k
 སྐྲ
 སྤྲོ་པོ
 སློབ་གྲྭ
 ས་བཀྲ
 
+# NT, p. 436, tr as [ɖ] at the beginning of low-tone words
 འགྲོ
 སྒྲུང
 འགྲིག
 
+#NT, p. 436, tr as [ɖ̥] at the beginning of internal syllables after m, n, ng, r, l
 ག་འདྲས་ཟེ
 ཤ་འབྲས
 མཁའ་འགྲོ་མ
 སྐུ་འདྲ
 སྐུ་དྲག
 
+#NT, p. 436, thr as [ʈʰ]
 ཁྲག
 དྲང་པོ
 དྲུག་པ
 འཕྲུལ་འཁོར
 
+#NT, p. 437, t as [t] at beginning of high-tone words
 རྟ
 སྟོང་པ
 
+#NT, p. 437, t as [t] at the beginning of internal syllables after k, p
 ཐོབ་ཐང
 ཟོ་ལྟ
 ཞབས་དག
 
+#NT, p. 437, t as [d] at the beginning of low-toned words
 རྡོ་རིང
 འདུག
 མདངས
 མདའ
 སྡོམ
 
+#NT, p. 437, t as [d̥] at the beginning of internal syllables after m, n, ng, r, l
 མེ་མདའ
 གསོལ་འདེབས
 ནང་དོན
 སྐུ་ཟད
 
+#NT, p. 437, th as [tʰ]
 མཐ་མ
 མཐོ་པོ
 ཐུར
 དང་པོ
 དོམ
 
+#NT, p. 437, p as [p] at beginning of high-toned words
 པར
 སྤུ
 སྤོ་ལོ
 
+#NT, p. 437, p as [p] at beginning of internal syllables after k
 ཡག་པོ
 ཐུག་པ
 རོགས་པ
 
+#NT, p. 437, p as [p] at end of internal syllables before p, t, tr, ts, c, s, sh
 ས་གདན
 ཐབ་ཚང
 བསླབ་བྱ
 སློ་བཟང
 ཐབས་ཤེས
 
+#NT, p. 438, p as [b] at beginning of low-tone words
 འབུ
 རྦ་རླབས
 སྦ་ནག
 
+#NT, p. 438, p as [b̥] at beginning of internal syllables after p, m, ng, n, r l and vowels
 ལྔ་པ
 རྒྱལ་པོ
 གསར་པ
 
+#NT, p. 438, p as [ʔ] at end of words
 ཕེབས
 སླེབས
 
+#NT, p. 438, ph as [pʰ]
 ཕར
 ཕུ
 བུ
 བལ
 བ་ཕྱུགས
 
+#NT, p. 438, c as [tɕ] at the beginning of high-toned words
 ལྕོ་བ
 གཅིག
 བཅུ
 
+#NT, p. 438, c as [tɕ] at beginning of internal syllables after p, k
 བསླབས་བྱ
 སྲོག་ཆགས
 བརྟག་དཔྱད
 སློབ་སྦྱོང
 ནུབ་བྱང
 
+#NT, p. 438, c as [dʑ] at beginning of low-tone words
 འཇའ
 མཇལ
 བརྗེད
 
+#NT, p. 439, c as [ɖ̥ʑ] at beginning of internal syllables after m, n, ng, r, l and vowels
 ཨ་ལྕག
 གསོལ་ཇ
 གསར་བརྗེ
 ཨ་ཅོར
 
+#NT, p. 439, ch as [tɕʰ]
 ཆུ
 ཆོས
 བྱང
 བྱམས་པོ
 བྱང་ཆུབ་སེམས་དཔའ
 
+#NT, p. 439, ts as [ts] at beginning of high-tones words
 རྩེ
 རྩ
 རྩམ་པ
 
+#NT, p. 439, ts as [ts] at beginning of internal syllables after p, k
 སྟག་ཚང
 སྣག་ཚ
 
+#NT, p. 439, ts as [dz] at beginning of low-toned words
 རྫོགས
 འཛམ་གླིང
 མཛེས་པོ
 མརྫོ
 
+#NT, p. 439,  ts as [dz̥] at beginning of internal syllables after m, n, ng, r, l
 རང་བཙན
 ས་མཚམས
 སྦྲང་རྩི
 བསྟན་འཛིན
 
+#NT, p. 439, tsh as [tsʰ]
 ཚྭ
 མཚོ
 
+#NT, p. 440, sh as [ɕ]
 ཤ
 ཞ་མོ
 
+#NT, p. 440, r as [r] at beginning of words and internal syllables
 ར
 རི
 རོ
 རང
 གངས་རི
 
+#NT, p. 440, r as [ː] at end of words and syllables
 མར
 མི་འབོར
 གསར་པ
 
+#NT, p. 440, rh as [ʂ]
 ཧྲང་ཧྲང
 མིག་ཧྲིག་ཧྲིག
 
+#NT, p. 440, s as [s]
 ས
 འགྲོ་སོང
 
+#NT, p. 441, l as [l] at beginning of words and syllables
 ལ
 མི་ལ་རས་པ
 ཡ་ལོང
 
+#NT, p. 441, l as [ː] at end of words and syllables
 བལ
 གལ་ཆེན་པོ
 བལ་ཡུལ
 
+#NT, p. 441, lh as [l̥ʰ]
 ལྷ
 ལྷོད་ལྷོད
 
+#NT, p. 441, h as [h]
 ཧམ་པ
 ཧ་ལས
 
+#NT, p. 441, m as [m]
 རྨོ་ལགས
 སྨན
 ཕ་ལམ
 
+#NT, p. 442, n as [n] and beginning of words, beginning of syllables and end of syllables before t and tr
 ནང་པ
 ནུས་པ
+ton dag
 
+#NT, p. 442, n as [m] before p, [ŋ] before k, [ɲ] before ky
 སྟོན་པ
 རིན་པོ་ཆེ
 ཕིན་པ་རེད
 སྤུན་སྐྱ
 དགུན་ཁ
 
+#NT, p. 442, n as [~] (inaudible nasalization) at end of words
 ལན
 གདན
 རྟེན
@@ -260,65 +302,83 @@
 བདུན
 ཡིན
 
+#NT, p. 442, ny as [ɲ]
 ཉ
 
+#NT, p. 442, ng as [ŋ] or as nasalisation
 ང་པོ
 བཏང
 སྡུན་བསྔལ
 
+#NT, p. 443, w as [w]
 དབང
 ཨ་ཝ
 
+#NT, p. 436, y as [j]
 ཡག་པོ
 
+#NT, p. 443, a as [a] everywhere except atonal suffixes
 ཁ
 བླ་མ
 ཨ་མ
 རྩམ་པ
 
+#NT, p. 443, a as [ə] in atonal position or in closed syllable
 ཁབ
 ཐབ
 ཡོང་པ་རེད
 
+#NT, p. 443, ä as [ɛ]
 རས
 ལས
 འབྲས
 ཉལ
 གསལ་པོ
 
+#NT, p. 444, e as [e] in open syllables
 རེད
 ཉེ་པོ
 སེལ
 
+#NT, p. 444, e as [ɛ] in closed syllables
 སླེབས
 ཕེབས
 དེང་སང
 
+#NT, p. 444, ö as [ø]
 བོད
 དངོས་ནས
 གསོལ་འདེབས
 
+#NT, p. 444, w before ö at beginning of low-toned words
 འོད
 
+#NT, p. 444, o as [o] in open syllables
 ལོ
 རྡོ
 བ་སོ
 
+#NT, p. 444, o as [ɔ] in closed syllables
 འཁོར་བ
 སོབ་སོག
 
+#NT, p. 444, w before o at beggining of low-toned words
 འོ་མ
 འོག་མ
 
+#NT, p. 444, u as [u] 
 ཀླུ
 སྐུ
 སུ
 
+#NT, p. 444, w before u at beggining of low-toned words
 འུག་པ
 
+#NT, p. 444, ü as [y]
 ཕུལ
 དུས་ཚོད
 ས་ཁུལ
 
+#NT, p. 444, i as [i]
 མི
 ཤི་བདེ
