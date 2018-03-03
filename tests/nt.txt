@@ -20,14 +20,14 @@
 བཅུ་གསུམ
 མིག་ཤེལ
 
-#NT, p. 433, [g] at the end of beginning of low-toned words
-དཀའ་པོ
-དཀུ
+#NT, p. 433, [g] at the beginning of low-toned words
+དགའ་པོ
+དགུ
 སྒོར་མོ
 དགེ་འདུན
 མགུར
 
-#NT, p. 434, [g] at the end of internal syllables after k, ng, n, m, (r), (l) and vowels, and at the end of interior syllables, especially before r, l
+#NT, p. 434, [g] at the beginning of internal syllables after k, ng, n, m, (r), (l) and vowels, and at the end of interior syllables, especially before r, l
 ཡི་གེ
 ཡག་ག
 སྡིགས་ར

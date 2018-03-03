@@ -25,8 +25,11 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - sku zda (kunta)
 - kha zas (khabzé)
 - dga' ldan (Ganden)
+- ga 'dras ze (khantr¨as)
 - dpal 'bar
 - phebs 'khor
+- bcu gsum
+- thig le (g, not )
 - nasalisation dans da nga?
 - add POS and position in the function arguments
 - da/sa glottal stop only at end of sentence
