@@ -1,6 +1,8 @@
 class PhonStateNT:
-    def __init__(self, options={}):
+    def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
+        self.pos = pos
+        self.endOfSentence = endOfSentence
         self.vowel = None
         self.final = None
         self.end = None

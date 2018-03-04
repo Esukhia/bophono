@@ -41,13 +41,21 @@ ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
 
 def is_tib_letter(c):
     """is a tibetan letter"""
-    return c >= '\u0F40' and c <= '\u0FBC'
+    return c >= '\u0F40' and c <= '\u0FBC' and c != '\u0F7F'
 
 def get_next_letter_index(tibstr, current, eindex):
     """finds first letter index in tibstr after current index"""
     for i in range(current, eindex):
         letter = tibstr[i]
         if is_tib_letter(letter) and letter not in ignored_chars:
+            return i
+    return -1
+
+def get_next_non_letter_index(tibstr, current, eindex):
+    """finds first letter index in tibstr after current index"""
+    for i in range(current, eindex):
+        letter = tibstr[i]
+        if not is_tib_letter(letter):
             return i
     return -1
 
@@ -73,18 +81,18 @@ def finishcombination(phonres):
     if not phonres:
         return None
 
-def combine_next_phon(tibstr, bindex, state, eindex=-1, schema=0):
+def combine_next_syll_phon(tibstr, bindex, state, eindex=-1):
+    # here we consider that we deal with a syllable starting at bindex, ending at eindex
     global roots, ends, exceptions, ignored_chars
     if eindex == -1:
         eindex = len(tibstr)
-    exceptioninfo = exceptions.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
-    if exceptioninfo and (state.position > 0 or not exceptioninfo['d'].startswith('2:')):
+    exceptioninfo = exceptions.get_data(tibstr, bindex, eindex, ignored_chars)
+    if exceptioninfo and (state.position > 0 or not exceptioninfo.startswith('2:')):
         # if it starts with '2:' and we're in the first syllable, we ignore it:
-        if exceptioninfo['d'].startswith('2:'):
-            exceptioninfo['d'] = exceptioninfo['d'][2:]
-        state.combineWithException(exceptioninfo['d'])
-        assert(exceptioninfo['i']>bindex)
-        return exceptioninfo['i']
+        if exceptioninfo.startswith('2:'):
+            exceptioninfo = exceptioninfo[2:]
+        state.combineWithException(exceptioninfo)
+        return eindex
     rootinfo = roots.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
     if not rootinfo:
         return -1
@@ -97,20 +105,31 @@ def combine_next_phon(tibstr, bindex, state, eindex=-1, schema=0):
     assert(endinfo['i']>bindex)
     return endinfo['i']
 
-def get_phonetics(tibstr, schema=0):
-    i = 0
-    state = PhonStateNT.PhonStateNT()
-    tibstrlen = len(tibstr)
-    while i < tibstrlen and i >= 0: # > 0 covers the case where next_letter_index returns -1
-        matchlastidx = combine_next_phon(tibstr, i, state)
+def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, schema=0, options={}):
+    if eindex == -1:
+        eindex = len(tibstr)
+    i = get_next_letter_index(tibstr, bindex, eindex)
+    if (i==-1):
+        return ''
+    state = PhonStateNT.PhonStateNT(options, pos, endOfSentence)
+    while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
+        # we combine syllable per syllable, first we search the end of next syllable:
+        lastidx = get_next_non_letter_index(tibstr, i, eindex)
+        if lastidx == -1:
+            lastidx = eindex
+        matchlastidx = combine_next_syll_phon(tibstr, i, state, lastidx)
         if matchlastidx == -1:
+            print("couldn't understand syllable "+tibstr[i:lastidx])
             break
-        i = get_next_letter_index(tibstr, matchlastidx, tibstrlen)
+        if matchlastidx < lastidx:
+            print("couldn't understand last "+str(lastidx-matchlastidx)+" characters of syllable "+tibstr[i:lastidx])
+        i = get_next_letter_index(tibstr, matchlastidx, eindex)
     state.finish()
     return state.phon
 
 if __name__ == '__main__':
     """ Example use """
+#    print(get_phonetics("ཤི་བདེ"))
     with open('tests/nt.txt', 'r') as f:
         for line in f:
             line = line[:-1]
