@@ -115,6 +115,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
     while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
         # we combine syllable per syllable, first we search the end of next syllable:
         lastidx = get_next_non_letter_index(tibstr, i, eindex)
+        #print("found syllable '"+tibstr[i:lastidx]+"'")
         if lastidx == -1:
             lastidx = eindex
         matchlastidx = combine_next_syll_phon(tibstr, i, state, lastidx)
@@ -129,7 +130,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 
 if __name__ == '__main__':
     """ Example use """
-#    print(get_phonetics("ཤི་བདེ"))
+    #print(get_phonetics("བག་ལེབ"))
     with open('tests/nt.txt', 'r') as f:
         for line in f:
             line = line[:-1]
@@ -140,4 +141,3 @@ if __name__ == '__main__':
                 continue
             phon = get_phonetics(line)
             print(line + " -> " + phon)
-    

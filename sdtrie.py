@@ -48,7 +48,8 @@ class Trie:
                 continue
             if letter in current_node.children:
                 current_node = current_node.children[letter]
-                if current_node.data and (i < eindex or current_node.canbefinal):
+                #print("i: "+str(i)+", eindex: "+str(eindex))
+                if current_node.data and (i+1 < eindex or current_node.canbefinal):
                     latest_match_node = current_node
                     latest_match_i = i+1
             else:

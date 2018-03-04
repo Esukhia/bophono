@@ -17,7 +17,6 @@
 ཚགས་པར
 དྲག་པོ
 རྫོགས་ཆེན
-བཅུ་གསུམ
 མིག་ཤེལ
 
 #NT, p. 433, [g] at the beginning of low-toned words
@@ -37,7 +36,7 @@
 བག་ལེབ
 ལག་ལེན
 དག་སྣང
-མདོན་ཉེས
+མདོག་ཉེས
 
 #NT, p. 434, [ʔ] end of words
 བཀག
@@ -223,7 +222,7 @@
 རྫོགས
 འཛམ་གླིང
 མཛེས་པོ
-མརྫོ
+མཛོ
 
 #NT, p. 439,  ts as [dz̥] at beginning of internal syllables after m, n, ng, r, l
 རང་བཙན

@@ -10,7 +10,7 @@ class PhonStateNT:
         self.phon = ''
         self.options = options
         self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u02CA'
-        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CA'
+        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CB'
         self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
