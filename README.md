@@ -19,11 +19,11 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 
 ## TODO
 
-- ཀཿ་ཐོག
 - study behavior for ambiguous syllables (probably list some as exceptions)
 - document annotations
 - da/sa glottal stop only at end of sentence
 - p. 443: closed syllable = when final has sound (including glottal stop)
+- document kh¨antr¨as
 
 ## License
 

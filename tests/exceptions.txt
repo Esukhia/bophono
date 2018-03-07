@@ -41,7 +41,7 @@
 ལམ་འབྲས
 
 ## Cherry-picked from NT
-# Nasalizations:
+# Nasalizations + oral s suffix
 སྐུ་ཟླ
 ག་འདྲས་ཟེ
 ཕེབས་འཁོར
