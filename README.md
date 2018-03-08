@@ -24,6 +24,12 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - da/sa glottal stop only at end of sentence
 - p. 443: closed syllable = when final has sound (including glottal stop)
 - document kh¨antr¨as
+- khon pa as gompa
+- footnote 200 p. 441
+- dmag mi p. 65 noted with '
+- dbu 'khyud
+- document non-nasalized words
+- implement p. 36
 
 ## License
 

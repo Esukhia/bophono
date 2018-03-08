@@ -1,4 +1,20 @@
 class PhonStateNT:
+    # Differences with Tournadre's book
+    #
+    ## In intermediate representation (not IPA):
+    # - using k+a instead of kā, k-a instead of ka̱
+    # - using | as syllable splitter
+    # - use ~ to indicate contour tone after suffix combinations ངས and མས, instead of ' (see p. 57)
+    # - use k instead of ' for the sake of simplicity
+    # - only use ' to indicate a possible stop after suffixes ས and ད
+    #
+    ## In IPA (most can be configured through options)
+    # - using [ɲ] instead of [ny]
+    # - using [kʰ] instead of [kh]
+    # - indicate syllable breaks with [.]
+    # - use tone markers \u02CA and \u02CB
+    # - use nasalization marker \u0303 on nasal vowels
+    # - use unreleased stops [p̚], [n̚], [k̚] instead of glottal stop [ʔ]
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
         self.pos = pos
@@ -13,14 +29,19 @@ class PhonStateNT:
         self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CB'
         self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
+        self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
         self.eatL = 'eatL' in options and options['eatL'] or False
-        self.eatP = 'eatP' in options and options['eatP'] or False
-        self.eatK = 'eatK' in options and options['eatK'] or False
+        self.eatP = 'eatP' in options and options['eatP'] or True
+        self.eatK = 'eatK' in options and options['eatK'] or True
+        # rules the way stops after suffixes ས and ད are handled, can be "eos" (end of sentence), "eow" (end of word)
+        # anything else will not print any stop
+        self.stopSDMode = 'stopSDMode' in options and options['stopSDMode'] or "eos"
+        self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
   
     def getFinal(endstr):
-        """ returns the final consonant or '' """
+        """ returns the final consonant or empty string """
         if not endstr:
             return ''
         simplesuffixes = ['m', 'p', 'n', "'", 'k', 'r', 'l']
@@ -57,7 +78,6 @@ class PhonStateNT:
     }
 
     simpleFinalMapping = {
-        "'": 'ʔ', #p. 435
         ":": 'ː', #p. 435
         'm': 'm', #p. 444
         'ng': 'ŋ' #p. 442
@@ -135,7 +155,7 @@ class PhonStateNT:
         if self.end.endswith('~'):
             self.end = self.end[:-1]
         self.final = PhonStateNT.getFinal(self.end)
-        # nasal prefix (not in NT)
+        # nasal prefix (not in NT) TODO: use white list instead
         if nrc.startswith('~'):
             nrc = nrc[1:]
             if self.position > 1 and self.final not in ['m', 'ng']:# TODO: exlude k too?
@@ -175,7 +195,7 @@ class PhonStateNT:
         elif self.final == 'k':
             if not endofword: # p. 433
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
-                    finalPhon = self.eatK and 'ʔ' or 'k'
+                    finalPhon = self.eatK and (self.useUnreleasedStops and 'k̚' or 'ʔ') or 'k'
                 elif self.vowel in ['i', 'e'] and nrc in ['l', 'sh']:
                     finalPhon = 'k'
                 elif nrc in ['r']:
@@ -189,15 +209,15 @@ class PhonStateNT:
                 else:
                     print("unhandled case, this shouldn't happen, nrc: "+nrc+", vowel: "+self.vowel)
             else:
-                finalPhon = 'ʔ'
+                finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
         elif self.final == 'p':
             if not endofword:
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
                     finalPhon = 'p'
                 else:
-                    finalPhon = self.eatP and '' or 'b̥'
+                    finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥'
             else:
-                finalPhon = self.eatP and 'ʔ' or 'b̥' # TODO: check
+                finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥' # TODO: check
         elif self.final == 'n':
             if not endofword:
                 if nrc in ['t', 'tr']:
@@ -209,15 +229,19 @@ class PhonStateNT:
                 elif nrc == 'ky':
                     finalPhon = 'ɲ'
                 else:
-                    finalPhon = '' # TODO: or 'n'?
+                    finalPhon = self.useUnreleasedStops and 'n̚' or ''
             else:
-                finalPhon = '' # TODO: or '~'?
+                finalPhon = self.useUnreleasedStops and 'n̚' or '' # TODO: or '~'?
         elif self.final == 'r':
             finalPhon = self.eatR and 'ː' or 'r'
         elif self.final == 'l':
             finalPhon = self.eatL and 'ː' or 'l'
         elif self.final == '':
             finalPhon = ''
+        elif self.final == "'":
+            if endofword:
+                if (self.stopSDMode == "eos" and self.endOfSentence) or self.stopSDMode == "eow":
+                    finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
         else:
             print("unrecognized final: "+self.final)
         self.phon += finalPhon
