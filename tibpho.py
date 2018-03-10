@@ -15,7 +15,7 @@ def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
         suffix_list = (letter == 'b' and Cx_suffix_list or Cx_affix_list)
         for affix in suffix_list:
             phonVowAffix = endsTrie.get_data(vow+affix)
-            print("add in trie: "+unicodeTib[0:-3]+affix+" -> "+phonStr+phonVowAffix)
+            #print("add in trie: "+unicodeTib[0:-3]+affix+" -> "+phonStr+phonVowAffix)
             add_association_in_trie(unicodeTib[0:-3]+affix, phonStr+phonVowAffix, trie, phonType)
         return
     if unicodeTib.startswith('2:'):
