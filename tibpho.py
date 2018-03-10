@@ -3,13 +3,17 @@ import csv
 import PhonStateNT
 
 
-Cx_to_vow = {'a': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
+Cx_to_vow = {'a': '', 'b': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
 Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
 
 def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
     if len(unicodeTib) > 2 and unicodeTib[-3] == '/' and unicodeTib[-2] == 'C':
-        vow = Cx_to_vow[unicodeTib[-1:]]
+        letter = unicodeTib[-1:]
+        vow = Cx_to_vow[letter]
         for affix in Cx_affix_list:
+            # by convention b is for when suffix འ is possible and an absence of suffix is not
+            if letter == 'b' and affix == '':
+                affix = 'འ'
             phonVowAffix = endsTrie.get_data(vow+affix)
             add_association_in_trie(unicodeTib[0:-3]+affix, phonStr+phonVowAffix, trie, phonType)
         return

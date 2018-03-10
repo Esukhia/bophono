@@ -1,3 +1,7 @@
+# these are pretty obvious
+2:བ/Ca,w-
+2:བོ/Co,w-
+# Exception from THL (not taking nasalizations)
 རྒྱལ་རྩེ/Ce,ky-än|ts+
 རྡོ་རྗེ/Ce,t-or|c-
 བླ་བྲང,l+ap|r-ang
@@ -7,23 +11,27 @@
 ཨུ་རྒྱན,+ur|khy-än
 ཨོ་རྒྱན,+or|khy-än
 བླ་བྲང,l+ap|thr-ang
-2:བ/Ca,w-
-2:བོ/Co,w-
+# NT p. 60
+ཨ་གསར,+ak|s+ar
+ས་གདན,s+ap|tän
+ཁ་གཅོད,kh+ap|cö'
+དབ/Cb,w+
+# numbers, from NT Annex 1, completed by Drupchen
 བཅུ་གཅིག,c+uk|c+ik
 བཅུ་གཉིས,c+uk|ny+i'
 བཅུ་གསུམ,c+uk|s+um
 བཅུ་བཞི,c+up|sh-i
 བཅུ་བདུན,c+up|t-ün
-བཅོ་བརྒྱད,c+up|ky-ä'
+བཅོ་བརྒྱད,c+op|ky-ä'
 རྩ་བཞི,ts+ap|sh-i
-་རྩ་བདུན,ts+ap|t-ün
-་རྩ་བརྒྱད,ts+ap|ky-ä'
+རྩ་བདུན,ts+ap|t-ün
+རྩ་བརྒྱད,ts+ap|ky-ä'
 སོ་བརྒྱད,s+op|ky-ä'
 བཞི་བཅུ,sh-ip|c+u
 ལྔ་བཅུ,ng+ap|c+u
 ང་བཞི,ng-ap|sh-i
 དགུ་བཅུ,k-u|c+u
-# possible according to accent, not always:
+# possible according to accent, not always (source: Drupchen)
 ལྔ་ཁྲི,ng+ap|tr+i
 གོ་བཞི,k-op|sh-i
 གོ་བརྒྱད,k-op|ky-ä'
@@ -32,3 +40,6 @@
 ང་བརྒྱད,ng-ap|ky-ä'
 ཞེ་བདུན,sh-ep|t-ün
 སོ་བཞི,s+op|sh-i
+# Sanskrit (TODO: check)
+པདྨ/Ca,p+e|m-
+ཀརྨ/Ca,k+ar|m-

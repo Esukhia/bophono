@@ -30,6 +30,10 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - dbu 'khyud
 - document non-nasalized words
 - implement p. 36
+- list da drag (p. 57) + some combinations (kyurcik)
+- long aspirations (lhod lhod in one big aspiration)
+- high tone ma when it's negation (ma mthong : "doesn't see" or "sees the mother")
+- add : after consonnants (khams -> kʰâmː, kham -> kʰàm)
 
 ## License
 
