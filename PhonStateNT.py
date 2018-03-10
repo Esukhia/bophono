@@ -184,7 +184,7 @@ class PhonStateNT:
         if self.final == 'ng':
             vowelPhon += self.nasalchar
         # add w at beginning of low tone words:
-        if self.position == 1 and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
+        if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
             self.phon += 'w'
         self.phon += vowelPhon
         if self.position == 1:

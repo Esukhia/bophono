@@ -5,16 +5,17 @@ import PhonStateNT
 
 Cx_to_vow = {'a': '', 'b': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
 Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
+Cx_suffix_list = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས', 'ག', 'གས', 'ང', 'ངས', 'ད', 'ན', 'བ', 'བས', 'མ', 'མས', 'ལ']
 
 def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
     if len(unicodeTib) > 2 and unicodeTib[-3] == '/' and unicodeTib[-2] == 'C':
         letter = unicodeTib[-1:]
         vow = Cx_to_vow[letter]
-        for affix in Cx_affix_list:
-            # by convention b is for when suffix འ is possible and an absence of suffix is not
-            if letter == 'b' and affix == '':
-                affix = 'འ'
+        # by convention b is for when suffix འ is possible and an absence of suffix is not
+        suffix_list = (letter == 'b' and Cx_suffix_list or Cx_affix_list)
+        for affix in suffix_list:
             phonVowAffix = endsTrie.get_data(vow+affix)
+            print("add in trie: "+unicodeTib[0:-3]+affix+" -> "+phonStr+phonVowAffix)
             add_association_in_trie(unicodeTib[0:-3]+affix, phonStr+phonVowAffix, trie, phonType)
         return
     if unicodeTib.startswith('2:'):
@@ -30,6 +31,8 @@ def get_trie_from_file(filename, phonType="roots", endsTrie=None):
     with open(filename, newline='') as csvfile:
         freader = csv.reader(csvfile)
         for row in freader:
+            if row[0].startswith('#'):
+                continue
             add_association_in_trie(row[0], row[1], trie, phonType, endsTrie)
     return trie
 
