@@ -68,6 +68,7 @@
 ཡར་འབྲོ་གཡུ་མཚོ
 བདག་འཛིན
 ཁ་འདོན
+སྐྱབས་འགྲོ
 ཞལ་འདེབས
 རྒྱལ་མཚན
 སྐུ་མདུན
@@ -87,5 +88,8 @@
 # g instead of k:
 ཐིག་ལེ
 
-## Difficult orthographies:
+## Difficult orthographies (no source, easy to spot)
 ཀཿ་ཐོག
+
+# Epenthesis
+ཡ་བཞི

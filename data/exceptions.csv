@@ -2,15 +2,14 @@
 2:བ/Ca,w-
 2:བོ/Co,w-
 # Exception from THL (not taking nasalizations)
-རྒྱལ་རྩེ/Ce,ky-än|ts+
 རྡོ་རྗེ/Ce,t-or|c-
 བླ་བྲང,l+ap|r-ang
 འབྲི་རུ/Cu,ph-i|r-
 ལྷ་རྗེ/Ce,lh+ar|c-
 ལྷ་བྲིས་པ/Ca,lh+ap|r-i|p+
-ཨུ་རྒྱན,+ur|khy-än
-ཨོ་རྒྱན,+or|khy-än
-བླ་བྲང,l+ap|thr-ang
+ཨུ་རྒྱན,+ur|ky-än
+ཨོ་རྒྱན,+or|ky-än
+བླ་བྲང,l+ap|tr-ang
 # NT p. 60
 ཨ་གསར,+ak|s+ar
 ས་གདན,s+ap|tän
@@ -43,3 +42,58 @@
 # Sanskrit (TODO: check)
 པདྨ/Ca,p+e|m-
 ཀརྨ/Ca,k+ar|m-
+# NT Annex 1, nasalizer
+ཞབས་འདེགས,sh-am|t-ek
+ཞིབ་འཇུག,sh-im|c-uk
+མིག་འཁྲུལ,m+ing|tr+ül
+སྔོན་འགྲོ/Co,ng+ön|tr-
+སྨོན་འདུན,m+ön|t-ün
+དཔལ་འབར,p+äm|p-ar
+དམའ་འབེབས,m+am|p-ep
+ཤ་འབྲས,sh+am|tr-ä'
+དགེ་འདུན,k-en|t-ün
+མི་འདུག,m-in|tu'
+བོད་ལྗོངས,ph-ön|c-ong
+དུས་འཁོར,th-üng|k+or
+གསར་འགྱུར,s+ang|ky-ur
+རྒྱུ་མཚན,ky-um|ts+än
+རྒྱ་མཚོ/Co,ky-am|ts+
+བོད་ཟླ/Ca,ph+ön|t-
+ད་ལྟ/ca,th-an|t+
+དཔལ་ལྡན,p+än|t-än
+སྟོབས་ལྡན,t+om|t-än
+ཡུལ་ལྗོངས,y-ün|c-ong
+འབྲས་ལྗོངས,tr-än|c-ong
+ཡལ་ག/Ca,y-än|k-
+དགའ་ལྡན,k-an|t-än
+གསོལ་འདེབས,s+ön|t-ep
+དུད་འགྲོ/Co,d-ün|tr-
+ཞིབ་འཇུག,sh-im|c-uk
+འཐབ་འཛིང,th+am|ts-ing
+སྐུ་འབུམ,k+um|p-um
+ཡར་འབྲོ/Co,y-a:m|tr-
+གཡུ་མཚོ/Co,y+um|ts+
+བདག་འཛིན,t-an|ts-in
+སྐྱབས་འགྲོ/Co,ky+am|tr-
+ཁ་འདོན,kh+an|t-ön
+ཞལ་འདེབས,sh-än|t-ep
+རྟེན་འབྲེལ,t+em|tr-el
+རྒྱལ་མཚན,ky-än|ts+än
+སྐུ་མདུན,k+un|t-ün
+ཕྱག་མཛོད,ch+ang|ts-ö'
+ལྷ་མཛེས,lh+an|ts-e'
+ལོ་མཆོད,l-om|c+ö'
+# THL nasalizations
+བཀའ་འགྱུར,k+an|ky-ur
+ངོས་འཛིན,ng-ön|ts-in
+རིག་འཛིན,r-in|ts-in
+མཁའ་འགྲོ/Co,kh+an|tr-
+དཀྱིལ་འཁོར,ky+in|k+or
+ཆོས་འཕེལ,ch+öm|p+el
+དཔལ་འབྱོར,p+än|c-or
+རྒྱུ་འབྲས,ky-un|tr-ä'
+ཨ་མདོ/Co,+am|t-
+མེ་མད/Cc,m-en|t-
+རྒྱལ་རྩེ/Ce,ky-än|ts+
+ཆབ་མདོ/Co,ch+am|t-
+རྟ་མགྲིན,t+am|tr-in

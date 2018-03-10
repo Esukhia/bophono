@@ -3,16 +3,23 @@ import csv
 import PhonStateNT
 
 
-Cx_to_vow = {'a': '', 'b': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
+Cx_to_vow = {'a': '', 'b': '', 'c': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
 Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
+Cx_affix_list_a = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
 Cx_suffix_list = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས', 'ག', 'གས', 'ང', 'ངས', 'ད', 'ན', 'བ', 'བས', 'མ', 'མས', 'ལ']
 
 def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
     if len(unicodeTib) > 2 and unicodeTib[-3] == '/' and unicodeTib[-2] == 'C':
         letter = unicodeTib[-1:]
         vow = Cx_to_vow[letter]
-        # by convention b is for when suffix འ is possible and an absence of suffix is not
-        suffix_list = (letter == 'b' and Cx_suffix_list or Cx_affix_list)
+        # convention:
+        # - b is for when all suffixes are possible, including འ, but an absence of suffix is not
+        # - c is for when all affixes are possible, but in the absence of affix, འ is mandatory
+        suffix_list = Cx_affix_list
+        if letter == 'b':
+            suffix_list = Cx_suffix_list
+        if letter == 'c':
+            suffix_list = Cx_affix_list_a
         for affix in suffix_list:
             phonVowAffix = endsTrie.get_data(vow+affix)
             #print("add in trie: "+unicodeTib[0:-3]+affix+" -> "+phonStr+phonVowAffix)

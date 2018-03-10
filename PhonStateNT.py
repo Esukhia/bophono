@@ -4,6 +4,7 @@ class PhonStateNT:
     ## In intermediate representation (not IPA):
     # - using k+a instead of kā, k-a instead of ka̱
     # - using | as syllable splitter
+    # - use ~ to indicate nasalizer (small capital N in NT, p. 397)
     # - use ~ to indicate contour tone after suffix combinations ངས and མས, instead of ' (see p. 57)
     # - use k instead of ' for the sake of simplicity
     # - only use ' to indicate a possible stop after suffixes ས and ད
@@ -158,8 +159,7 @@ class PhonStateNT:
         # nasal prefix (not in NT) TODO: use white list instead
         if nrc.startswith('~'):
             nrc = nrc[1:]
-            if self.position > 1 and self.final not in ['m', 'ng']:# TODO: exlude k too?
-                self.final = 'n'
+            # TODO: maybe output several possibilities?
         ## vowels:
         vowelPhon = ''
         if self.vowel in PhonStateNT.simpleVowMapping:
