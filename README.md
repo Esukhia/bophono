@@ -38,6 +38,7 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - དགོན་པ: p. 442, note 201, do something about it?
 - indicate weak pronounciation of n and ng
 - geminates p. 37?
+- option to use ligature ties: t͡s, t͡ɕ instead of ts, tɕ
 
 ## License
 
