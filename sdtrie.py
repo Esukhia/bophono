@@ -45,6 +45,10 @@ class Trie:
         for i in range(bindex, eindex):
             letter = word[i]
             if ignored_chars and letter in ignored_chars:
+                if latest_match_i == i:
+                    # if we just matched, consider that the following ignored chars
+                    # are also part of the match
+                    latest_match_i = i+1
                 continue
             if letter in current_node.children:
                 current_node = current_node.children[letter]
