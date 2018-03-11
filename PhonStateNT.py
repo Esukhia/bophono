@@ -156,10 +156,21 @@ class PhonStateNT:
         if slashi != -1:
             self.end = self.end[:slashi]
         self.vowel = self.end[:1]
-        # do something about final ~ ?
+        modulated = False
         if self.end.endswith('~'):
+            modulated = True
             self.end = self.end[:-1]
         self.final = PhonStateNT.getFinal(self.end)
+        # p. 36, we use the following notation:
+        # '+_' flat high tone
+        # '+\' for falling high tone
+        # '-_' for low tone flat, slightly rising
+        # '-^' for low tone rising followed by short fall
+        tonecountour = self.tone
+        if self.final in ['', 'n', 'm', 'ng']:
+            tonecountour = self.tone == '+' and '+_' or '-_'
+        elif self.final in ['p', 'k'] or (modulated and self.final in ['m', 'n', 'ng']):
+            tonecountour = self.tone == '+' and '+\\' or '-^'
         # nasal prefix (not in NT) TODO: use white list instead
         if nrc.startswith('~'):
             nrc = nrc[1:]
