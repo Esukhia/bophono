@@ -13,6 +13,8 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - Tournadre basis scheme -> IPA (Annex 2)
 - IPA -> phonetic scheme
 
+We focus exclusively on litterary pronounciation, and have options for reading pronounciation or oral pronounciation.
+
 ## Installation
 
 ## Running
@@ -24,18 +26,17 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - da/sa glottal stop only at end of sentence
 - p. 443: closed syllable = when final has sound (including glottal stop)
 - document kh¨antr¨as
-- khon pa as gompa
 - footnote 200 p. 441
-- dmag mi p. 65 noted with '
 - dbu 'khyud
 - document non-nasalized words
 - implement p. 36
-- list da drag (p. 57) + some combinations (kyurcik)
 - long aspirations (lhod lhod in one big aspiration)
 - high tone ma when it's negation (ma mthong : "doesn't see" or "sees the mother")
 - add : after consonnants (khams -> kʰâmː, kham -> kʰàm)
 - indicate ambiguity: ཤ་འབྲས = sh+am|tr-ä' or sha|tr-ä' according to pos
 - option of word separation for exceptions, so that another syllable can be at position 1
+- p. 432, note 196, aspirated consonnants on second syllables
+- དགོན་པ: p. 442, note 201, do something about it?
 
 ## License
 

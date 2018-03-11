@@ -8,6 +8,7 @@ class PhonStateNT:
     # - use ~ to indicate contour tone after suffix combinations ངས and མས, instead of ' (see p. 57)
     # - use k instead of ' for the sake of simplicity
     # - only use ' to indicate a possible stop after suffixes ས and ད
+    # - use g as a very exceptional suffix to indicate that the IPA should be g̥, not k
     #
     ## In IPA (most can be configured through options)
     # - using [ɲ] instead of [ny]
@@ -45,9 +46,9 @@ class PhonStateNT:
         """ returns the final consonant or empty string """
         if not endstr:
             return ''
-        simplesuffixes = ['m', 'p', 'n', "'", 'k', 'r', 'l']
+        simplesuffixes = ['m', 'p', 'n', "'", 'k', 'r', 'l', 'g']
         lastchar = endstr[-1]
-        if lastchar == 'g':
+        if endstr.endswith('ng'):
             return 'ng'
         elif lastchar in simplesuffixes:
             return lastchar
@@ -79,7 +80,8 @@ class PhonStateNT:
     simpleFinalMapping = {
         ':': 'ː', #p. 435
         'm': 'm', #p. 444
-        'ng': 'ŋ' #p. 442
+        'ng': 'ŋ', #p. 442
+        'g': 'g̥' # only in exceptions, see comment at the top of the file
     }
 
     aspirateMapping = {
