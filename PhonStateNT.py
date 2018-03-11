@@ -56,11 +56,9 @@ class PhonStateNT:
     #TODO: remove aspiration on low tones
     simpleRootMapping = {
         'sh': 'ɕ', #p. 440
-        'rh': 'ʂ', #p. 440
         's': 's', #p. 440
         'r': 'r', #p. 441
         'l': 'l', #p. 441
-        'lh': 'l̥ʰ', #p. 441
         'h': 'h', #p. 441
         'm': 'm', #p. 441
         'n': 'n', #p. 442
@@ -79,9 +77,22 @@ class PhonStateNT:
     }
 
     simpleFinalMapping = {
-        ":": 'ː', #p. 435
+        ':': 'ː', #p. 435
         'm': 'm', #p. 444
         'ng': 'ŋ' #p. 442
+    }
+
+    aspirateMapping = {
+        # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
+        'kh' : {'a': 'kʰ', 'na': 'k', 'nac': 'k'}, #p. 435
+        'khy' : {'a': 'cʰ', 'na': 'c', 'nac': 'ky'}, #p. 436
+        'thr' : {'a': 'ʈʰ', 'na': 'ʈ', 'nac': 'tr'}, #p. 436
+        'th' : {'a': 'tʰ', 'na': 't', 'nac': 't'}, #p. 437
+        'ph' : {'a': 'pʰ', 'na': 'p', 'nac': 'p'}, #p. 439
+        'ch' : {'a': 'tɕʰ', 'na': 'tɕ', 'nac': 'c'}, #p. 439
+        'tsh' : {'a': 'tsʰ', 'na': 'ts', 'nac': 'ts'}, #p. 439
+        'rh' : {'a': 'ʂ', 'na': 'r', 'nac': 'r'}, #p. 440
+        'lh' : {'a': 'l̥ʰ', 'na': 'l̥', 'nac': 'l'} #p. 441
     }
 
     def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
@@ -99,27 +110,18 @@ class PhonStateNT:
         if nrc.startswith('~'):
             # TODO: Do some magic here?
             nrc = nrc[1:]
-        possibleAspirate = True
-        if self.tone == '-' and not self.aspirateLowTones:
-            possibleAspirate = False
+        if nrc in PhonStateNT.aspirateMapping:
+            # TODO: maybe this should happen in the case of exceptions starting with an aspirated?
+            #if self.position != 1:
+            #    nrc = PhonStateNT.aspirateMapping[nrc]['nac']
+            if self.tone == '-' and not self.aspirateLowTones:
+                return PhonStateNT.aspirateMapping[nrc]['na']
+            else:
+                return PhonStateNT.aspirateMapping[nrc]['a']
         if nrc in PhonStateNT.simpleRootMapping:
             return PhonStateNT.simpleRootMapping[nrc]
         if nrc == '':
             return ''
-        if nrc == 'kh':
-            return possibleAspirate and 'kʰ' or 'k' #p. 435
-        if nrc == 'khy':
-            return possibleAspirate and 'cʰ' or 'c' #p. 436
-        if nrc == 'thr':
-            return possibleAspirate and 'ʈʰ' or 'ʈ' #p. 436
-        if nrc == 'th':
-            return possibleAspirate and 'tʰ' or 't' #p. 437
-        if nrc == 'ph':
-            return possibleAspirate and 'pʰ' or 'p' #p. 438
-        if nrc == 'ch':
-            return possibleAspirate and 'tɕʰ' or 'tɕ' #p. 439
-        if nrc == 'tsh':
-            return possibleAspirate and 'tsʰ' or 'ts' #p. 439
         if nrc == 'k':
             lastcond = (self.final == 'p')
             return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̥')

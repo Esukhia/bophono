@@ -34,7 +34,8 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - long aspirations (lhod lhod in one big aspiration)
 - high tone ma when it's negation (ma mthong : "doesn't see" or "sees the mother")
 - add : after consonnants (khams -> kʰâmː, kham -> kʰàm)
-- indicate ambiguity: ཤ་འབྲས = sh+am|tr-ä' or sha|tr-ä'
+- indicate ambiguity: ཤ་འབྲས = sh+am|tr-ä' or sha|tr-ä' according to pos
+- option of word separation for exceptions, so that another syllable can be at position 1
 
 ## License
 
