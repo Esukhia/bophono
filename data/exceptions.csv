@@ -9,7 +9,7 @@
 ལྷ་བྲིས་པ/Ca,lh+ap|r-i|p+
 ཨུ་རྒྱན,+ur|ky-än
 ཨོ་རྒྱན,+or|ky-än
-བླ་བྲང,l+ap|tr-ang
+བླ་བྲང,l+ap|thr-ang
 # NT p. 60
 ཨ་གསར,+ak|s+ar
 ས་གདན,s+ap|tän
@@ -31,7 +31,7 @@
 ང་བཞི/Ci,ng-ap|sh-
 དགུ་བཅུ/Cu,k-u|c+
 # possible according to accent, not always (source: Drupchen)
-ལྔ་ཁྲི/Ci,ng+ap|tr+
+ལྔ་ཁྲི/Ci,ng+ap|thr+
 གོ་བཞི/Ci,k-op|sh-
 གོ་བརྒྱད,k-op|ky-ä'
 གྱ་བདུན,ky-ap|t-ün
@@ -45,7 +45,7 @@
 # NT Annex 1, nasalizer
 ཞབས་འདེགས,sh-am|~t-ek
 ཞིབ་འཇུག,sh-im|~c-uk
-མིག་འཁྲུལ,m+ing|~tr+ül
+མིག་འཁྲུལ,m+ing|~thr+ül
 སྔོན་འགྲོ/Co,ng+ön|~tr-
 སྨོན་འདུན,m+ön|~t-ün
 དཔལ་འབར,p+äm|~p-ar
@@ -54,12 +54,12 @@
 དགེ་འདུན,k-en|~t-ün
 མི་འདུག,m-in|~tu'
 བོད་ལྗོངས,ph-ön|~c-ong
-དུས་འཁོར,th-üng|~k+or
+དུས་འཁོར,th-üng|~kh+or
 གསར་འགྱུར,s+ang|~ky-ur
-རྒྱུ་མཚན,ky-um|~ts+än
-རྒྱ་མཚོ/Co,ky-am|~ts+
+རྒྱུ་མཚན,ky-um|~tsh+än
+རྒྱ་མཚོ/Co,ky-am|~tsh+
 བོད་ཟླ/Ca,ph+ön|~t-
-ད་ལྟ/ca,th-an|~t+
+ད་ལྟ/Ca,th-an|~t+
 དཔལ་ལྡན,p+än|~t-än
 སྟོབས་ལྡན,t+om|~t-än
 ཡུལ་ལྗོངས,y-ün|~c-ong
@@ -72,24 +72,24 @@
 འཐབ་འཛིང,th+am|~ts-ing
 སྐུ་འབུམ,k+um|~p-um
 ཡར་འབྲོ/Co,y-a:m|~tr-
-གཡུ་མཚོ/Co,y+um|~ts+
+གཡུ་མཚོ/Co,y+um|~tsh+
 བདག་འཛིན,t-an|~ts-in
 སྐྱབས་འགྲོ/Co,ky+am|~tr-
 ཁ་འདོན,kh+an|~t-ön
 ཞལ་འདེབས,sh-än|~t-ep
 རྟེན་འབྲེལ,t+em|~tr-el
-རྒྱལ་མཚན,ky-än|~ts+än
+རྒྱལ་མཚན,ky-än|~tsh+än
 སྐུ་མདུན,k+un|~t-ün
 ཕྱག་མཛོད,ch+ang|~ts-ö'
 ལྷ་མཛེས,lh+an|~ts-e'
-ལོ་མཆོད,l-om|~c+ö'
+ལོ་མཆོད,l-om|~ch+ö'
 # THL nasalizations
 བཀའ་འགྱུར,k+an|~ky-ur
 ངོས་འཛིན,ng-ön|~ts-in
 རིག་འཛིན,r-in|~ts-in
 མཁའ་འགྲོ/Co,kh+an|~tr-
-དཀྱིལ་འཁོར,ky+in|~k+or
-ཆོས་འཕེལ,ch+öm|~p+el
+དཀྱིལ་འཁོར,ky+in|~kh+or
+ཆོས་འཕེལ,ch+öm|~ph+el
 དཔལ་འབྱོར,p+än|~c-or
 རྒྱུ་འབྲས,ky-un|~tr-ä'
 ཨ་མདོ/Co,+am|~t-
@@ -125,7 +125,7 @@
 རྒྱས་འདེབས,ky-en|~t-ep
 རྒྱུ་འགྲུལ,ky-un|~tr-ül
 སྐྱེ་འགྲོ/Co,ky+en|~tr-
-སྐྱེ་མཆེད,ky+em|~c+e'
+སྐྱེ་མཆེད,ky+em|~ch+e'
 སྤྱོད་འཇུག,c+ön|~c-uk
 ཞེ་འདོད,sh-en|~t-ö'
 # from Perl module, rigpa_exceptions.txt
@@ -139,6 +139,6 @@
 རེ་འདོད,r-en|~t-ö'
 སྒྲོ་འདོགས,tr-ön|~t-ok
 ཚེ་འཛིན,tsh+en|~ts-in
-བདེ་མཆོག,t-em|~c+ok
-ཆེ་མཆོག,ch+em|~c+ok
+བདེ་མཆོག,t-em|~ch+ok
+ཆེ་མཆོག,ch+em|~ch+ok
 བདེ་འགྲོ/Co,t-em|~tr-

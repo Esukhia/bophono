@@ -113,10 +113,9 @@ class PhonStateNT:
             # TODO: Do some magic here?
             nrc = nrc[1:]
         if nrc in PhonStateNT.aspirateMapping:
-            # TODO: maybe this should happen in the case of exceptions starting with an aspirated?
-            #if self.position != 1:
-            #    nrc = PhonStateNT.aspirateMapping[nrc]['nac']
-            if self.tone == '-' and not self.aspirateLowTones:
+            if self.position != 1:
+                nrc = PhonStateNT.aspirateMapping[nrc]['nac']
+            elif self.tone == '-' and not self.aspirateLowTones:
                 return PhonStateNT.aspirateMapping[nrc]['na']
             else:
                 return PhonStateNT.aspirateMapping[nrc]['a']
