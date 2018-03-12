@@ -91,5 +91,54 @@
 ## Difficult orthographies (no source, easy to spot)
 ཀཿ་ཐོག
 
-# Epenthesis
+# Epenthesis, other difficulties, some from Perl module, rigpa_exceptions.txt
 ཡ་བཞི
+ས་བཅད
+ཡང་ལེ་བེར
+མཆོད་རྟེན
+སྡེ་དགེ
+
+# not sure about these:
+སྤྲེའུ
+ལྡེའུ་བཙན
+ཐེའུ་རང
+སྤྲུལ་སྐུ
+
+# from Perl module, padmakara_exceptions.txt
+མི་འབྲལ
+མི་འབྱུང
+མི་འདོད
+མི་འགག
+མི་འགྱུར
+རྒྱས་འདེབས
+རྒྱུ་འགྲུལ
+སྐྱེ་འགྲོ
+སྐྱེ་མཆེད
+སྤྱོད་འཇུག
+ཞེ་འདོད
+
+# from Perl module, rigpa_exceptions.txt
+དེ་འབྲེལ
+དེ་འདྲ
+འདི་འདྲ
+དཀའ་འགྲེལ
+ག་འདྲ
+མི་ལྡོག
+མཁས་འཇུག
+རེ་འདོད
+སྒྲོ་འདོགས
+ཚེ་འཛིན
+བདེ་མཆོག
+ཆེ་མཆོག
+བདེ་འགྲོ
+
+## No nasalizer
+# from Perl module, rigpa_exceptions.txt
+དུ་འབྲལ
+དུ་འཛི
+ལོ་འདབ
+མ་འོངས
+མཆོད་འོས
+མི་འམ་ཅི
+རེ་འདོད
+ཞལ་མཇལ

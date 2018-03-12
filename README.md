@@ -39,6 +39,8 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - indicate weak pronounciation of n and ng
 - geminates p. 37?
 - option to use ligature ties: t͡s, t͡ɕ instead of ts, tɕ
+- pronounciation of 'i in monosyllabic words
+- option for having eʲ instead of e for a'i (in polysillabic)
 
 ## License
 

@@ -19,26 +19,26 @@
 བཅུ་གཅིག,c+uk|c+ik
 བཅུ་གཉིས,c+uk|ny+i'
 བཅུ་གསུམ,c+uk|s+um
-བཅུ་བཞི,c+up|sh-i
+བཅུ་བཞི/Ci,c+up|sh-
 བཅུ་བདུན,c+up|t-ün
 བཅོ་བརྒྱད,c+op|ky-ä'
-རྩ་བཞི,ts+ap|sh-i
+རྩ་བཞི/Ci,ts+ap|sh-
 རྩ་བདུན,ts+ap|t-ün
 རྩ་བརྒྱད,ts+ap|ky-ä'
 སོ་བརྒྱད,s+op|ky-ä'
-བཞི་བཅུ,sh-ip|c+u
-ལྔ་བཅུ,ng+ap|c+u
-ང་བཞི,ng-ap|sh-i
-དགུ་བཅུ,k-u|c+u
+བཞི་བཅུ/Cu,sh-ip|c+
+ལྔ་བཅུ/Cu,ng+ap|c+
+ང་བཞི/Ci,ng-ap|sh-
+དགུ་བཅུ/Cu,k-u|c+
 # possible according to accent, not always (source: Drupchen)
-ལྔ་ཁྲི,ng+ap|tr+i
-གོ་བཞི,k-op|sh-i
+ལྔ་ཁྲི/Ci,ng+ap|tr+
+གོ་བཞི/Ci,k-op|sh-
 གོ་བརྒྱད,k-op|ky-ä'
 གྱ་བདུན,ky-ap|t-ün
 རེ་བདུན,r-ep|t-ün
 ང་བརྒྱད,ng-ap|ky-ä'
 ཞེ་བདུན,sh-ep|t-ün
-སོ་བཞི,s+op|sh-i
+སོ་བཞི/Ci,s+op|sh-
 # Sanskrit (TODO: check)
 པདྨ/Ca,p+e|m-
 ཀརྨ/Ca,k+ar|m-
@@ -105,3 +105,40 @@
 ཕྱིན,ch+in~
 ## g instead of k
 ཐིག་ལེ/Ce,th+ig|l-
+# Epenthesis, other difficulties, some from Perl module, rigpa_exceptions.txt
+ཡ་བཞི/Ci,y-ap|sh-
+ས་བཅད,s+ap|c+ä'
+ཡང་ལེ་བེར,y-ang|l-e|w-er
+མཆོད་རྟེན,ch+ör|t+en
+སྡེ་དགེ/Ce,t-er|k-
+# not sure about these:
+#སྤྲེའུ,p+eu
+#ལྡེའུ་བཙན,~t-e|ts+än
+#ཐེའུ་རང,th+e|r-ang
+#སྤྲུལ་སྐུ/Cu,tr+ül|k+
+# from Perl module, padmakara_exceptions.txt
+མི་འབྲལ,m-in|~tr-äl
+མི་འབྱུང,m-in|~c-ung
+མི་འདོད,m-in|~t-ö'
+མི་འགག,m-in|~k-ak
+མི་འགྱུར,m-in|~ky-ur
+རྒྱས་འདེབས,ky-en|~t-ep
+རྒྱུ་འགྲུལ,ky-un|~tr-ül
+སྐྱེ་འགྲོ/Co,ky+en|~tr-
+སྐྱེ་མཆེད,ky+em|~c+e'
+སྤྱོད་འཇུག,c+ön|~c-uk
+ཞེ་འདོད,sh-en|~t-ö'
+# from Perl module, rigpa_exceptions.txt
+དེ་འབྲེལ,th-en|~tr-el
+དེ་འདྲ/Ca,th-en|~tr-
+འདི་འདྲ/Ca,t-i|~tr-
+དཀའ་འགྲེལ,k+an|~tr-el
+ག་འདྲ/Ca,kh-an|~tr-
+མི་ལྡོག,m-in|~t-ok
+མཁས་འཇུག,kh+en|~c-uk
+རེ་འདོད,r-en|~t-ö'
+སྒྲོ་འདོགས,tr-ön|~t-ok
+ཚེ་འཛིན,tsh+en|~ts-in
+བདེ་མཆོག,t-em|~c+ok
+ཆེ་མཆོག,ch+em|~c+ok
+བདེ་འགྲོ/Co,t-em|~tr-
