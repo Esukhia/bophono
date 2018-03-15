@@ -98,7 +98,7 @@
 མཆོད་རྟེན
 སྡེ་དགེ
 
-# not sure about these:
+# these are listed as exceptions in rigpa_exceptions, but we consider they're pronounced normally
 སྤྲེའུ
 ལྡེའུ་བཙན
 ཐེའུ་རང
@@ -142,3 +142,7 @@
 མི་འམ་ཅི
 རེ་འདོད
 ཞལ་མཇལ
+
+## unclear nasalization
+# in སེང་ཁྲི་པད་ཟླའི་སྟེང
+པད་ཟླ

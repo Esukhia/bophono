@@ -13,7 +13,7 @@ The various steps (for the Tournadre scheme, which is the most complex) will be:
 - Phonological scheme -> IPA (according to Annex 2 of Tournadre)
 - IPA -> phonetic scheme
 
-We focus exclusively on litterary pronounciation, and have options for reading pronounciation or oral pronounciation.
+We focus exclusively on litterary pronounciation, and have options for reading pronounciation or oral pronounciation. Our goal is to express how an umze would pronounce.
 
 ## Installation
 
@@ -25,7 +25,6 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - document kh¨antr¨as
 - footnote 200 p. 441
 - dbu 'khyud
-- document non-nasalized words
 - implement p. 36
 - long aspirations (lhod lhod in one big aspiration)
 - high tone ma when it's negation (ma mthong : "doesn't see" or "sees the mother")
@@ -34,11 +33,12 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - test ཐིག་ལེ
 - indicate ambiguity: ཤ་འབྲས = sh+am|tr-ä' or sha|tr-ä' according to pos
 - option of word separation for exceptions, so that another syllable can be at position 1
-- p. 432, note 196, aspirated consonnants on second syllables
-- དགོན་པ: p. 442, note 201, do something about it?
+- option for p. 432, note 196, aspirated consonnants on second syllables
+- དགོན་པ: p. 442, note 201, do something about it? gø~ pa
 - indicate weak pronounciation of n and ng
 - geminates p. 37?
 - option to use ligature ties: t͡s, t͡ɕ instead of ts, tɕ
+- replace alveo-palatal with retroflex
 - pronounciation of 'i in monosyllabic words
 - option for having eʲ instead of e for a'i (in polysillabic)
 

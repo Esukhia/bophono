@@ -1,14 +1,15 @@
 class PhonStateNT:
-    # Differences with Tournadre's book
+    # Differences with Tournadre's book (all are not destructive)
     #
-    ## In intermediate representation (not IPA):
-    # - using k+a instead of kā, k-a instead of ka̱
+    ## In phonologic representation (not IPA):
+    # - tone indication: using k+a instead of kā, k-a instead of ka̱
     # - using | as syllable splitter
-    # - use ~ to indicate nasalizer (small capital N in NT, p. 397)
+    # - use ~ to indicate nasalizer (ɴ in NT, p. 397)
     # - use ~ to indicate contour tone after suffix combinations ངས and མས, instead of ' (see p. 57)
     # - use k instead of ' for the sake of simplicity
     # - only use ' to indicate a possible stop after suffixes ས and ད
-    # - use g as a very exceptional suffix to indicate that the IPA should be g̥, not k
+    # - use g as a very exceptional suffix to indicate that the IPA should be g̊, not k
+    # - use j instead of : for འི affix
     #
     ## In IPA (most can be configured through options)
     # - using [ɲ] instead of [ny]
@@ -16,6 +17,8 @@ class PhonStateNT:
     # - indicate syllable breaks with [.]
     # - use tone markers \u02CA and \u02CB
     # - use nasalization marker \u0303 on nasal vowels
+    # - use 'ːɪ̯' instead of 'ː' for affix འི
+    # - use 'a.ɪ' instead of 'ɛːɪ' (same for other vowels) for affix འི in monosyllabic contexts
     # - use unreleased stops [p̚], [n̚], [k̚] instead of glottal stop [ʔ]
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
@@ -31,16 +34,41 @@ class PhonStateNT:
         self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CB'
         self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
-        self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
         self.eatL = 'eatL' in options and options['eatL'] or False
         self.eatP = 'eatP' in options and options['eatP'] or True
         self.eatK = 'eatK' in options and options['eatK'] or True
+        self.aiAffixchar = 'aiAffixchar' in options and options['aiAffixchar'] or 'ːɪ̯'
+        self.aiAffixmonochar = 'aiAffixmonochar' in options and options['aiAffixmonochar'] or self.syllablesepchar+'ɪ'
+        # does the འི affix in monosyllabic words change the vowel sound (a -> ä) or not (defaults to not)
+        self.aiAffixmonomodif = 'aiAffixmonomodif' in options and options['aiAffixmonomodif'] or False
         # rules the way stops after suffixes ས and ད are handled, can be "eos" (end of sentence), "eow" (end of word)
         # anything else will not print any stop
         self.stopSDMode = 'stopSDMode' in options and options['stopSDMode'] or "eos"
+        # use k̚ instead of ʔ
         self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
+        # indicate aspiration on low tones
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
+        # use ligature ties, ex: t͡s instead of ts
+        self.useLigatureTies = 'useLigatureTies' in options and options['useLigatureTies'] or True
+        # retroflex instead of alveo-palatal, ex: ʈʂ instead of tɕ
+        self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
+        self.aspirateMapping = {
+            # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
+            'kh' : {'a': 'kʰ', 'na': 'k', 'nac': 'k'}, #p. 435
+            'khy' : {'a': 'cʰ', 'na': 'c', 'nac': 'ky'}, #p. 436
+            'thr' : {'a': 'ʈʰ', 'na': 'ʈ', 'nac': 'tr'}, #p. 436
+            'th' : {'a': 'tʰ', 'na': 't', 'nac': 't'}, #p. 437
+            'ph' : {'a': 'pʰ', 'na': 'p', 'nac': 'p'}, #p. 439
+            'rh' : {'a': 'ʂ', 'na': 'r', 'nac': 'r'}, #p. 440
+            'lh' : {'a': 'l̥ʰ', 'na': 'l̥', 'nac': 'l'}, #p. 441
+            'tsh' : {'nac': 'ts'}, #p. 439
+            'ch' : {'nac': 'c'} #p. 439
+            }
+        self.aspirateMapping['ch']['a'] = self.getComplex('c', False, True)
+        self.aspirateMapping['ch']['na'] = self.getComplex('c')
+        self.aspirateMapping['tsh']['a'] = self.getComplex('ts', False, True)
+        self.aspirateMapping['tsh']['na'] = self.getComplex('ts')
   
     def getFinal(endstr):
         """ returns the final consonant or empty string """
@@ -53,6 +81,32 @@ class PhonStateNT:
         elif lastchar in simplesuffixes:
             return lastchar
         return ''
+
+    def getComplex(self, base, voiceless=False, aspirated=False):
+        """ base = c, j, ts or dz, , voiceless and aspirated should be obvious  """
+        res = ''
+        voicelessBelow = True
+        if base == 'c':
+            if self.useRetroflex:
+                res = self.useLigatureTies and 'ʈ͡ʂ' or 'ʈʂ'
+                voicelessBelow = False
+            else:
+                res = self.useLigatureTies and 't͡ɕ' or 'tɕ'
+        elif base == 'j':
+            if self.useRetroflex:
+                res = self.useLigatureTies and 'ɖ͡ʐ' or 'ɖʐ'
+                voicelessBelow = False
+            else:
+                res = self.useLigatureTies and 'd͡ʑ' or 'dʑ'
+        elif base == 'ts':
+            res = self.useLigatureTies and 't͡s' or 'ts'
+        else:
+            res = self.useLigatureTies and 'd͡z' or 'dz'
+        if voiceless:
+            res += voicelessBelow and '\u0325' or '\u030A'
+        if aspirated:
+            res += 'ʰ'
+        return res
 
     #TODO: remove aspiration on low tones
     simpleRootMapping = {
@@ -81,20 +135,13 @@ class PhonStateNT:
         ':': 'ː', #p. 435
         'm': 'm', #p. 444
         'ng': 'ŋ', #p. 442
-        'g': 'g̥' # only in exceptions, see comment at the top of the file
+        'g': 'g̊' # only in exceptions, see comment at the top of the file
     }
 
-    aspirateMapping = {
-        # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
-        'kh' : {'a': 'kʰ', 'na': 'k', 'nac': 'k'}, #p. 435
-        'khy' : {'a': 'cʰ', 'na': 'c', 'nac': 'ky'}, #p. 436
-        'thr' : {'a': 'ʈʰ', 'na': 'ʈ', 'nac': 'tr'}, #p. 436
-        'th' : {'a': 'tʰ', 'na': 't', 'nac': 't'}, #p. 437
-        'ph' : {'a': 'pʰ', 'na': 'p', 'nac': 'p'}, #p. 439
-        'ch' : {'a': 'tɕʰ', 'na': 'tɕ', 'nac': 'c'}, #p. 439
-        'tsh' : {'a': 'tsʰ', 'na': 'ts', 'nac': 'ts'}, #p. 439
-        'rh' : {'a': 'ʂ', 'na': 'r', 'nac': 'r'}, #p. 440
-        'lh' : {'a': 'l̥ʰ', 'na': 'l̥', 'nac': 'l'} #p. 441
+    simplifyVowMapping = {
+        'ä': 'a',
+        'ö': 'o',
+        'ü': 'u'
     }
 
     def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
@@ -112,23 +159,24 @@ class PhonStateNT:
         if nrc.startswith('~'):
             # TODO: Do some magic here?
             nrc = nrc[1:]
-        if nrc in PhonStateNT.aspirateMapping:
+        # handle aspirates, option to use them on non-first syllables
+        if nrc in self.aspirateMapping:
             if self.position != 1:
-                nrc = PhonStateNT.aspirateMapping[nrc]['nac']
+                nrc = self.aspirateMapping[nrc]['nac']
             elif self.tone == '-' and not self.aspirateLowTones:
-                return PhonStateNT.aspirateMapping[nrc]['na']
+                return self.aspirateMapping[nrc]['na']
             else:
-                return PhonStateNT.aspirateMapping[nrc]['a']
+                return self.aspirateMapping[nrc]['a']
         if nrc in PhonStateNT.simpleRootMapping:
             return PhonStateNT.simpleRootMapping[nrc]
         if nrc == '':
             return ''
         if nrc == 'k':
             lastcond = (self.final == 'p')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̥')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̊')
         if nrc == 'ky':
             lastcond = (self.final == 'p')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̥')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̊')
         if nrc == 'tr':
             lastcond = (self.final == 'p' or self.final == 'k')
             return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
@@ -140,10 +188,16 @@ class PhonStateNT:
             return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
         if nrc == 'c':
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'tɕ', 'dʑ', 'ɖ̥ʑ')
+            opt1 = self.getComplex('c')
+            opt2 = self.getComplex('j')
+            opt3 = self.getComplex('j', True)
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         if nrc == 'ts':
+            opt1 = self.getComplex('ts')
+            opt2 = self.getComplex('dz')
+            opt3 = self.getComplex('dz', True)
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ts', 'dz', 'dz̥')
+            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -154,7 +208,6 @@ class PhonStateNT:
         slashi = self.end.find('/')
         if slashi != -1:
             self.end = self.end[:slashi]
-        self.vowel = self.end[:1]
         modulated = False
         if self.end.endswith('~'):
             modulated = True
@@ -175,6 +228,15 @@ class PhonStateNT:
             nrc = nrc[1:]
             # TODO: maybe output several possibilities?
         ## vowels:
+        # འི affix:
+        aiAffix = False
+        if self.end.endswith('j'):
+            aiAffix = True
+            self.end = self.end[:-1]
+        self.vowel = self.end[:1]
+        if self.position == 1 and endofword and aiAffix:
+            if not self.aiAffixmonomodif and self.vowel in PhonStateNT.simplifyVowMapping:
+                self.vowel = PhonStateNT.simplifyVowMapping[self.vowel]
         vowelPhon = ''
         if self.vowel in PhonStateNT.simpleVowMapping:
             vowelPhon = PhonStateNT.simpleVowMapping[self.vowel]
@@ -195,15 +257,20 @@ class PhonStateNT:
                 vowelPhon = 'o'
         else:
             print("unknown vowel: "+self.vowel)
-        if self.final == 'ng':
-            vowelPhon += self.nasalchar
         # add w at beginning of low tone words:
         if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
             self.phon += 'w'
-        self.phon += vowelPhon
+        if aiAffix:
+            if self.position == 1 and endofword:
+                self.phon += self.aiAffixchar
+            else:
+                self.phon += self.aiAffixmonochar
+        tonePhon = ''
         if self.position == 1:
-            self.phon += self.tone == '+' and self.hightonechar or self.lowtonechar
+            tonePhon += self.tone == '+' and self.hightonechar or self.lowtonechar
         finalPhon = ''
+        if self.final == 'ng':
+            vowelPhon += self.nasalchar
         if self.final in PhonStateNT.simpleFinalMapping:
             finalPhon = PhonStateNT.simpleFinalMapping[self.final]
         elif self.final == 'k':
@@ -213,7 +280,7 @@ class PhonStateNT:
                 elif self.vowel in ['i', 'e'] and nrc in ['l', 'sh']:
                     finalPhon = 'k'
                 elif nrc in ['r']:
-                    finalPhon = 'g̥'
+                    finalPhon = 'g̊'
                 elif self.vowel not in ['e', 'i'] and nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
                     finalPhon = 'ɣ'
                 elif nrc in ['k', 'ky', 'w', 'y']:
@@ -245,7 +312,8 @@ class PhonStateNT:
                 else:
                     finalPhon = self.useUnreleasedStops and 'n̚' or ''
             else:
-                finalPhon = self.useUnreleasedStops and 'n̚' or '' # TODO: or '~'?
+                finalPhon = self.useUnreleasedStops and 'n̚' or ''
+                vowelPhon += self.nasalchar
         elif self.final == 'r':
             finalPhon = self.eatR and 'ː' or 'r'
         elif self.final == 'l':
@@ -258,6 +326,8 @@ class PhonStateNT:
                     finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
         else:
             print("unrecognized final: "+self.final)
+        self.phon += vowelPhon
+        self.phon += tonePhon
         self.phon += finalPhon
         if not endofword:
             self.phon += self.syllablesepchar
