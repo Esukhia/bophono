@@ -260,14 +260,14 @@ class PhonStateNT:
         # add w at beginning of low tone words:
         if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
             self.phon += 'w'
-        if aiAffix:
-            if self.position == 1 and endofword:
-                self.phon += self.aiAffixchar
-            else:
-                self.phon += self.aiAffixmonochar
         tonePhon = ''
         if self.position == 1:
-            tonePhon += self.tone == '+' and self.hightonechar or self.lowtonechar
+            vowelPhon += self.tone == '+' and self.hightonechar or self.lowtonechar
+        if aiAffix:
+            if self.position == 1 and endofword:
+                vowelPhon += self.aiAffixmonochar
+            else:
+                vowelPhon += self.aiAffixchar
         finalPhon = ''
         if self.final == 'ng':
             vowelPhon += self.nasalchar
@@ -327,7 +327,6 @@ class PhonStateNT:
         else:
             print("unrecognized final: "+self.final)
         self.phon += vowelPhon
-        self.phon += tonePhon
         self.phon += finalPhon
         if not endofword:
             self.phon += self.syllablesepchar

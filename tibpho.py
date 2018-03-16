@@ -145,7 +145,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 if __name__ == '__main__':
     """ Example use """
     #print(get_phonetics("བག་ལེབ"))
-    with open('tests/nt.txt', 'r') as f:
+    with open('tests/others.txt', 'r') as f:
         for line in f:
             line = line[:-1]
             if line == '':
