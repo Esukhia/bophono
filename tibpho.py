@@ -76,18 +76,7 @@ def get_next_non_letter_index(tibstr, current, eindex):
 def combine(previous, rootinfo, endinfo=None):
     rootinfod = rootinfo['d']
     previousendinfod = previous and previous['endinfod'] or None
-    slashi = rootinfod.find('/')
-    if slashi != -1:
-        if previous:
-            rootinfod = rootinfod[slashi+1:]
-        else:
-            rootinfod = rootinfod[:slashi]
-    if previousendinfod:
-        slashi = previousendinfod.find('/')
-        if slashi != -1:
-            previousendinfod = previousendinfod[slashi+1:]
     curphon = previous and previous['phon'] or ''
-
     res = previous and previous['phon']+rootinfo['d'] or rootinfo['d']
     return endinfo and res+endinfo['d'] or res
 
@@ -145,7 +134,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 if __name__ == '__main__':
     """ Example use """
     #print(get_phonetics("བག་ལེབ"))
-    with open('tests/others.txt', 'r') as f:
+    with open('tests/ends.txt', 'r') as f:
         for line in f:
             line = line[:-1]
             if line == '':

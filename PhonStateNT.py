@@ -343,12 +343,6 @@ class PhonStateNT:
             self.combineWith(syl[:indexplusminus+1], syl[indexplusminus+1:])
 
     def combineWith(self, nextroot, nextend):
-        slashi = nextroot.find('/')
-        if slashi != -1:
-            if self.position > 0:
-                nextroot = nextroot[slashi+1:]
-            else:
-                nextroot = nextroot[:slashi]
         if self.position == 0:
             self.tone = nextroot[-1]
         nextrootconsonant = nextroot[:-1]
@@ -357,7 +351,15 @@ class PhonStateNT:
         self.position += 1
         nextrootphon = self.getNextRootPhon(nextrootconsonant)
         self.phon += nextrootphon
-        self.end = nextend
+        # decompose multi-syllable ends:
+        if nextend.find('|') != -1:
+            ends = nextend.split('|')
+            self.end = ends[0]
+            for endsyl in ends[1:]:
+                # we suppose that roots are always null
+                self.combineWith(endsyl[:1], endsyl[1:])
+        else:
+            self.end = nextend
     
     def finish(self):
         self.doCombineCurEnd(True)
