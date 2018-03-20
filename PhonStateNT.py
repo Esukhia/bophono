@@ -238,6 +238,9 @@ class PhonStateNT:
             if not self.aiAffixmonomodif and self.vowel in PhonStateNT.simplifyVowMapping:
                 self.vowel = PhonStateNT.simplifyVowMapping[self.vowel]
         vowelPhon = ''
+        nasalPhon = ''
+        tonePhon = ''
+        postVowelPhon = ''
         if self.vowel in PhonStateNT.simpleVowMapping:
             vowelPhon = PhonStateNT.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
@@ -260,17 +263,16 @@ class PhonStateNT:
         # add w at beginning of low tone words:
         if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
             self.phon += 'w'
-        tonePhon = ''
         if self.position == 1:
-            vowelPhon += self.tone == '+' and self.hightonechar or self.lowtonechar
+            tonePhon = self.tone == '+' and self.hightonechar or self.lowtonechar
         if aiAffix:
             if self.position == 1 and endofword:
-                vowelPhon += self.aiAffixmonochar
+                postVowelPhon = self.aiAffixmonochar
             else:
-                vowelPhon += self.aiAffixchar
+                postVowelPhon = self.aiAffixchar
         finalPhon = ''
         if self.final == 'ng':
-            vowelPhon += self.nasalchar
+            nasalPhon = self.nasalchar
         if self.final in PhonStateNT.simpleFinalMapping:
             finalPhon = PhonStateNT.simpleFinalMapping[self.final]
         elif self.final == 'k':
@@ -313,7 +315,7 @@ class PhonStateNT:
                     finalPhon = self.useUnreleasedStops and 'n̚' or ''
             else:
                 finalPhon = self.useUnreleasedStops and 'n̚' or ''
-                vowelPhon += self.nasalchar
+                nasalPhon += self.nasalchar
         elif self.final == 'r':
             finalPhon = self.eatR and 'ː' or 'r'
         elif self.final == 'l':
@@ -326,7 +328,7 @@ class PhonStateNT:
                     finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
         else:
             print("unrecognized final: "+self.final)
-        self.phon += vowelPhon
+        self.phon += vowelPhon+nasalPhon+tonePhon+postVowelPhon
         self.phon += finalPhon
         if not endofword:
             self.phon += self.syllablesepchar

@@ -1,7 +1,7 @@
 import sdtrie
 import csv
 import PhonStateNT
-
+import sys
 
 Cx_to_vow = {'a': '', 'b': '', 'c': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
 Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
@@ -134,7 +134,10 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 if __name__ == '__main__':
     """ Example use """
     #print(get_phonetics("བག་ལེབ"))
-    with open('tests/ends.txt', 'r') as f:
+    filename = 'tests/nt.txt'
+    if (len(sys.argv) > 1):
+        filename = sys.argv[1]
+    with open(filename, 'r') as f:
         for line in f:
             line = line[:-1]
             if line == '':
