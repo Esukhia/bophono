@@ -53,6 +53,8 @@ class PhonStateNT:
         self.useLigatureTies = 'useLigatureTies' in options and options['useLigatureTies'] or True
         # retroflex instead of alveo-palatal, ex: ʈʂ instead of tɕ
         self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
+        # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
+        self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
         self.aspirateMapping = {
             # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
             'kh' : {'a': 'kʰ', 'na': 'k', 'nac': 'k'}, #p. 435
@@ -241,6 +243,16 @@ class PhonStateNT:
         nasalPhon = ''
         tonePhon = ''
         postVowelPhon = ''
+        # geminates
+        geminates = False
+        unaspired_nrc = nrc
+        if nrc in self.aspirateMapping:
+            unaspired_nrc = self.aspirateMapping[nrc]['nac']
+        if unaspired_nrc == self.final and self.final != '':
+            geminates = True
+            if self.gemminatesStrategy == 'len' or self.gemminatesStrategy == 'lentone':
+                postVowelPhon = 'ː'
+        # main vowel code 
         if self.vowel in PhonStateNT.simpleVowMapping:
             vowelPhon = PhonStateNT.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
@@ -270,10 +282,13 @@ class PhonStateNT:
                 postVowelPhon = self.aiAffixmonochar
             else:
                 postVowelPhon = self.aiAffixchar
+        ## Suffix
         finalPhon = ''
         if self.final == 'ng':
             nasalPhon = self.nasalchar
-        if self.final in PhonStateNT.simpleFinalMapping:
+        if geminates:
+            pass
+        elif self.final in PhonStateNT.simpleFinalMapping:
             finalPhon = PhonStateNT.simpleFinalMapping[self.final]
         elif self.final == 'k':
             if not endofword: # p. 433

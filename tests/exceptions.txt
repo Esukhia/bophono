@@ -146,3 +146,10 @@
 ## unclear nasalization
 # in སེང་ཁྲི་པད་ཟླའི་སྟེང
 པད་ཟླ
+
+# ":" in exception phonology
+ཡར་འབྲོ
+
+# geminates (NT p. 37)
+སླབ་པ
+གླ་པ
