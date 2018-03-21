@@ -47,10 +47,6 @@ roots = get_trie_from_file("data/roots.csv")
 ends = get_trie_from_file("data/ends.csv", "ends")
 exceptions = get_trie_from_file("data/exceptions.csv", "exceptions", ends)
 
-config = {
-    "useLitterary": True
-}
-
 ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
 
 def is_tib_letter(c):
@@ -84,18 +80,9 @@ def finishcombination(phonres):
     if not phonres:
         return None
 
-def combine_next_syll_phon(tibstr, bindex, state, eindex=-1):
+def combine_next_syll_phon(tibstr, bindex, state, eindex):
     # here we consider that we deal with a syllable starting at bindex, ending at eindex
     global roots, ends, exceptions, ignored_chars
-    if eindex == -1:
-        eindex = len(tibstr)
-    exceptioninfo = exceptions.get_data(tibstr, bindex, eindex, ignored_chars)
-    if exceptioninfo and (state.position > 0 or not exceptioninfo.startswith('2:')):
-        # if it starts with '2:' and we're in the first syllable, we ignore it:
-        if exceptioninfo.startswith('2:'):
-            exceptioninfo = exceptioninfo[2:]
-        state.combineWithException(exceptioninfo)
-        return eindex
     rootinfo = roots.get_longest_match_with_data(tibstr, bindex, eindex, ignored_chars)
     if not rootinfo:
         return -1
@@ -116,6 +103,19 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
         return ''
     state = PhonStateNT.PhonStateNT(options, pos, endOfSentence)
     while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
+        exceptioninfo = exceptions.get_longest_match_with_data(tibstr, i, eindex, ignored_chars)
+        if (exceptioninfo and (state.position > 0 or not exceptioninfo['d'].startswith('2:'))) and (
+                exceptioninfo['i'] >= eindex or not is_tib_letter(tibstr[exceptioninfo['i']])):
+            # if it starts with '2:' and we're in the first syllable, we ignore it:
+            if exceptioninfo['d'].startswith('2:'):
+                exceptioninfo['d'] = exceptioninfo['d'][2:]
+            state.combineWithException(exceptioninfo['d'])
+            nextidx = get_next_letter_index(tibstr, exceptioninfo['i']+1, eindex)
+            if nextidx == -1:
+                nextidx = eindex
+            assert(i < nextidx)
+            i = nextidx
+            continue
         # we combine syllable per syllable, first we search the end of next syllable:
         lastidx = get_next_non_letter_index(tibstr, i, eindex)
         #print("found syllable '"+tibstr[i:lastidx]+"'")
@@ -133,7 +133,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 
 if __name__ == '__main__':
     """ Example use """
-    #print(get_phonetics("བག་ལེབ"))
+    #print(get_phonetics("ག་འདྲས་ཟེ"))
     filename = 'tests/nt.txt'
     if (len(sys.argv) > 1):
         filename = sys.argv[1]

@@ -37,6 +37,7 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - དགོན་པ: p. 442, note 201, do something about it? gø~ pa
 - indicate weak pronounciation of n and ng?
 - geminates: impact on a/schwa?
+- stop after m suffix
 
 ## License
 
