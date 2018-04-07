@@ -28,7 +28,7 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - implement p. 36
 - long aspirations (lhod lhod in one big aspiration)
 - high tone ma when it's negation (ma mthong : "doesn't see" or "sees the mother")
-- add : after consonnants (khams -> kʰâmː, kham -> kʰàm)
+- add : after vowels in case of second suffix? (khams -> kʰâːm, kham -> kʰàm)
 - test ཡར་འབྲོ/Co,y-a:m|~tr-
 - test ཐིག་ལེ
 - indicate ambiguity: ཤ་འབྲས = sh+am|tr-ä' or sha|tr-ä' according to pos
@@ -38,6 +38,8 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - indicate weak pronounciation of n and ng?
 - geminates: impact on a/schwa?
 - stop after m suffix
+- phrase accents: -རྔ་སུ་རེད། and -རྔ་ང་རེད། : རྔ pronounced as ་ང
+- ཀུན་དགའ < test n -> ng
 
 ## License
 

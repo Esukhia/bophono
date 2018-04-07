@@ -133,7 +133,10 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
 
 if __name__ == '__main__':
     """ Example use """
-    #print(get_phonetics("ག་འདྲས་ཟེ"))
+    options = {
+      'aspirateLowTones': True
+    }
+    print(get_phonetics("བཅུ་བཞི"))
     filename = 'tests/nt.txt'
     if (len(sys.argv) > 1):
         filename = sys.argv[1]
@@ -145,5 +148,5 @@ if __name__ == '__main__':
             if line.startswith('#'):
                 print(line[1:])
                 continue
-            phon = get_phonetics(line)
+            phon = get_phonetics(line, options = options)
             print(line + " -> " + phon)

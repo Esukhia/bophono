@@ -67,7 +67,7 @@
 ཡལ་ག/Ca,y-än|~k-
 དགའ་ལྡན,k-an|~t-än
 གསོལ་འདེབས,s+ön|~t-ep
-དུད་འགྲོ/Co,d-ün|~tr-
+དུད་འགྲོ/Co,th-ün|~tr-
 ཞིབ་འཇུག,sh-im|~c-uk
 འཐབ་འཛིང,th+am|~ts-ing
 སྐུ་འབུམ,k+um|~p-um
@@ -97,6 +97,11 @@
 རྒྱལ་རྩེ/Ce,ky-än|~ts+
 ཆབ་མདོ/Co,ch+am|~t-
 རྟ་མགྲིན,t+am|~tr-in
+# Nasalizations from Esukhia doc
+འདི་ཚོ/Co,t-in|~tsh+
+དེ་ཚོ/Co,th-en|~tsh+
+སྐུ་འདྲ/Ca,k+un|~tr-
+གང་འདྲ,kh-an|~tr-
 ## da drag (a relatively safe list, but it's a difficult subject)
 ཀུན,k+ün~
 ཤིན,sh+in~
@@ -105,7 +110,9 @@
 ཕྱིན,ch+in~
 ## g instead of k
 ཐིག་ལེ/Ce,th+ig|l-
-# Epenthesis, other difficulties, some from Perl module, rigpa_exceptions.txt
+# l not pronounced
+གསལ་པོ/Co,s+ä|p+
+# Epenthesis, other difficulties, some from rigpa_exceptions.txt
 ཡ་བཞི/Ci,y-ap|sh-
 ས་བཅད,s+ap|c+ä'
 ཡང་ལེ་བེར,y-ang|l-e|w-er
@@ -130,7 +137,7 @@
 ཞེ་འདོད,sh-en|~t-ö'
 # from Perl module, rigpa_exceptions.txt
 དེ་འབྲེལ,th-en|~tr-el
-དེ་འདྲ/Ca,th-en|~tr-
+དེ་འདྲ/Ca,th-in|~tr-
 འདི་འདྲ/Ca,t-i|~tr-
 དཀའ་འགྲེལ,k+an|~tr-el
 ག་འདྲ/Ca,kh-an|~tr-
@@ -142,3 +149,7 @@
 བདེ་མཆོག,t-em|~ch+ok
 ཆེ་མཆོག,ch+em|~ch+ok
 བདེ་འགྲོ/Co,t-em|~tr-
+# Other sources (oral)
+བུ་འདོད,p-un|~t-ö'
+# from མཚོ་མེ་འབར
+མེ་འབར,m-en|p-ar
