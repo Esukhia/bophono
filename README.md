@@ -40,6 +40,7 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - stop after m suffix
 - phrase accents: -རྔ་སུ་རེད། and -རྔ་ང་རེད། : རྔ pronounced as ་ང
 - ཀུན་དགའ < test n -> ng
+- བར་ཆད -> war cho after another word?
 
 ## License
 
