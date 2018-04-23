@@ -10,7 +10,7 @@ Cx_suffix_list = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ',
 
 api4chinese_table = {
     "equivalence":("k̊", "g̊", "d͡z̥", "ɖ͡ʐ̊", "t̥", "d̥", "ɖ̥", "b̥", "p̥", "ɟ̊"),
-    "clean":("ː", "̚", "̯", "g̊", "k", "p", "r", "l", "ɣ", "ˊ", "ˋ"),
+    "clean":("ː", "̚", "̯", "g̊", "k", "p", "r", "l", "ɣ", "ɪ", "ˊ", "ˋ"),
 }
 
 def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
