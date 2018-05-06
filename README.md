@@ -3,15 +3,20 @@
 The goal of this repository is to:
 - provide an engine to interpret Tibetan in various phonetic transcription schemes
 - implement the rules in [Tournadre](http://www.worldcat.org/oclc/916715611) (intro and Ann. 2) as a starting point
+- implement the Chinese transcription letting a speaker of Mandarin pronounces or chants Tibetan scriptures
 
 ## Description
 
 Ideally the engine will solely use configuration files, so that it can be phonetic scheme agnostic (no phonetics hardcoded).
 
 The various steps (for the Tournadre scheme, which is the most complex) will be:
-- Tibetan unicode -> Phonolical scheme (given in Tournadre)
+- Tibetan unicode -> Phonological scheme (given in Tournadre)
 - Phonological scheme -> IPA (according to Annex 2 of Tournadre)
 - IPA -> phonetic scheme
+
+The Chinese is produced by a streamlined phonetic scheme in order to match the Mandarin phonology (vowels have been simplified and most of the Tibetan suffixes removed).
+
+In brief, the generated IPA brings the Zhuyin or Bopomofo (Chinese transliteration system for Taiwanese Mandarin), which in turn provides the appropriate and chosen traditional Chinese sinograms.
 
 We focus exclusively on litterary pronounciation, and have options for reading pronounciation or oral pronounciation. Our focus is to be able express how an umze would pronounce a traditional text.
 
