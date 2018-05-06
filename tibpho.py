@@ -1,6 +1,6 @@
 import sdtrie
 import csv
-import PhonStateNT
+import PhonStateMST
 import sys
 
 Cx_to_vow = {'a': '', 'b': '', 'c': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
@@ -112,7 +112,7 @@ def get_phonetics(tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False, sc
     i = get_next_letter_index(tibstr, bindex, eindex)
     if (i==-1):
         return ''
-    state = PhonStateNT.PhonStateNT(options, pos, endOfSentence)
+    state = PhonStateMST.PhonStateMST(options, pos, endOfSentence)
     while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
         exceptioninfo = exceptions.get_longest_match_with_data(tibstr, i, eindex, ignored_chars)
         if (exceptioninfo and (state.position > 0 or not exceptioninfo['d'].startswith('2:'))) and (

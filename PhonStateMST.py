@@ -1,4 +1,7 @@
-class PhonStateNT:
+class PhonStateMST:
+    # This file is handling the second column of the csv files. It is based on 
+    # the Manual of Standard Tibetan by Nicolas Tournadre.
+    #
     # Differences with Tournadre's book (all are not destructive)
     #
     ## In phonologic representation (not IPA):
@@ -49,8 +52,6 @@ class PhonStateNT:
         self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
         # indicate aspiration on low tones
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
-        # use ligature ties, ex: t͡s instead of ts
-        self.useLigatureTies = 'useLigatureTies' in options and options['useLigatureTies'] or True
         # retroflex instead of alveo-palatal, ex: ʈʂ instead of tɕ
         self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
@@ -90,20 +91,20 @@ class PhonStateNT:
         voicelessBelow = True
         if base == 'c':
             if self.useRetroflex:
-                res = self.useLigatureTies and 'ʈ͡ʂ' or 'ʈʂ'
+                res = 'ʈ͡ʂ'
                 voicelessBelow = False
             else:
-                res = self.useLigatureTies and 't͡ɕ' or 'tɕ'
+                res = 't͡ɕ'
         elif base == 'j':
             if self.useRetroflex:
-                res = self.useLigatureTies and 'ɖ͡ʐ' or 'ɖʐ'
+                res = 'ɖ͡ʐ'
                 voicelessBelow = False
             else:
-                res = self.useLigatureTies and 'd͡ʑ' or 'dʑ'
+                res = 'd͡ʑ'
         elif base == 'ts':
-            res = self.useLigatureTies and 't͡s' or 'ts'
+            res = 't͡s'
         else:
-            res = self.useLigatureTies and 'd͡z' or 'dz'
+            res = 'd͡z'
         if voiceless:
             res += voicelessBelow and '\u0325' or '\u030A'
         if aspirated:
@@ -169,37 +170,37 @@ class PhonStateNT:
                 return self.aspirateMapping[nrc]['na']
             else:
                 return self.aspirateMapping[nrc]['a']
-        if nrc in PhonStateNT.simpleRootMapping:
-            return PhonStateNT.simpleRootMapping[nrc]
+        if nrc in PhonStateMST.simpleRootMapping:
+            return PhonStateMST.simpleRootMapping[nrc]
         if nrc == '':
             return ''
         if nrc == 'k':
             lastcond = (self.final == 'p')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̊')
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̊')
         if nrc == 'ky':
             lastcond = (self.final == 'p')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̊')
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̊')
         if nrc == 'tr':
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
         if nrc == 't':
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd̥')
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd̥')
         if nrc == 'p':
             lastcond = (self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
         if nrc == 'c':
             lastcond = (self.final == 'p' or self.final == 'k')
             opt1 = self.getComplex('c')
             opt2 = self.getComplex('j')
             opt3 = self.getComplex('j', True)
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         if nrc == 'ts':
             opt1 = self.getComplex('ts')
             opt2 = self.getComplex('dz')
             opt3 = self.getComplex('dz', True)
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateNT.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
+            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -214,7 +215,7 @@ class PhonStateNT:
         if self.end.endswith('~'):
             modulated = True
             self.end = self.end[:-1]
-        self.final = PhonStateNT.getFinal(self.end)
+        self.final = PhonStateMST.getFinal(self.end)
         # p. 36, we use the following notation:
         # '+_' flat high tone
         # '+\' for falling high tone
@@ -237,8 +238,8 @@ class PhonStateNT:
             self.end = self.end[:-1]
         self.vowel = self.end[:1]
         if self.position == 1 and endofword and aiAffix:
-            if not self.aiAffixmonomodif and self.vowel in PhonStateNT.simplifyVowMapping:
-                self.vowel = PhonStateNT.simplifyVowMapping[self.vowel]
+            if not self.aiAffixmonomodif and self.vowel in PhonStateMST.simplifyVowMapping:
+                self.vowel = PhonStateMST.simplifyVowMapping[self.vowel]
         vowelPhon = ''
         nasalPhon = ''
         tonePhon = ''
@@ -253,8 +254,8 @@ class PhonStateNT:
             if self.gemminatesStrategy == 'len' or self.gemminatesStrategy == 'lentone':
                 postVowelPhon = 'ː'
         # main vowel code 
-        if self.vowel in PhonStateNT.simpleVowMapping:
-            vowelPhon = PhonStateNT.simpleVowMapping[self.vowel]
+        if self.vowel in PhonStateMST.simpleVowMapping:
+            vowelPhon = PhonStateMST.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
             if (self.position == 1 and self.final != 'p') or self.final == 'ng':
                 vowelPhon = 'a'
@@ -288,8 +289,8 @@ class PhonStateNT:
             nasalPhon = self.nasalchar
         if geminates:
             pass
-        elif self.final in PhonStateNT.simpleFinalMapping:
-            finalPhon = PhonStateNT.simpleFinalMapping[self.final]
+        elif self.final in PhonStateMST.simpleFinalMapping:
+            finalPhon = PhonStateMST.simpleFinalMapping[self.final]
         elif self.final == 'k':
             if not endofword: # p. 433
                 if nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
@@ -383,7 +384,7 @@ class PhonStateNT:
 
 if __name__ == '__main__':
     """ Example use """
-    s = PhonStateNT()
+    s = PhonStateMST()
     s.combineWith("k+", "ak")
     s.finish()
     print(s.phon)
