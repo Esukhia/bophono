@@ -249,7 +249,7 @@ class PhonStateNT:
         if nrc in self.aspirateMapping:
             unaspired_nrc = self.aspirateMapping[nrc]['nac']
         if unaspired_nrc == self.final and self.final != '':
-            geminates = True
+            geminates = True # p. 37
             if self.gemminatesStrategy == 'len' or self.gemminatesStrategy == 'lentone':
                 postVowelPhon = 'ː'
         # main vowel code 
@@ -316,7 +316,7 @@ class PhonStateNT:
                     finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥'
             else:
                 finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥' # TODO: check
-        elif self.final == 'n':
+        elif self.final == 'n': # p. 442
             if not endofword:
                 if nrc in ['t', 'tr']:
                     finalPhon = 'n'

@@ -136,7 +136,7 @@ if __name__ == '__main__':
     options = {
       'aspirateLowTones': True
     }
-    print(get_phonetics("བར་ཆད"))
+    print(get_phonetics("བོན"))
     filename = 'tests/nt.txt'
     if (len(sys.argv) > 1):
         filename = sys.argv[1]
