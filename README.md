@@ -42,4 +42,4 @@ See [CHANGELOG.md](CHANGELOG.md).
 
 ## License
 
-The Python code is Copyright (C) 2018 Esukhia, provided under [MIT License](LICENSE).
+The Python code is Copyright (C) 2018 Esukhia, provided under [MIT License](LICENSE). See [CONTRIBUTORS.md](CONTRIBUTORS.md) for a list of authors and contributors.
