@@ -46,6 +46,8 @@ We focus exclusively on litterary pronounciation, and have options for reading p
 - phrase accents: -རྔ་སུ་རེད། and -རྔ་ང་རེད། : རྔ pronounced as ་ང
 - ཀུན་དགའ < test n -> ng
 - བར་ཆད -> war cho after another word?
+- amdokä: p.39, optional rise from ang to eng
+- idem p. 40: variation b/v in suffix, ar/er in last syllable?
 
 ## License
 
