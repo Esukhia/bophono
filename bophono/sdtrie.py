@@ -1,3 +1,5 @@
+import csv
+
 # Simple decorated Trie with helper functions
 
 ## inspired from https://gist.github.com/nickstanisha/733c134a0171a00f66d4
@@ -94,6 +96,45 @@ class Trie:
         """ Iterates over all the data of a trie """
         self._walk_all_data_rec(iterator, self.head, '', prefix)
         
+
+Cx_to_vow = {'a': '', 'b': '', 'c': '', 'i': 'ི', 'u': 'ུ', 'e': 'ེ', 'o': 'ོ'}
+Cx_affix_list = ['', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
+Cx_affix_list_a = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས']
+Cx_suffix_list = ['འ', 'འི', 'འིའོ', 'འོ', 'འང', 'འམ', 'ར', 'ས', 'ག', 'གས', 'ང', 'ངས', 'ད', 'ན', 'བ', 'བས', 'མ', 'མས', 'ལ']
+
+def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
+    if len(unicodeTib) > 2 and unicodeTib[-3] == '/' and unicodeTib[-2] == 'C':
+        letter = unicodeTib[-1:]
+        vow = Cx_to_vow[letter]
+        # convention:
+        # - b is for when all suffixes are possible, including འ, but an absence of suffix is not
+        # - c is for when all affixes are possible, but in the absence of affix, འ is mandatory
+        suffix_list = Cx_affix_list
+        if letter == 'b':
+            suffix_list = Cx_suffix_list
+        if letter == 'c':
+            suffix_list = Cx_affix_list_a
+        for affix in suffix_list:
+            phonVowAffix = endsTrie.get_data(vow+affix)
+            #print("add in trie: "+unicodeTib[0:-3]+affix+" -> "+phonStr+phonVowAffix)
+            add_association_in_trie(unicodeTib[0:-3]+affix, phonStr+phonVowAffix, trie, phonType)
+        return
+    if unicodeTib.startswith('2:'):
+        trie.add(unicodeTib[2:], '2:'+phonStr)
+    if unicodeTib.endswith('*'):
+        trie.add(unicodeTib[0:-1], phonStr, False)
+    else:
+        trie.add(unicodeTib, phonStr)
+
+def get_trie_from_file(filename, phonType="roots", endsTrie=None):
+    trie = Trie()
+    with open(filename, newline='', encoding="utf8") as csvfile:
+        freader = csv.reader(csvfile)
+        for row in freader:
+            if row[0].startswith('#'):
+                continue
+            add_association_in_trie(row[0], row[1], trie, phonType, endsTrie)
+    return trie
 
 if __name__ == '__main__':
     """ Example use """
