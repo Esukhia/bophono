@@ -5,13 +5,14 @@ class PhonStateCAT:
         self.pos = pos
         self.latent = ''
         self.endOfSentence = endOfSentence
-        self.vowel = None
+        self.vowel = ''
         self.final = None
         self.end = None
         self.tone = None
         self.phon = ''
         self.options = options
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
+        self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.latentExpression = 'latentExpression' in options and options['latentExpression'] or 'afteropen'
         # use k̚ instead of ʔ
         self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
@@ -19,7 +20,7 @@ class PhonStateCAT:
         self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
         self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
-        self.simpleRootMapping = {
+        self.simpleRootMapping = { # p. 7
             'k': 'k',
             'k+': 'kʰ',
             'g': 'g',
@@ -39,9 +40,10 @@ class PhonStateCAT:
             'sr': 'ʂ',
             'R': 'ʁ',
             'hw': 'hw',
-            'Rw': 'ʁw'
+            'Rw': 'ʁw',
             's': 's',
             's+': 'sʰ',
+            'sh': 'ɕ',
             'l+': 'ɬ',
             'l': 'l',
             'h': 'h',
@@ -50,7 +52,7 @@ class PhonStateCAT:
             'ny': 'ɲ',
             'ng': 'ŋ',
             'w': 'w',
-            'y': 'j', # y in the book
+            'y': 'j',
             'x': 'x', # not sure about that
             'ts': self.getComplex('ts'),
             'ts+': self.getComplex('ts', aspirated=True),
@@ -71,7 +73,7 @@ class PhonStateCAT:
         ':': 'ː',
         'm': 'm',
         'ng': 'ŋ',
-        'x': 'x' # ?
+        'x': 'x', # ?
         'r': '',
         'l': 'l',
         'n': 'n',
@@ -86,7 +88,7 @@ class PhonStateCAT:
         if endstr.endswith('ng'):
             return 'ng'
         lastchar = endstr[-1]
-        elif lastchar in ['m', 'b', 'n', "x", 'r', 'l', 't', 'x']:
+        if lastchar in ['m', 'b', 'n', "x", 'r', 'l', 't', 'x']:
             return lastchar
         return ''
 
@@ -113,9 +115,13 @@ class PhonStateCAT:
             self.latent = nrc[1]
             nrc = nrc[3:]
         else:
-            self/latent = ''
+            self.latent = ''
         if nrc in self.simpleRootMapping:
             return self.simpleRootMapping[nrc]
+        elif nrc == 'r':
+            return self.position == 1 and 'ʐ' or 'ɾ'
+        elif nrc == '':
+            pass
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -124,12 +130,13 @@ class PhonStateCAT:
         if not self.end:
             return
         self.final = PhonStateCAT.getFinal(self.end)
-        vowelPhon = self.vowel
         nasalPhon = ''
         tonePhon = ''
         postVowelPhon = ''
         # geminates
         geminates = False
+        self.vowel = self.end[:1]
+        vowelPhon = self.vowel
         if nrc == self.final and self.final != '':
             geminates = True
             if self.gemminatesStrategy == 'len' or self.gemminatesStrategy == 'lentone':
@@ -137,7 +144,7 @@ class PhonStateCAT:
         ## Suffix
         finalPhon = ''
         if self.final == 'ng':
-            nasalPhon = self.nasalchar
+            nasalPhon = self.nasalchar # ?
         if geminates:
             pass
         elif self.final in PhonStateCAT.simpleFinalMapping:
@@ -148,7 +155,7 @@ class PhonStateCAT:
             finalPhon = ''
         else:
             print("unrecognized final: "+self.final)
-        self.phon += vowelPhon+postVowelPhon+finalPhon
+        self.phon += vowelPhon+nasalPhon+postVowelPhon+finalPhon
         if not endofword:
             self.phon += self.syllablesepchar
 
@@ -162,13 +169,10 @@ class PhonStateCAT:
             self.combineWith(syl[:indexsep+1], syl[indexsep+1:])
 
     def combineWith(self, nextroot, nextend):
-        if self.position == 0:
-            self.tone = nextroot[-1]
-        nextrootconsonant = nextroot[:-1]
         nextvowel = ''
-        self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
+        self.doCombineCurEnd(False, nextroot, nextvowel)
         self.position += 1
-        nextrootphon = self.getNextRootPhon(nextrootconsonant)
+        nextrootphon = self.getNextRootPhon(nextroot)
         self.phon += nextrootphon
         # decompose multi-syllable ends:
         if nextend.find('|') != -1:
@@ -182,10 +186,3 @@ class PhonStateCAT:
     
     def finish(self):
         self.doCombineCurEnd(True)
-
-if __name__ == '__main__':
-    """ Example use """
-    s = PhonStateCAT()
-    s.combineWith("k+", "ak")
-    s.finish()
-    print(s.phon)

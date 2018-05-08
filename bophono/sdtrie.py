@@ -126,14 +126,17 @@ def add_association_in_trie(unicodeTib, phonStr, trie, phonType, endsTrie=None):
     else:
         trie.add(unicodeTib, phonStr)
 
-def get_trie_from_file(filename, phonType="roots", endsTrie=None):
+def get_trie_from_file(filename, phonType="roots", columnIndex = 1, endsTrie=None):
     trie = Trie()
     with open(filename, newline='', encoding="utf8") as csvfile:
         freader = csv.reader(csvfile)
         for row in freader:
             if row[0].startswith('#'):
                 continue
-            add_association_in_trie(row[0], row[1], trie, phonType, endsTrie)
+            if len(row) > columnIndex:
+                add_association_in_trie(row[0], row[columnIndex], trie, phonType, endsTrie)
+            elif phonType != "exceptions":
+                add_association_in_trie(row[0], '', trie, phonType, endsTrie)
     return trie
 
 if __name__ == '__main__':
