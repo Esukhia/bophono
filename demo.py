@@ -5,7 +5,7 @@ options = {
   'aspirateLowTones': True
 }
 filename = 'tests/nt.txt'
-converter = bophono.UnicodeToApi(schema="CAT", options = options) # try with CAT for Amdokä
+converter = bophono.UnicodeToApi(schema="MST", options = options) # try with CAT for Amdokä
 if (len(sys.argv) > 1):
     filename = sys.argv[1]
 with open(filename, 'r', encoding="utf8") as f:
