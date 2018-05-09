@@ -57,7 +57,7 @@ def api2chinese(api, phon={"zhuyin":[], "chinese_trad":[]}) :
             so = s  #Keep the original one
             s = _simplify_api(s)
             #Tone
-            s += "+" if not i and "ˊ" in s else "-"
+            s += "+" if not i and "ˊ" in so else "-"
 
             #Exception for simplified transcription
             exc = exception_csv.get_data("@"+s)
