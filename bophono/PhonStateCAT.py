@@ -20,7 +20,19 @@ class PhonStateCAT:
         self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
         self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
+        # prefix strategy, can be:
+        #  - 'never', in which case it is never realized
+        #  - 'always', in which case the superscript and prefix are always realized
+        #  - 'afterEmptyCoda' in which case it is realized after an empty coda. 
+        #                     Note that this option realizes the latent consonnants in the coda of the previous syllable
+        #  - 'afterEmptyCoda+' same as before + beginning of string
+        self.prefixStrategy = 'prefixStrategy' in options and options['prefixStrategy'] or 'afterEmptyCoda'
+        # prefix syllable indication, can be:
+        #  - 'afterEmptyCoda' to indicate the latent syllable in the empty coda of a previous syllable when possible (at the beginning of the syllabe if not)
+        #  - 'beginning' to always indicate the latent syllabe at the beginning of the syllable
+        self.prefixSyllable = 'prefixSyllable' in options and options['prefixSyllable'] or 'afterEmptyCoda'
         self.simpleRootMapping = { # p. 7
+            '_': '', # we need _ for the empty string, otherwise the Trie doens't get filled
             'k': 'k',
             'k+': 'kʰ',
             'g': 'g',
@@ -116,12 +128,25 @@ class PhonStateCAT:
             nrc = nrc[3:]
         else:
             self.latent = ''
+        latentAtBeginning = ''
+        if self.latent != '':
+            if self.prefixStrategy == 'never':
+                pass
+            elif self.position == 1:
+                if self.prefixStrategy == 'always' or self.prefixStrategy == 'afterEmptyCoda+':
+                    latentAtBeginning = PhonStateCAT.simpleLatentMapping[self.latent]
+            elif self.final == '':
+                if self.prefixSyllable != 'afterEmptyCoda':
+                    latentAtBeginning = PhonStateCAT.simpleLatentMapping[self.latent]
+            else:
+                if self.prefixStrategy == 'always':
+                    latentAtBeginning = PhonStateCAT.simpleLatentMapping[self.latent]
         if nrc in self.simpleRootMapping:
-            return self.simpleRootMapping[nrc]
+            return latentAtBeginning+self.simpleRootMapping[nrc]
         elif nrc == 'r':
-            return self.position == 1 and 'ʐ' or 'ɾ'
+            return self.position == 1 and latentAtBeginning+'ʐ' or latentAtBeginning+'ɾ'
         elif nrc == '':
-            pass
+            return latentAtBeginning
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -131,11 +156,15 @@ class PhonStateCAT:
             return
         self.final = PhonStateCAT.getFinal(self.end)
         nasalPhon = ''
-        tonePhon = ''
         postVowelPhon = ''
+        preVowelPhon = ''
         # geminates
         geminates = False
-        self.vowel = self.end[:1]
+        if self.end.startswith('w'):
+            preVowelPhon = 'w'
+            self.vowel = self.end[1:2]
+        else:
+            self.vowel = self.end[:1]
         vowelPhon = self.vowel
         if nrc == self.final and self.final != '':
             geminates = True
@@ -150,12 +179,12 @@ class PhonStateCAT:
         elif self.final in PhonStateCAT.simpleFinalMapping:
             finalPhon = PhonStateCAT.simpleFinalMapping[self.final]
         elif self.final == '':
-            if self.latent != '':
+            if self.latent != '' and self.prefixStrategy != 'never' and (self.prefixSyllable == 'afterEmptyCoda' or self.prefixSyllable == 'afterEmptyCoda+'):
                 finalPhon = PhonStateCAT.simpleLatentMapping[self.latent]
             finalPhon = ''
         else:
             print("unrecognized final: "+self.final)
-        self.phon += vowelPhon+nasalPhon+postVowelPhon+finalPhon
+        self.phon += preVowelPhon+vowelPhon+nasalPhon+postVowelPhon+finalPhon
         if not endofword:
             self.phon += self.syllablesepchar
 
