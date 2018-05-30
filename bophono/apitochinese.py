@@ -13,7 +13,7 @@ space = " "*2
 def _simplify_api(s):
     # simplify onset
     if '\u0325' in s:
-        s = s.remplace('\u0325', '')
+        s = s.replace('\u0325', '')
     elif '\u030A' in s:
         s = s.replace('\u030A', '')
     # simplify coda
