@@ -6,22 +6,11 @@ from __future__ import print_function
 import os
 import sys
 from setuptools import setup, find_packages
-
+import pypandoc
 
 def read(fname):
-    fname_rst = fname.replace('.md', '.rst')
-    if os.path.exists(fname_rst):
-        return open(os.path.join(os.path.dirname(__file__), fname_rst)).read()
-    else:
-        try:
-            import pypandoc
-            rst = pypandoc.convert(os.path.join(os.path.dirname(__file__), fname), 'rst')
-            with open(fname_rst, 'w') as f:
-                f.write(rst)
-            return rst
-        except (IOError, ImportError):
-            return open(os.path.join(os.path.dirname(__file__), fname)).read()
-
+    rst = pypandoc.convert_file(os.path.join(os.path.dirname(__file__), fname), 'rst', format='md')
+    return rst
 
 setup(
     name="bophono",
