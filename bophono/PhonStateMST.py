@@ -33,8 +33,8 @@ class PhonStateMST:
         self.tone = None
         self.phon = ''
         self.options = options
-        self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u02CA'
-        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u02CB'
+        self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u0301' #'\u02CA'
+        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u0300'# '\u02CB'
         self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
@@ -53,7 +53,7 @@ class PhonStateMST:
         # indicate aspiration on low tones
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
         # retroflex instead of alveo-palatal, ex: ʈʂ instead of tɕ
-        self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or True
+        self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or False
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
         self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
         self.aspirateMapping = {
@@ -91,20 +91,20 @@ class PhonStateMST:
         voicelessBelow = True
         if base == 'c':
             if self.useRetroflex:
-                res = 'ʈ͡ʂ'
+                res = 'ʈʂ'
                 voicelessBelow = False
             else:
-                res = 't͡ɕ'
+                res = 'tɕ'
         elif base == 'j':
             if self.useRetroflex:
-                res = 'ɖ͡ʐ'
+                res = 'ɖʐ'
                 voicelessBelow = False
             else:
-                res = 'd͡ʑ'
+                res = 'dʑ'
         elif base == 'ts':
-            res = 't͡s'
+            res = 'ts'
         else:
-            res = 'd͡z'
+            res = 'dz'
         if voiceless:
             res += voicelessBelow and '\u0325' or '\u030A'
         if aspirated:

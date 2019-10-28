@@ -1,5 +1,7 @@
 ## TODO
 
+- incorporate French dictionary
+- glottal stop + k-| ?
 - study behavior for ambiguous syllables (probably list some as exceptions)
 - document kh¨antr¨as
 - footnote 200 p. 441
