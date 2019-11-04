@@ -1,6 +1,6 @@
 ## TODO
 
-- incorporate French dictionary
+- བཟས་སོང་། (passe) va etre prononce ཟ་སོང་། (mange passe)
 - glottal stop + k-| ?
 - study behavior for ambiguous syllables (probably list some as exceptions)
 - document kh¨antr¨as

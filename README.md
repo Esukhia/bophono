@@ -30,11 +30,26 @@ To produce the final output, we first transform the generated IPA into [Zhuyin](
 
 ## Installation
 
-This library should appear soon enough on pip.
+```
+pip install bophono
+```
 
 ## API
 
-TODO
+To get the IPA for a word according to the `MST` scheme:
+
+```python
+# see https://github.com/Esukhia/bophono/blob/master/bophono/PhonStateMST.py#L36 for other options
+options = {
+  'aspirateLowTones': True
+}
+
+mstconverter = bophono.UnicodeToApi(schema="MST", options = options)
+mstipa = converter.get_api("སྐུ")
+print(mstipa) # kú
+```
+
+Note that you must first segment your text in words and then convert each word.
 
 ## Changes
 
