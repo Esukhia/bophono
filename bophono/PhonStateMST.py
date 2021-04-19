@@ -33,8 +33,8 @@ class PhonStateMST:
         self.tone = None
         self.phon = ''
         self.options = options
-        self.hightonechar = 'hightonechar' in options and options['hightonechar'] or '\u0301' #'\u02CA'
-        self.lowtonechar = 'lowtonechar' in options and options['lowtonechar'] or '\u0300'# '\u02CB'
+        self.hightonechar = options['hightonechar'] if 'hightonechar' in options else '\u0301' #'\u02CA'
+        self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '\u0300'# '\u02CB'
         self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
         self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
         self.eatR = 'eatR' in options and options['eatR'] or False
@@ -52,8 +52,6 @@ class PhonStateMST:
         self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
         # indicate aspiration on low tones
         self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
-        # retroflex instead of alveo-palatal, ex: ʈʂ instead of tɕ
-        self.useRetroflex = 'useRetroflex' in options and options['useRetroflex'] or False
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
         self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
         self.aspirateMapping = {
@@ -90,17 +88,9 @@ class PhonStateMST:
         res = ''
         voicelessBelow = True
         if base == 'c':
-            if self.useRetroflex:
-                res = 'ʈʂ'
-                voicelessBelow = False
-            else:
-                res = 'tɕ'
+            res = 'tɕ'
         elif base == 'j':
-            if self.useRetroflex:
-                res = 'ɖʐ'
-                voicelessBelow = False
-            else:
-                res = 'dʑ'
+            res = 'dʑ'
         elif base == 'ts':
             res = 'ts'
         else:
@@ -293,39 +283,39 @@ class PhonStateMST:
             finalPhon = PhonStateMST.simpleFinalMapping[self.final]
         elif self.final == 'k':
             if not endofword: # p. 433
-                if nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
-                    finalPhon = self.eatK and (self.useUnreleasedStops and 'k̚' or 'ʔ') or 'k'
-                elif self.vowel in ['i', 'e'] and nrc in ['l', 'sh']:
+                if unaspired_nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
+                    finalPhon = self.eatK and (self.useUnreleasedStops and 'ʔk̚' or 'ʔ') or 'k'
+                elif self.vowel in ['i', 'e'] and unaspired_nrc in ['l', 'sh']:
                     finalPhon = 'k'
-                elif nrc in ['r']:
+                elif unaspired_nrc in ['r']:
                     finalPhon = 'g̊'
-                elif self.vowel not in ['e', 'i'] and nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
+                elif self.vowel not in ['e', 'i'] and unaspired_nrc in ['l', 'sh', 'm', 'ny', 'n', 'ng']:
                     finalPhon = 'ɣ'
-                elif nrc in ['k', 'ky', 'w', 'y']:
+                elif unaspired_nrc in ['k', 'ky', 'w', 'y']:
                     finalPhon = ''
-                elif self.vowel in ['e', 'i'] and nrc in ['m', 'ny', 'n', 'ng']:
+                elif self.vowel in ['e', 'i'] and unaspired_nrc in ['m', 'ny', 'n', 'ng']:
                     finalPhon = 'ŋ'
                 else:
                     print("unhandled case, this shouldn't happen, nrc: "+nrc+", vowel: "+self.vowel)
             else:
-                finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
+                finalPhon = self.useUnreleasedStops and 'ʔk̚' or 'ʔ'
         elif self.final == 'p':
             if not endofword:
-                if nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
+                if unaspired_nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
                     finalPhon = 'p'
                 else:
-                    finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥'
+                    finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'b̥'
             else:
-                finalPhon = self.eatP and (self.useUnreleasedStops and 'p̚' or 'ʔ') or 'b̥' # TODO: check
+                finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'b̥' # TODO: check
         elif self.final == 'n': # p. 442
             if not endofword:
-                if nrc in ['t', 'tr']:
+                if unaspired_nrc in ['t', 'tr']:
                     finalPhon = 'n'
-                elif nrc == 'p':
+                elif unaspired_nrc == 'p':
                     finalPhon = 'm'
-                elif nrc == 'k':
+                elif unaspired_nrc == 'k':
                     finalPhon = 'ŋ'
-                elif nrc == 'ky':
+                elif unaspired_nrc == 'ky':
                     finalPhon = 'ɲ'
                 else:
                     finalPhon = self.useUnreleasedStops and 'n̚' or ''
@@ -341,7 +331,7 @@ class PhonStateMST:
         elif self.final == "'":
             if endofword:
                 if (self.stopSDMode == "eos" and self.endOfSentence) or self.stopSDMode == "eow":
-                    finalPhon = self.useUnreleasedStops and 'k̚' or 'ʔ'
+                    finalPhon = self.useUnreleasedStops and 'ʔk̚' or 'ʔ'
         else:
             print("unrecognized final: "+self.final)
         self.phon += vowelPhon+nasalPhon+tonePhon+postVowelPhon
