@@ -4,6 +4,10 @@ class PhonStateMST:
     #
     # Differences with Tournadre's book (all are not destructive)
     #
+    # TODO: option to voice low tone at the beginning of words
+    # softaspirationchar
+    # beta at the beginning of syllables
+    #
     ## In phonologic representation (not IPA):
     # - tone indication: using k+a instead of kā, k-a instead of ka̱
     # - using | as syllable splitter
@@ -13,6 +17,7 @@ class PhonStateMST:
     # - only use ' to indicate a possible stop after suffixes ས and ད
     # - use g as a very exceptional suffix to indicate that the IPA should be g̊, not k
     # - use j instead of : for འི affix
+    # - indicate l in the phonology so that it can be reconstructed
     #
     ## In IPA (most can be configured through options)
     # - using [ɲ] instead of [ny]
@@ -35,23 +40,28 @@ class PhonStateMST:
         self.options = options
         self.hightonechar = options['hightonechar'] if 'hightonechar' in options else '\u0301' #'\u02CA'
         self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '\u0300'# '\u02CB'
-        self.nasalchar = 'nasalchar' in options and options['nasalchar'] or '\u0303'
-        self.syllablesepchar = 'syllablesepchar' in options and options['syllablesepchar'] or '.'
-        self.eatR = 'eatR' in options and options['eatR'] or False
-        self.eatL = 'eatL' in options and options['eatL'] or False
-        self.eatP = 'eatP' in options and options['eatP'] or True
-        self.eatK = 'eatK' in options and options['eatK'] or True
-        self.aiAffixchar = 'aiAffixchar' in options and options['aiAffixchar'] or 'ːɪ̯'
-        self.aiAffixmonochar = 'aiAffixmonochar' in options and options['aiAffixmonochar'] or self.syllablesepchar+'ɪ'
+        self.nasalchar = options['nasalchar'] if 'nasalchar' in options else '\u0303'
+        self.syllablesepchar = options['syllablesepchar'] if 'syllablesepchar' in options else '.'
+        # fully voice beginning of low tone words
+        self.voicebowlowtone = options['voicebowlowtone'] if 'voicebowlowtone' in options else True
+        # put a w before low tone words starting with a round vowel
+        self.wbeforeround = options['wbeforeround'] if 'wbeforeround' in options else True
+        self.eatR = options['eatR'] if 'eatR' in options else False
+        self.eatL = options['eatL'] if 'eatL' in options else False
+        self.eatP = options['eatP'] if 'eatP' in options else True
+        self.eatK = options['eatK'] if 'eatK' in options else True
+        self.aiAffixchar = options['aiAffixchar'] if 'aiAffixchar' in options else 'ːɪ̯'
+        self.aiAffixmonochar = options['aiAffixmonochar'] if 'aiAffixmonochar' in options else self.syllablesepchar+'ɪ'
         # does the འི affix in monosyllabic words change the vowel sound (a -> ä) or not (defaults to not)
-        self.aiAffixmonomodif = 'aiAffixmonomodif' in options and options['aiAffixmonomodif'] or False
+        self.aiAffixmonomodif = options['aiAffixmonomodif'] if 'aiAffixmonomodif' in options else False
         # rules the way stops after suffixes ས and ད are handled, can be "eos" (end of sentence), "eow" (end of word)
         # anything else will not print any stop
         self.stopSDMode = 'stopSDMode' in options and options['stopSDMode'] or "eos"
         # use k̚ instead of ʔ
-        self.useUnreleasedStops = 'useUnreleasedStops' in options and options['useUnreleasedStops'] or True
-        # indicate aspiration on low tones
-        self.aspirateLowTones = 'aspirateLowTones' in options and options['aspirateLowTones'] or False
+        self.useUnreleasedStops = options['useUnreleasedStops'] if 'useUnreleasedStops' in options else True
+        # weak aspiration character
+        self.weakAspirationChar = options['weakAspirationChar'] if 'weakAspirationChar' in options else 'ʰ'
+        self.aspirateLowTones = options['aspirateLowTones'] if 'aspirateLowTones' in options else False
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
         self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
         self.aspirateMapping = {
@@ -137,12 +147,12 @@ class PhonStateMST:
         'ü': 'u'
     }
 
-    def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
+    def getNextRootCommonPattern(self, position, tone, lastcondition, phon1, phon2, phon3):
         """ this corresponds to the most common pattern for roots: phon1 at the beginning
             of high-toned words, phon2 at the beginning of low-tones words, phon1 after
             some consonnants (if lastcondition is met), and phon3 otherwise"""
         if position == 1:
-            return tone == '+' and phon1 or phon2
+            return tone == '+' and phon1 or (self.voicebowlowtone and phon2 or phon3)
         return lastcondition and phon1 or phon3
 
     def getNextRootPhon(self, nrc): # nrc: nextrootconsonant
@@ -156,8 +166,14 @@ class PhonStateMST:
         if nrc in self.aspirateMapping:
             if self.position != 1:
                 nrc = self.aspirateMapping[nrc]['nac']
-            elif self.tone == '-' and not self.aspirateLowTones:
-                return self.aspirateMapping[nrc]['na']
+            elif self.tone == '-':
+                if not self.aspirateLowTones:
+                    return self.aspirateMapping[nrc]['na']
+                else:
+                    res = self.aspirateMapping[nrc]['a']
+                    if self.weakAspirationChar != 'ʰ':
+                        res = res.replace('ʰ', self.weakAspirationChar)
+                    return res
             else:
                 return self.aspirateMapping[nrc]['a']
         if nrc in PhonStateMST.simpleRootMapping:
@@ -166,31 +182,31 @@ class PhonStateMST:
             return ''
         if nrc == 'k':
             lastcond = (self.final == 'p')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̊')
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g̊')
         if nrc == 'ky':
             lastcond = (self.final == 'p')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̊')
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, 'c', 'ɟ', 'ɟ̊')
         if nrc == 'tr':
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ʈ', 'ɖ', 'ɖ̥')
         if nrc == 't':
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd̥')
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd̥')
         if nrc == 'p':
             lastcond = (self.final == 'k')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b̥')
         if nrc == 'c':
             lastcond = (self.final == 'p' or self.final == 'k')
             opt1 = self.getComplex('c')
             opt2 = self.getComplex('j')
             opt3 = self.getComplex('j', True)
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         if nrc == 'ts':
             opt1 = self.getComplex('ts')
             opt2 = self.getComplex('dz')
             opt3 = self.getComplex('dz', True)
             lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateMST.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
+            return self.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
         print("unknown root consonant: "+nrc)
         return nrc
 
@@ -264,7 +280,7 @@ class PhonStateMST:
         else:
             print("unknown vowel: "+self.vowel)
         # add w at beginning of low tone words:
-        if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '':
+        if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '' and self.wbeforeround:
             self.phon += 'w'
         if self.position == 1:
             tonePhon = self.tone == '+' and self.hightonechar or self.lowtonechar
@@ -284,7 +300,7 @@ class PhonStateMST:
         elif self.final == 'k':
             if not endofword: # p. 433
                 if unaspired_nrc in ['p', 't', 'tr', 'ts', 'c', 's']:
-                    finalPhon = self.eatK and (self.useUnreleasedStops and 'ʔk̚' or 'ʔ') or 'k'
+                    finalPhon = 'k'
                 elif self.vowel in ['i', 'e'] and unaspired_nrc in ['l', 'sh']:
                     finalPhon = 'k'
                 elif unaspired_nrc in ['r']:
@@ -304,9 +320,9 @@ class PhonStateMST:
                 if unaspired_nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
                     finalPhon = 'p'
                 else:
-                    finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'b̥'
+                    finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'p' # TODO: check
             else:
-                finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'b̥' # TODO: check
+                finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'p' # TODO: check
         elif self.final == 'n': # p. 442
             if not endofword:
                 if unaspired_nrc in ['t', 'tr']:
@@ -331,7 +347,7 @@ class PhonStateMST:
         elif self.final == "'":
             if endofword:
                 if (self.stopSDMode == "eos" and self.endOfSentence) or self.stopSDMode == "eow":
-                    finalPhon = self.useUnreleasedStops and 'ʔk̚' or 'ʔ'
+                    finalPhon = 'ʔ'
         else:
             print("unrecognized final: "+self.final)
         self.phon += vowelPhon+nasalPhon+tonePhon+postVowelPhon
