@@ -9,7 +9,6 @@
 ལྷ་བྲིས་པ/Ca,lh+ap|r-i|p+
 ཨུ་རྒྱན,+ur|ky-än
 ཨོ་རྒྱན,+or|ky-än
-བླ་བྲང,l+ap|thr-ang
 # NT p. 60
 ཨ་གསར,+ak|s+ar
 ས་གདན,s+ap|tän
@@ -115,7 +114,7 @@
 # Epenthesis, other difficulties, some from rigpa_exceptions.txt
 ཡ་བཞི/Ci,y-ap|sh-
 ས་བཅད,s+ap|c+ä'
-ཡང་ལེ་བེར,y-ang|l-e|w-er
+#ཡང་ལེ་བེར,y-ang|l-e|w-er
 #མཆོད་རྟེན,ch+ör|t+en (only in some dialects)
 སྡེ་དགེ/Ce,t-er|k-
 སློ་བཟང,l+op|s-ang
@@ -138,12 +137,12 @@
 ཞེ་འདོད,sh-en|~t-ö'
 # from Perl module, rigpa_exceptions.txt
 དེ་འབྲེལ,th-en|~tr-el
-དེ་འདྲ/Ca,th-in|~tr-
-འདི་འདྲ/Ca,t-i|~tr-
+དེ་འདྲ/Ca,th-en|~tr-
+འདི་འདྲ/Ca,t-in|~tr-
 དཀའ་འགྲེལ,k+an|~tr-el
 ག་འདྲ/Ca,kh-an|~tr-
 མི་ལྡོག,m-in|~t-ok
-མཁས་འཇུག,kh+en|~c-uk
+མཁས་འཇུག,kh+än|~c-uk
 རེ་འདོད,r-en|~t-ö'
 སྒྲོ་འདོགས,tr-ön|~t-ok
 ཚེ་འཛིན,tsh+en|~ts-in

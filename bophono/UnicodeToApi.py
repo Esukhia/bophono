@@ -4,6 +4,7 @@ import os
 from.sdtrie import *
 from .PhonStateMST import *
 from .PhonStateCAT import *
+from .PhonStateKVP import *
 
 class UnicodeToApi:
     def __init__(self, schema="MST", options={}):
@@ -12,9 +13,14 @@ class UnicodeToApi:
         self.columnIndex = 1
         if schema == "CAT":
             self.columnIndex = 2
+        if schema == "KVP":
+            self.columnIndex = 3
         self.roots = get_trie_from_file(self.__get_trie_path("roots.csv"), "roots", self.columnIndex)
         self.ends = get_trie_from_file(self.__get_trie_path("ends.csv"), "ends", self.columnIndex)
-        self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions.csv"), "exceptions", self.columnIndex, self.ends)
+        if schema == "KVP":
+            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions-kvp.csv"), "exceptions", self.columnIndex, self.ends)
+        else:
+            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions.csv"), "exceptions", self.columnIndex, self.ends)
         self.ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
 
     def __get_trie_path(self, name):
@@ -70,6 +76,8 @@ class UnicodeToApi:
         # recreating one each time is suboptimal
         if self.schema == 'CAT':
             state = PhonStateCAT(self.options, pos, endOfSentence)
+        elif self.schema == 'KVP':
+            state = PhonStateKVP(self.options, pos, endOfSentence)
         else:
             state = PhonStateMST(self.options, pos, endOfSentence)
         while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
