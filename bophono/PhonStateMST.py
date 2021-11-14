@@ -320,7 +320,8 @@ class PhonStateMST:
                 if unaspired_nrc in ['p', 't', 'tr', 'ts', 'c', 's', 'sh']:
                     finalPhon = 'p'
                 else:
-                    finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'p' # TODO: check
+                    # uncommon in words but can appear in pronouncation, especially before gnyis
+                    finalPhon = 'p'
             else:
                 finalPhon = self.eatP and (self.useUnreleasedStops and 'ʔp̚' or 'ʔ') or 'p' # TODO: check
         elif self.final == 'n': # p. 442
@@ -334,7 +335,8 @@ class PhonStateMST:
                 elif unaspired_nrc == 'ky':
                     finalPhon = 'ɲ'
                 else:
-                    finalPhon = self.useUnreleasedStops and 'n̚' or ''
+                    # this case is a bit unclear in the MST
+                    finalPhon = 'n'
             else:
                 finalPhon = self.useUnreleasedStops and 'n̚' or ''
                 nasalPhon += self.nasalchar
