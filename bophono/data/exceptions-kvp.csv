@@ -1,0 +1,139 @@
+# these are pretty obvious
+2:བ/Ca,
+2:བོ/Co,
+# Existing english words
+དྲག,drak
+གྲགས,drak
+དྲུག,druk
+འབྲུག,druk
+# drip, drop ?
+# Unvoiced gutturals and labials with ra ta (kra, khra, pra, phra) become tra (e.g., khri becomes tri, except for the name Tashi)
+# བཀྲ་ཤིས,tashi ?
+# Exception from THL (not taking nasalizations)
+རྡོ་རྗེ/Ce,dorj
+བླ་བྲང,labrang
+འབྲི་རུ/Cu,bir
+ལྷ་རྗེ/Ce,lharj
+ཨུ་རྒྱན,urgyen
+ཨོ་རྒྱན,orgyen
+# NT p. 60
+ཨ་གསར,agsar
+ས་གདན,sabden
+ཁ་གཅོད,khabchö
+དབ/Cb,w
+# numbers, from NT Annex 1, completed by Drupchen
+བཅུ་གཅིག,chugchik
+བཅུ་གཉིས,chugnyi
+བཅུ་གསུམ,chugsum
+བཅུ་བཞི/Ci,chubsh
+བཅུ་བདུན,chubdün
+བཅོ་བརྒྱད,chobgyé
+རྩ་བཞི/Ci,tsabsh
+རྩ་བདུན,tsabdün
+རྩ་བརྒྱད,tsabgyé
+སོ་བརྒྱད,sobgyé
+བཞི་བཅུ/Cu,shibch
+ལྔ་བཅུ/Cu,ngabch
+ང་བཞི/Ci,ngabsh
+དགུ་བཅུ/Cu,gubch
+# Sanskrit (TODO: check)
+པདྨ/Ca,padm
+ཀརྨ/Ca,karm
+# NT Annex 1, nasalizer
+ཞབས་འདེགས,shamdek
+ཞིབ་འཇུག,shimjuk
+མིག་འཁྲུལ,mingtrül
+སྔོན་འགྲོ/Co,ngöndr
+སྨོན་འདུན,möndün
+དཔལ་འབར,pembar
+དམའ་འབེབས,mambeb
+ཤ་འབྲས,shamdré
+དགེ་འདུན,gendün
+མི་འདུག,minduk
+བོད་ལྗོངས,bönjong
+དུས་འཁོར,thüngkhor
+གསར་འགྱུར,sangyur
+རྒྱུ་མཚན,gyumtsen
+རྒྱ་མཚོ/Co,gyamts
+བོད་ཟླ/Ca,bönd
+ད་ལྟ/Ca,dant
+དཔལ་ལྡན,penden
+སྟོབས་ལྡན,tomden
+ཡུལ་ལྗོངས,yünjong
+འབྲས་ལྗོངས,drenjong
+ཡལ་ག/Ca,yeng
+དགའ་ལྡན,ganden
+གསོལ་འདེབས,söndeb
+དུད་འགྲོ/Co,dündr
+ཞིབ་འཇུག,shimjuk
+འཐབ་འཛིང,tamzing
+སྐུ་འབུམ,kumbum
+ཡར་འབྲོ/Co,yamdr
+གཡུ་མཚོ/Co,yumts
+བདག་འཛིན,danzin
+སྐྱབས་འགྲོ/Co,kyamdr
+ཁ་འདོན,khandön
+ཞལ་འདེབས,shendeb
+རྟེན་འབྲེལ,temdrel
+རྒྱལ་མཚན,gyentsen
+སྐུ་མདུན,kundün
+ཕྱག་མཛོད,changtsö
+ལྷ་མཛེས,lhanzé
+ལོ་མཆོད,lomchö
+# THL nasalizations
+བཀའ་འགྱུར,kangyur
+ངོས་འཛིན,ngönzin
+རིག་འཛིན,rinzin
+མཁའ་འགྲོ/Co,khandr
+དཀྱིལ་འཁོར,kyinkhor
+ཆོས་འཕེལ,chömpel
+དཔལ་འབྱོར,penjor
+རྒྱུ་འབྲས,gyundré
+ཨ་མདོ/Co,amd
+མེ་མད/Cc,mend
+རྒྱལ་རྩེ/Ce,gyents
+ཆབ་མདོ/Co,chamd
+རྟ་མགྲིན,tamdrin
+# Nasalizations from Esukhia doc
+འདི་ཚོ/Co,dimts
+དེ་ཚོ/Co,dents
+སྐུ་འདྲ/Ca,kundr
+གང་འདྲ,gandr
+# l not pronounced
+གསལ་པོ/Co,sep
+# Epenthesis, other difficulties, some from rigpa_exceptions.txt
+ཡ་བཞི/Ci,yapsh
+ས་བཅད,sapché
+#ཡང་ལེ་བེར, ?
+སྡེ་དགེ/Ce,derg
+སློ་བཟང,lopsang
+# from Perl module, padmakara_exceptions.txt
+མི་འབྲལ,mindrel
+མི་འབྱུང,minjung
+མི་འདོད,mindö
+མི་འགག,mingak
+མི་འགྱུར,mingyur
+རྒྱས་འདེབས,gyendeb
+རྒྱུ་འགྲུལ,gyundrül
+སྐྱེ་འགྲོ/Co,kyendr
+སྐྱེ་མཆེད,kyemché
+སྤྱོད་འཇུག,chönjuk
+ཞེ་འདོད,shendön
+# from Perl module, rigpa_exceptions.txt
+དེ་འབྲེལ,dendrel
+དེ་འདྲ/Ca,dendr
+འདི་འདྲ/Ca,dindr
+དཀའ་འགྲེལ,kandrel
+ག་འདྲ/Ca,gandr
+མི་ལྡོག,mindok
+མཁས་འཇུག,khenjuk
+རེ་འདོད,rendö
+སྒྲོ་འདོགས,dröndok
+ཚེ་འཛིན,tsenzin
+བདེ་མཆོག,demchok
+ཆེ་མཆོག,chemchok
+བདེ་འགྲོ/Co,demdr
+# Other sources (oral)
+བུ་འདོད,bundö
+# from མཚོ་མེ་འབར
+མེ་འབར,membar

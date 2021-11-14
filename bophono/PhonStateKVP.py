@@ -102,38 +102,19 @@ class PhonStateKVP:
                 return self.aspirateMapping[nrc]['na']
             else:
                 return self.aspirateMapping[nrc]['a']
+        # suffix ga is "k" except in the middle of words
+        # "kn" should be separated with a space: "k n"
+        # suffix ba is always b (encoded in ends.csv)
+        # e at the end of a word always becomes é 
+        # Exceptions: if a + i, u + i, or o + i are used as two syllables in the context of a metric system in a verse, they become a’i, u’i, or o’i
+        # be’u -> "bé u""   ;   mchi’o -> "chi o"
+        # dbu becomes u, dbus becomes ü
+        # dba becomes wa
+        # optional, from Rigpa: kun dga' -> kun-ga
+        # nng or ngg -> ng
+        # weak syllables: nominalizers + med, bral, bya, mi, ldan, can. "Prefix" weak syllable: rnam. Verbalizers: byed, mdzad
         if nrc in PhonStateKVP.simpleRootMapping:
             return PhonStateKVP.simpleRootMapping[nrc]
-        if nrc == '':
-            return ''
-        if nrc == 'k':
-            lastcond = (self.final == 'p')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, 'k', 'g', 'g')
-        if nrc == 'ky':
-            lastcond = (self.final == 'p')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, 'ky', 'gy', 'gy')
-        if nrc == 'tr':
-            lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, 'tr', 'dr', 'dr')
-        if nrc == 't':
-            lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, 't', 'd', 'd')
-        if nrc == 'p':
-            lastcond = (self.final == 'k')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, 'p', 'b', 'b')
-        if nrc == 'c':
-            lastcond = (self.final == 'p' or self.final == 'k')
-            opt1 = self.getComplex('c')
-            opt2 = self.getComplex('j')
-            opt3 = self.getComplex('j', True)
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
-        if nrc == 'ts':
-            opt1 = self.getComplex('ts')
-            opt2 = self.getComplex('dz')
-            opt3 = self.getComplex('dz', True)
-            lastcond = (self.final == 'p' or self.final == 'k')
-            return PhonStateKVP.getNextRootCommonPattern(self.position, self.tone, lastcond, opt1, opt2, opt3)
-        print("unknown root consonant: "+nrc)
         return nrc
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
@@ -158,9 +139,7 @@ class PhonStateKVP:
             self.combineWith(syl[:indexplusminus+1], syl[indexplusminus+1:])
 
     def combineWith(self, nextroot, nextend):
-        if self.position == 0:
-            self.tone = nextroot[-1]
-        nextrootconsonant = nextroot[:-1]
+        nextrootconsonant = nextroot
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
         self.position += 1
