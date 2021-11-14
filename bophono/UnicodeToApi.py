@@ -18,9 +18,9 @@ class UnicodeToApi:
         self.roots = get_trie_from_file(self.__get_trie_path("roots.csv"), "roots", self.columnIndex)
         self.ends = get_trie_from_file(self.__get_trie_path("ends.csv"), "ends", self.columnIndex)
         if schema == "KVP":
-            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions-kvp.csv"), "exceptions", self.columnIndex, self.ends)
+            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions-kvp.csv"), "exceptions", 1, self.ends)
         else:
-            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions.csv"), "exceptions", self.columnIndex, self.ends)
+            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions.csv"), "exceptions", 1, self.ends)
         self.ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
 
     def __get_trie_path(self, name):

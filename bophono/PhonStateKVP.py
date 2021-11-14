@@ -11,56 +11,8 @@ class PhonStateKVP:
         self.tone = None
         self.phon = ''
         self.options = options
-        self.aspirateMapping = {
-            # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
-            'kh' : {'a': 'kh', 'na': 'k', 'nac': 'k'}, #p. 435
-            'khy' : {'a': 'khy', 'na': 'ky', 'nac': 'ky'}, #p. 436
-            'thr' : {'a': 'tr', 'na': 'tr', 'nac': 'tr'}, #p. 436
-            'th' : {'a': 'th', 'na': 't', 'nac': 't'}, #p. 437
-            'ph' : {'a': 'ph', 'na': 'p', 'nac': 'p'}, #p. 439
-            'rh' : {'a': 'hr', 'na': 'r', 'nac': 'r'}, #p. 440
-            'lh' : {'a': 'lh', 'na': 'l', 'nac': 'l'}, #p. 441
-            'tsh' : {'nac': 'ts'}, #p. 439
-            'ch' : {'nac': 'c', 'a': 'c', 'nac': 'c'} #p. 439
-            }
-
-
-    simpleRootMapping = {
-        'sh': 'sh',
-        's': 's',
-        'r': 'r',
-        'l': 'l',
-        'g': 'g',
-        'd': 'd',
-        'h': 'h',
-        'm': 'm',
-        'n': 'n',
-        'ny': 'ny',
-        'ng': 'ng',
-        'w': 'w',
-        'y': 'y'
-    }
-
-    simpleVowMapping = {
-        'ä': 'e',
-        'ö': 'ö',
-        'u': 'u',
-        'ü': 'ü',
-        'i': 'i' 
-    }
-
-    simpleFinalMapping = {
-        ':': 'ː',
-        'm': 'm',
-        'ng': 'ng',
-        'g': 'g'
-    }
-
-    simplifyVowMapping = {
-        'ä': 'a',
-        'ö': 'o',
-        'ü': 'u'
-    }
+        self.splitNG = options['splitNG'] if 'splitNG' in options else False
+        self.splitKN = options['splitKN'] if 'splitKN' in options else True
 
     def getComplex(self, base, voiceless=False, aspirated=False):
         """ base = c, j, ts or dz, , voiceless and aspirated should be obvious  """
@@ -87,36 +39,6 @@ class PhonStateKVP:
             return tone == '+' and phon1 or phon2
         return lastcondition and phon1 or phon3
 
-    def getNextRootPhon(self, nrc): # nrc: nextrootconsonant
-        # self.tone is the first tone (can be associated with current syllable)
-        # self.position is the position of the syllable we're adding
-        # self.final is the previous final consonnant (if any)
-        if nrc.startswith('~'):
-            # TODO: Do some magic here?
-            nrc = nrc[1:]
-        # handle aspirates, option to use them on non-first syllables
-        if nrc in self.aspirateMapping:
-            if self.position != 1:
-                nrc = self.aspirateMapping[nrc]['nac']
-            elif self.tone == '-' and not self.aspirateLowTones:
-                return self.aspirateMapping[nrc]['na']
-            else:
-                return self.aspirateMapping[nrc]['a']
-        # suffix ga is "k" except in the middle of words
-        # "kn" should be separated with a space: "k n"
-        # suffix ba is always b (encoded in ends.csv)
-        # e at the end of a word always becomes é 
-        # Exceptions: if a + i, u + i, or o + i are used as two syllables in the context of a metric system in a verse, they become a’i, u’i, or o’i
-        # be’u -> "bé u""   ;   mchi’o -> "chi o"
-        # dbu becomes u, dbus becomes ü
-        # dba becomes wa
-        # optional, from Rigpa: kun dga' -> kun-ga
-        # nng or ngg -> ng
-        # weak syllables: nominalizers + med, bral, bya, mi, ldan, can. "Prefix" weak syllable: rnam. Verbalizers: byed, mdzad
-        if nrc in PhonStateKVP.simpleRootMapping:
-            return PhonStateKVP.simpleRootMapping[nrc]
-        return nrc
-
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
         if not self.end:
@@ -124,27 +46,43 @@ class PhonStateKVP:
         slashi = self.end.find('/')
         if slashi != -1:
             self.end = self.end[:slashi]
+        # suffix ba is always b (encoded in ends.csv)
+        # be’u -> "bé u""   ;   mchi’o -> "chi o" (encoded in ends.csv)
+        # e at the end of a word always becomes é 
+        if self.end.endswith("e") and endofword:
+            self.end = self.end[:-1]+"é"
+        # suffix ga is "k" except in the middle of words
+        if self.end.endswith("k") and not endofword:
+            self.end = self.end[:-1]+"g"
+        # nng or ngg -> ng
+        if self.end.endswith("g") and nrc.startswith("g"):
+            self.end = self.end[:-1]
+        if self.end.endswith("n") and nrc.startswith("n"):
+            self.end = self.end[:-1]
+        # optional, from Rigpa: kun dga' -> kun-ga
+        if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
+            self.end += "-"
+        # optional, "kn" should be separated with a space: "k n"
+        if self.splitKN and self.end.endswith("k") and nrc.startswith("n"):
+            self.end += " "
         self.phon += self.end
 
 
     def combineWithException(self, exception):
         syllables = exception.split('|')
         for syl in syllables:
-            indexplusminus = syl.find('+')
-            if indexplusminus == -1:
-                indexplusminus = syl.find('-')
+            indexplusminus = syl.find('-')
             if indexplusminus == -1:
                 print("invalid exception syllable: "+syl)
                 continue
-            self.combineWith(syl[:indexplusminus+1], syl[indexplusminus+1:])
+            self.combineWith(syl[:indexplusminus], syl[indexplusminus+1:])
 
     def combineWith(self, nextroot, nextend):
         nextrootconsonant = nextroot
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
         self.position += 1
-        nextrootphon = self.getNextRootPhon(nextrootconsonant)
-        self.phon += nextrootphon
+        self.phon += "" if nextrootconsonant == "-" else nextrootconsonant
         # decompose multi-syllable ends:
         if nextend.find('|') != -1:
             ends = nextend.split('|')
