@@ -1,7 +1,9 @@
 # these are pretty obvious
 2:བ/Ca,w-
 2:བོ/Co,w-
+#
 # Exception from THL (not taking nasalizations)
+#
 རྡོ་རྗེ/Ce,t-or|c-
 བླ་བྲང,l+ap|r-ang
 འབྲི་རུ/Cu,ph-i|r-
@@ -9,12 +11,16 @@
 ལྷ་བྲིས་པ/Ca,lh+ap|r-i|p+
 ཨུ་རྒྱན,+ur|ky-än
 ཨོ་རྒྱན,+or|ky-än
+#
 # NT p. 60
+#
 ཨ་གསར,+ak|s+ar
 ས་གདན,s+ap|tän
 ཁ་གཅོད,kh+ap|cö'
 དབ/Cb,w+
+#
 # numbers, from NT Annex 1, completed by Drupchen
+#
 བཅུ་གཅིག,c+uk|c+ik
 བཅུ་གཉིས,c+uk|ny+i'
 བཅུ་གསུམ,c+uk|s+um
@@ -41,7 +47,9 @@
 # Sanskrit (TODO: check)
 པདྨ/Ca,p+e|m-
 ཀརྨ/Ca,k+ar|m-
+#
 # NT Annex 1, nasalizer
+#
 ཞབས་འདེགས,sh-am|~t-ek
 ཞིབ་འཇུག,sh-im|~c-uk
 མིག་འཁྲུལ,m+ing|~thr+ül
@@ -82,7 +90,9 @@
 ཕྱག་མཛོད,ch+ang|~ts-ö'
 ལྷ་མཛེས,lh+an|~ts-e'
 ལོ་མཆོད,l-om|~ch+ö'
+#
 # THL nasalizations
+#
 བཀའ་འགྱུར,k+an|~ky-ur
 ངོས་འཛིན,ng-ön|~ts-in
 རིག་འཛིན,r-in|~ts-in
@@ -101,7 +111,9 @@
 དེ་ཚོ/Co,th-en|~tsh+
 སྐུ་འདྲ/Ca,k+un|~tr-
 གང་འདྲ/Ca,kh-an|~tr-
+#
 ## da drag (a relatively safe list, but it's a difficult subject)
+#
 ཀུན,k+ün~
 ཤིན,sh+in~
 འོན,-ön~
@@ -111,7 +123,9 @@
 ཐིག་ལེ/Ce,th+ig|l-
 # l not pronounced
 གསལ་པོ/Co,s+ä|p+
+#
 # Epenthesis, other difficulties, some from rigpa_exceptions.txt
+#
 ཡ་བཞི/Ci,y-ap|sh-
 ས་བཅད,s+ap|c+ä'
 #ཡང་ལེ་བེར,y-ang|l-e|w-er
@@ -123,7 +137,9 @@
 #ལྡེའུ་བཙན,~t-e|ts+än
 #ཐེའུ་རང,th+e|r-ang
 #སྤྲུལ་སྐུ/Cu,tr+ül|k+
+#
 # from Perl module, padmakara_exceptions.txt
+#
 མི་འབྲལ,m-in|~tr-äl
 མི་འབྱུང,m-in|~c-ung
 མི་འདོད,m-in|~t-ö'
@@ -135,7 +151,9 @@
 སྐྱེ་མཆེད,ky+em|~ch+e'
 སྤྱོད་འཇུག,c+ön|~c-uk
 ཞེ་འདོད,sh-en|~t-ö'
+#
 # from Perl module, rigpa_exceptions.txt
+#
 དེ་འབྲེལ,th-en|~tr-el
 དེ་འདྲ/Ca,th-en|~tr-
 འདི་འདྲ/Ca,t-in|~tr-
@@ -153,12 +171,14 @@
 བུ་འདོད,p-un|~t-ö'
 # from མཚོ་མེ་འབར
 མེ་འབར,m-en|p-ar
+#
 # From Dordogne
+#
 ཡ་མཚན,y-am|~tsh+än
 གོ་འཕང,kh-om|~ph+ang
-རྗེ་འབངས,c-em|~p-ang~
+#རྗེ་འབངས,c-em|~p-ang~ # not in NT's pronounciation, should be tested further
 འཕྲོ་འདུ/Cu,thr+on|~t-
-#སྤྲོ་བསྡུ/Co,tr+on|t- # or trobtu? to be confirmed
-འོད་མཐ/Cb,-on|~th+a # for འོད་མཐའ་ཡས
-#ན་བཟ/Cb,n-ap|s-a # or namsa ? to be confirmed
+སྤྲོ་བསྡུ/Co,tr+on|t-
+#འོད་མཐ/Cb,-on|~th+a # for འོད་མཐའ་ཡས, not in NT's pronounciation, should be tested further
+ན་བཟ/Cb,n-am|s-a
 མ་འགགས,m-an|~k-ak
