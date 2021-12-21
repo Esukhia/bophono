@@ -12,24 +12,8 @@ class PhonStateKVP:
         self.phon = ''
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
-        self.splitKN = options['splitKN'] if 'splitKN' in options else True
-
-    def getComplex(self, base, voiceless=False, aspirated=False):
-        """ base = c, j, ts or dz, , voiceless and aspirated should be obvious  """
-        res = ''
-        voicelessBelow = True
-        if base == 'c':
-            res = 'ch'
-        elif base == 'j':
-            res = 'j'
-        elif base == 'ts':
-            res = 'ts'
-        else:
-            res = 'dz'
-        # shouldn't be there?
-        if aspirated:
-            res += 'h'
-        return res
+        self.splitKN = options['splitKN'] if 'splitKN' in options else False
+        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
 
     def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
         """ this corresponds to the most common pattern for roots: phon1 at the beginning
@@ -48,9 +32,11 @@ class PhonStateKVP:
             self.end = self.end[:slashi]
         # suffix ba is always b (encoded in ends.csv)
         # be’u -> "bé u""   ;   mchi’o -> "chi o" (encoded in ends.csv)
-        # e at the end of a word always becomes é 
+        # e at the end of a word becomes é when there's a risk of confusion with an existing English word
+        # (dome, tone, chime, etc.)
         if self.end.endswith("e") and endofword:
-            self.end = self.end[:-1]+"é"
+            if self.phon+'e' in self.accentuateWL:
+                self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"
@@ -59,6 +45,9 @@ class PhonStateKVP:
             self.end = self.end[:-1]
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
+        # I suppose? TODO: check
+        if self.end.endswith("ng") and nrc.startswith("ng"):
+            self.end = self.end[:-2]
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"

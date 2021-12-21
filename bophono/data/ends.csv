@@ -12,10 +12,10 @@
 མས,am~,am,am
 ལ,äl,ɛl,al
 འི,äj,ɨ,é
-འིའོ,a|-i|-o,i|wo,é o
-འོ,a|-o,a|o,a o
-འང,a|-ang,a|wang,a ang
-འམ,a|-am,a:m,a am
+འིའོ,a|-i|-o,i|wo,é'o
+འོ,a|-o,a|o,a'o
+འང,a|-ang,a|wang,ang
+འམ,a|-am,a:m,am
 ར,ar,ər,ar
 ས,ä',e,e
 ི,i,i,i
@@ -31,10 +31,10 @@
 ིམས,im~,im,im
 ིལ,il,il,il
 ིའི,i:,i:,i
-ིའིའོ,i:|-o,,i o
-ིའོ,i|-o,,i o
-ིའང,i|-ang,,i ang
-ིའམ,i|-am,,i am
+ིའིའོ,i:|-o,,i'o
+ིའོ,i|-o,,i'o
+ིའང,i|-ang,,i'ang
+ིའམ,i|-am,,i'am
 ིར,ir,ir,ir
 ིས,i',i,i
 ུ,u,u,u
@@ -42,20 +42,20 @@
 ུགས,uk,ɨx,uk
 ུང,ung,ong,ung
 ུངས,ung~,ong,ung
-ུད,ü',ut,ü
-ུན,ün,un,ün
+ུད,ü',ut,u
+ུན,ün,un,un
 ུབ,up,ub,ub
 ུབས,up,ub,ub
 ུམ,um,um,um
 ུམས,um~,um,um
-ུལ,ül,ul,ül
-ུའི,üj,ɨ,ü
-ུའིའོ,u|-i|-o,,ü o
-ུའོ,u|-o,,u o
-ུའང,u|-ang,,u ang
-ུའམ,u|-am,,u am
+ུལ,ül,ul,ul
+ུའི,üj,ɨ,u
+ུའིའོ,u|-i|-o,,u'o
+ུའོ,u|-o,,u'o
+ུའང,u|-ang,,u'ang
+ུའམ,u|-am,,u'am
 ུར,ur,ur,ur
-ུས,ü',i,ü
+ུས,ü',i,u
 ེ,e,e,e
 ེག,ek,əx,ek
 ེགས,ek,əx,ek
@@ -69,10 +69,10 @@
 ེམས,em~,em,em
 ེལ,el,el,el
 ེའི,ej,,é
-ེའིའོ,e|-i|-o,,é o
-ེའོ,e|-o,,é o
-ེའང,e|-ang,,é ang
-ེའམ,e|-am,,é am
+ེའིའོ,e|-i|-o,,é'o
+ེའོ,e|-o,,é'o
+ེའང,e|-ang,,é'ang
+ེའམ,e|-am,,é'am
 ེར,er,er,er
 ེས,e',i,e
 ོ,o,o,o
@@ -80,7 +80,7 @@
 ོགས,ok,ox,ok
 ོང,ong,ong,ong
 ོངས,ong~,ong,ong
-ོད,ö',ot,ö
+ོད,ö',ot,u
 ོན,ön,wən,ön
 ོབ,op,ob,ob
 ོབས,op,ob,ob
@@ -90,47 +90,47 @@
 ོའི,öj,,ö
 ོའིའོ,o|-i|-o,,o
 ོའོ,o|-o,,o
-ོའང,o|-ang,,o ang
-ོའམ,o|-am,,o am
+ོའང,o|-ang,,o'ang
+ོའམ,o|-am,,o'am
 ོར,or,or,or
 ོས,ö',i,ö
-འུ,a|-u,-u,a u
-འུའི,a|-u|-i,,a ü
-འུའིའོ,a|-u|-i|-o,,a ü o
-འུའོ,a|-u|-o,,a ü o
-འུའང,a|-u|-ang,,a u ang
-འུའམ,a|-u|-am,,a u am
-འུར,a|-ur,ur,a ur
-འུས,a|-ü',i,a ü
-ིའུ,i|-u,u,i u
-ིའུའི,i|-u|-i,,i ü
-ིའུའིའོ,i|-u|-i|-o,,i ü o
-ིའུའོ,i|-u|-o,,i u o
-ིའུའང,i|-u|-ang,,i u ang
-ིའུའམ,i|-u|-am,,i u am
-ིའུར,i|-ur,,i ur
-ིའུས,i|-ü',,i ü
-ུའུ,u|-u,u,u u
-ུའུའི,u|-u|-i,u,u ü
-ུའུའིའོ,u|-u|-i|-o,,u ü o
-ུའུའོ,u|-u|-o,,u u o
-ུའུའང,u|-u|-ang,,u u ang
-ུའུའམ,u|-u|-am,,u u am
-ུའུར,u|-ur,,é ur
-ུའུས,u|-ü',,é ü
-ེའུ,e|-u,u,é u
-ེའུའི,e|-u|-i,,é ü
-ེའུའིའོ,e|-u|-i|-o,,é ü o
-ེའུའོ,e|-u|-o,,é u o
-ེའུའང,e|-u|-ang,,é u ang
-ེའུའམ,e|-u|-am,,é u am
-ེའུར,e|-ur,,é ur
-ེའུས,e|-ü',,é ü
-ོའུ,o|-u,u,o u
-ོའུའི,o|-u|-i,,o ü
-ོའུའིའོ,o|-u|-i|-o,,o ü o
-ོའུའོ,o|-u|-o,,o u o
-ོའུའང,o|-u|-ang,,o u ang
-ོའུའམ,o|-u|-am,,o u am
-ོའུར,o|-ur,,o ur
-ོའུས,o|-ü',,o ü
+འུ,a|-u,-u,a'u
+འུའི,a|-u|-i,,a'u
+འུའིའོ,a|-u|-i|-o,,a'u'o
+འུའོ,a|-u|-o,,a'u'o
+འུའང,a|-u|-ang,,a'u'ang
+འུའམ,a|-u|-am,,a'u'am
+འུར,a|-ur,ur,a'ur
+འུས,a|-ü',i,a'u
+ིའུ,i|-u,u,i'u
+ིའུའི,i|-u|-i,,i'u
+ིའུའིའོ,i|-u|-i|-o,,i'u'o
+ིའུའོ,i|-u|-o,,i'u'o
+ིའུའང,i|-u|-ang,,i'u'ang
+ིའུའམ,i|-u|-am,,i'u'am
+ིའུར,i|-ur,,i'ur
+ིའུས,i|-ü',,i'u
+ུའུ,u|-u,u,u'u
+ུའུའི,u|-u|-i,u,u'u
+ུའུའིའོ,u|-u|-i|-o,,u'u'o
+ུའུའོ,u|-u|-o,,u'u'o
+ུའུའང,u|-u|-ang,,u'u'ang
+ུའུའམ,u|-u|-am,,u'u'am
+ུའུར,u|-ur,,é'ur
+ུའུས,u|-ü',,é'u
+ེའུ,e|-u,u,é'u
+ེའུའི,e|-u|-i,,é'u
+ེའུའིའོ,e|-u|-i|-o,,é'u'o
+ེའུའོ,e|-u|-o,,é'u'o
+ེའུའང,e|-u|-ang,,é'u'ang
+ེའུའམ,e|-u|-am,,é'u'am
+ེའུར,e|-ur,,é'ur
+ེའུས,e|-ü',,é'u
+ོའུ,o|-u,u,o'u
+ོའུའི,o|-u|-i,,o'u
+ོའུའིའོ,o|-u|-i|-o,,o'u'o
+ོའུའོ,o|-u|-o,,o'u'o
+ོའུའང,o|-u|-ang,,o'u'ang
+ོའུའམ,o|-u|-am,,o'u'am
+ོའུར,o|-ur,,o'ur
+ོའུས,o|-ü',,o'u
