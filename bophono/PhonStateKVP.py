@@ -11,7 +11,7 @@ class PhonStateKVP:
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
-        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
+        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["dune", "dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
