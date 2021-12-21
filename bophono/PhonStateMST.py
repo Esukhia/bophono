@@ -39,9 +39,8 @@ class PhonStateMST:
         self.phon = ''
         self.options = options
         self.hightonechar = options['hightonechar'] if 'hightonechar' in options else '˥' # \u0301 for phonological tones
-        self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '˩'# \u0300 for phonological tones
+        self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '˩˨'# \u0300 for phonological tones
         self.highfallingtonechar = options['highfallingtonechar'] if 'highfallingtonechar' in options else '˥˨'
-        self.lowrisingtonechar = options['lowrisingtonechar'] if 'lowrisingtonechar' in options else '˩˨'
         self.lowrisingfallingtonechar = options['lowrisingfallingtonechar'] if 'lowrisingfallingtonechar' in options else '˩˧˨'
         self.nasalchar = options['nasalchar'] if 'nasalchar' in options else '\u0303'
         self.syllablesepchar = options['syllablesepchar'] if 'syllablesepchar' in options else '.'
@@ -279,12 +278,8 @@ class PhonStateMST:
             # by default we keep the tones flat (this is actually a bit unclear in the MST)
             tonePhon = self.tone == '+' and self.hightonechar or self.lowtonechar
             # MST, p. 36: some tones are modulated
-            if self.final in ['p', 'k', "'"] or (modulated and self.final in ['m', 'n', 'ng']):
+            if (not geminates and self.final in ['p', 'k', "'"]) or modulated:
                 tonePhon = self.tone == '+' and self.highfallingtonechar or self.lowrisingfallingtonechar
-            elif self.tone == '-' and self.final in ['', 'n', 'm', 'ng']:
-                tonePhon = self.lowrisingtonechar
-            # TODO: MST, p. 37: what to do with lightly falling tones in the case of gemination?
-            # rules are unclear
         if aiAffix:
             if self.position == 1 and endofword:
                 postVowelPhon = self.aiAffixmonochar
