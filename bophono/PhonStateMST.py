@@ -38,8 +38,11 @@ class PhonStateMST:
         self.tone = None
         self.phon = ''
         self.options = options
-        self.hightonechar = options['hightonechar'] if 'hightonechar' in options else '\u0301' #'\u02CA'
-        self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '\u0300'# '\u02CB'
+        self.hightonechar = options['hightonechar'] if 'hightonechar' in options else '˥' # \u0301 for phonological tones
+        self.lowtonechar = options['lowtonechar'] if 'lowtonechar' in options else '˩'# \u0300 for phonological tones
+        self.highfallingtonechar = options['highfallingtonechar'] if 'highfallingtonechar' in options else '˥˨'
+        self.lowrisingtonechar = options['lowrisingtonechar'] if 'lowrisingtonechar' in options else '˩˨'
+        self.lowrisingfallingtonechar = options['lowrisingfallingtonechar'] if 'lowrisingfallingtonechar' in options else '˩˧˨'
         self.nasalchar = options['nasalchar'] if 'nasalchar' in options else '\u0303'
         self.syllablesepchar = options['syllablesepchar'] if 'syllablesepchar' in options else '.'
         # fully voice beginning of low tone words
@@ -222,16 +225,6 @@ class PhonStateMST:
             modulated = True
             self.end = self.end[:-1]
         self.final = PhonStateMST.getFinal(self.end)
-        # p. 36, we use the following notation:
-        # '+_' flat high tone
-        # '+\' for falling high tone
-        # '-_' for low tone flat, slightly rising
-        # '-^' for low tone rising followed by short fall
-        tonecountour = self.tone
-        if self.final in ['', 'n', 'm', 'ng']:
-            tonecountour = self.tone == '+' and '+_' or '-_'
-        elif self.final in ['p', 'k'] or (modulated and self.final in ['m', 'n', 'ng']):
-            tonecountour = self.tone == '+' and '+\\' or '-^'
         # nasal prefix (not in NT) TODO: use white list instead
         if nrc.startswith('~'):
             nrc = nrc[1:]
@@ -283,7 +276,13 @@ class PhonStateMST:
         if self.position == 1 and self.tone == '-' and self.vowel in ['ö', 'o', 'u'] and self.phon == '' and self.wbeforeround:
             self.phon += 'w'
         if self.position == 1:
+            # by default we keep the tones flat (this is actually a bit unclear in the MST)
             tonePhon = self.tone == '+' and self.hightonechar or self.lowtonechar
+            # MST, p. 36: some tones are modulated
+            if self.final in ['p', 'k', "'"] or (modulated and self.final in ['m', 'n', 'ng']):
+                tonePhon = self.tone == '+' and self.highfallingtonechar or self.lowrisingfallingtonechar
+            elif self.tone == '-' and self.final in ['', 'n', 'm', 'ng']:
+                tonePhon = self.lowrisingtonechar
         if aiAffix:
             if self.position == 1 and endofword:
                 postVowelPhon = self.aiAffixmonochar
