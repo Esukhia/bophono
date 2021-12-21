@@ -256,7 +256,7 @@ class PhonStateMST:
         if self.vowel in PhonStateMST.simpleVowMapping:
             vowelPhon = PhonStateMST.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
-            if (self.position == 1 and self.final != 'p') or self.final == 'ng':
+            if self.position == 1 and self.final != 'p':
                 vowelPhon = 'a'
             else:
                 vowelPhon = 'ə'
@@ -283,6 +283,8 @@ class PhonStateMST:
                 tonePhon = self.tone == '+' and self.highfallingtonechar or self.lowrisingfallingtonechar
             elif self.tone == '-' and self.final in ['', 'n', 'm', 'ng']:
                 tonePhon = self.lowrisingtonechar
+            # TODO: MST, p. 37: what to do with lightly falling tones in the case of gemination?
+            # rules are unclear
         if aiAffix:
             if self.position == 1 and endofword:
                 postVowelPhon = self.aiAffixmonochar
