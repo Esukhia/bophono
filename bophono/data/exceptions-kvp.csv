@@ -7,8 +7,6 @@
 དྲུག,dr-uk
 འབྲུག,dr-uk
 # drip, drop ?
-# Unvoiced gutturals and labials with ra ta (kra, khra, pra, phra) become tra (e.g., khri becomes tri, except for the name Tashi)
-# བཀྲ་ཤིས,tashi ?
 # Exception from THL (not taking nasalizations)
 རྡོ་རྗེ/Ce,dor-j
 བླ་བྲང,lab-rang
@@ -26,73 +24,73 @@
 བཅུ་གཅིག,chugch-ik
 བཅུ་གཉིས,chugny-i
 བཅུ་གསུམ,chugs-um
-བཅུ་བཞི/Ci,chubsh-
-བཅུ་བདུན,chubd-ün
-བཅོ་བརྒྱད,chobgy-é
-རྩ་བཞི/Ci,tsabsh-
-རྩ་བདུན,tsabd-ün
-རྩ་བརྒྱད,tsabgy-é
-སོ་བརྒྱད,sobgy-é
-བཞི་བཅུ/Cu,shibch-
+བཅུ་བཞི/Ci,chubzh-
+བཅུ་བདུན,chubd-un
+བཅོ་བརྒྱད,chobgy-e
+རྩ་བཞི/Ci,tsabzh-
+རྩ་བདུན,tsabd-un
+རྩ་བརྒྱད,tsabgy-e
+སོ་བརྒྱད,sobgy-e
+བཞི་བཅུ/Cu,zhibch-
 ལྔ་བཅུ/Cu,ngabch-
-ང་བཞི/Ci,ngabsh-
+ང་བཞི/Ci,ngabzh-
 དགུ་བཅུ/Cu,gubch-
 # Sanskrit (TODO: check)
 པདྨ/Ca,padm-
 ཀརྨ/Ca,karm-
 # NT Annex 1, nasalizer
-ཞབས་འདེགས,shamd-ek
-ཞིབ་འཇུག,shimj-uk
-མིག་འཁྲུལ,mingtr-ül
+ཞབས་འདེགས,zhamd-ek
+ཞིབ་འཇུག,zhimj-uk
+མིག་འཁྲུལ,mingtr-ul
 སྔོན་འགྲོ/Co,ngöndr-
-སྨོན་འདུན,mönd-ün
-དཔལ་འབར,pemb-ar
+སྨོན་འདུན,mönd-un
+#དཔལ་འབར,pemb-ar
 དམའ་འབེབས,mamb-eb
-ཤ་འབྲས,shamdr-é
-དགེ་འདུན,gend-ün
+ཤ་འབྲས,shamdr-e
+དགེ་འདུན,gend-un
 མི་འདུག,mind-uk
 བོད་ལྗོངས,bönj-ong
-དུས་འཁོར,thüngkh-or
+དུས་འཁོར,thungkh-or
 གསར་འགྱུར,sangy-ur
 རྒྱུ་མཚན,gyumts-en
 རྒྱ་མཚོ/Co,gyamts-
 བོད་ཟླ/Ca,bönd-
 ད་ལྟ/Ca,dant-
 # དཔལ་ལྡན,pend-en (notes palden in the document)
-སྟོབས་ལྡན,tomd-en
-ཡུལ་ལྗོངས,yünj-ong
+#སྟོབས་ལྡན,tomd-en
+#ཡུལ་ལྗོངས,yunj-ong
 འབྲས་ལྗོངས,drenj-ong
-ཡལ་ག/Ca,yeng-
+#ཡལ་ག/Ca,yeng-
 དགའ་ལྡན,gand-en
-གསོལ་འདེབས,sönd-eb
-དུད་འགྲོ/Co,dündr-
-ཞིབ་འཇུག,shimj-uk
+#གསོལ་འདེབས,sönd-eb
+དུད་འགྲོ/Co,dundr-
+ཞིབ་འཇུག,zhimj-uk
 འཐབ་འཛིང,tamz-ing
 སྐུ་འབུམ,kumb-um
 ཡར་འབྲོ/Co,yamdr-
 གཡུ་མཚོ/Co,yumts-
 བདག་འཛིན,danz-in
-སྐྱབས་འགྲོ/Co,kyandr-
+#སྐྱབས་འགྲོ/Co,kyabdr-
 ཁ་འདོན,khand-ön
-ཞལ་འདེབས,shend-eb
+#ཞལ་འདེབས,zhend-eb
 རྟེན་འབྲེལ,tendr-el
-རྒྱལ་མཚན,gyents-en
-སྐུ་མདུན,kund-ün
+#རྒྱལ་མཚན,gyents-en
+སྐུ་མདུན,kund-un
 ཕྱག་མཛོད,changts-ö
-ལྷ་མཛེས,lhanz-é
+ལྷ་མཛེས,lhanz-e
 ལོ་མཆོད,lomch-ö
 # THL nasalizations
 བཀའ་འགྱུར,kangy-ur
 ངོས་འཛིན,ngönz-in
 རིག་འཛིན,rinz-in
 མཁའ་འགྲོ/Co,khandr-
-དཀྱིལ་འཁོར,kyinkh-or
+#དཀྱིལ་འཁོར,kyinkh-or
 # ཆོས་འཕེལ,chömp-el (noted chöpel in the document)
-དཔལ་འབྱོར,penj-or
-རྒྱུ་འབྲས,gyundr-é
+#དཔལ་འབྱོར,penj-or
+རྒྱུ་འབྲས,gyundr-e
 ཨ་མདོ/Co,amd-
 མེ་མད/Cc,mend-
-རྒྱལ་རྩེ/Ce,gyents-
+#རྒྱལ་རྩེ/Ce,gyents-
 ཆབ་མདོ/Co,chamd-
 རྟ་མགྲིན,tamdr-in
 # Nasalizations from Esukhia doc
@@ -101,13 +99,13 @@
 སྐུ་འདྲ/Ca,kundr-
 གང་འདྲ/Ca,gandr-
 # l not pronounced
-གསལ་པོ/Co,sep-
+#གསལ་པོ/Co,sep-
 # Epenthesis, other difficulties, some from rigpa_exceptions.txt
-ཡ་བཞི/Ci,yapsh-
-ས་བཅད,sapch-é
+ཡ་བཞི/Ci,yapzh-
+ས་བཅད,sapch-e
 #ཡང་ལེ་བེར, ?
 སྡེ་དགེ/Ce,derg-
-སློ་བཟང,lobs-ang
+སློ་བཟང,lobz-ang
 # from Perl module, padmakara_exceptions.txt
 མི་འབྲལ,mindr-el
 མི་འབྱུང,minj-ung
@@ -115,11 +113,11 @@
 མི་འགག,ming-ak
 མི་འགྱུར,mingy-ur
 རྒྱས་འདེབས,gyendeb
-རྒྱུ་འགྲུལ,gyundr-ül
+རྒྱུ་འགྲུལ,gyundr-ul
 སྐྱེ་འགྲོ/Co,kyendr-
-སྐྱེ་མཆེད,kyemch-é
+སྐྱེ་མཆེད,kyemch-e
 སྤྱོད་འཇུག,chönj-uk
-ཞེ་འདོད,shend-ön
+ཞེ་འདོད,zhend-ön
 # from Perl module, rigpa_exceptions.txt
 དེ་འབྲེལ,dendr-el
 དེ་འདྲ/Ca,dendr-
@@ -138,3 +136,12 @@
 བུ་འདོད,bund-ö
 # from མཚོ་མེ་འབར
 མེ་འབར,memb-ar
+# from Dordogne
+ཡ་མཚན,yamts-an
+གོ་འཕང,gomp-ang
+འཕྲོ་འདུ/Cu,tront-
+སྤྲོ་བསྡུ/Co,tront-
+ན་བཟ/Cb,namz-
+མ་འགགས,mank-ak
+# From KVP rules
+སློབ་དཔོན,lop-ön

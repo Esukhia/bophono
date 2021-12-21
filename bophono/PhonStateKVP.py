@@ -1,5 +1,3 @@
-from .PhonStateMST import PhonStateMST
-
 class PhonStateKVP:
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
@@ -14,14 +12,6 @@ class PhonStateKVP:
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
         self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
-
-    def getNextRootCommonPattern(position, tone, lastcondition, phon1, phon2, phon3):
-        """ this corresponds to the most common pattern for roots: phon1 at the beginning
-            of high-toned words, phon2 at the beginning of low-tones words, phon1 after
-            some consonnants (if lastcondition is met), and phon3 otherwise"""
-        if position == 1:
-            return tone == '+' and phon1 or phon2
-        return lastcondition and phon1 or phon3
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
@@ -71,7 +61,12 @@ class PhonStateKVP:
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
         self.position += 1
-        self.phon += "" if nextrootconsonant == "-" else nextrootconsonant
+        if nextrootconsonant == "-":
+            self.phon += ""
+        elif nextrootconsonant == "dz" and self.position > 1:
+            self.phon += "z"
+        else:
+            self.phon += nextrootconsonant
         # decompose multi-syllable ends:
         if nextend.find('|') != -1:
             ends = nextend.split('|')
@@ -88,6 +83,7 @@ class PhonStateKVP:
 if __name__ == '__main__':
     """ Example use """
     s = PhonStateKVP()
-    s.combineWith("k+", "ak")
+    s.combineWith("dz-", "og")
+    s.combineWith("dz-", "og")
     s.finish()
     print(s.phon)
