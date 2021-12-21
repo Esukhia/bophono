@@ -65,7 +65,6 @@ class PhonStateMST:
         self.weakAspirationChar = options['weakAspirationChar'] if 'weakAspirationChar' in options else 'ʰ'
         self.aspirateLowTones = options['aspirateLowTones'] if 'aspirateLowTones' in options else False
         # gemminates strategy: "no" => don't do anything, "len" => lengthen preceding vowel, "lentone" => lengthen + tone change
-        self.gemminatesStrategy = 'gemminatesStrategy' in options and options['gemminatesStrategy'] or 'len'
         self.aspirateMapping = {
             # nac = non-aspirated equivalent consonnant, na=non-aspirated IPA, a = aspirated IPA
             'kh' : {'a': 'kʰ', 'na': 'k', 'nac': 'k'}, #p. 435
@@ -249,22 +248,24 @@ class PhonStateMST:
             unaspired_nrc = self.aspirateMapping[nrc]['nac']
         if unaspired_nrc == self.final and self.final != '':
             geminates = True # p. 37
-            if self.gemminatesStrategy == 'len' or self.gemminatesStrategy == 'lentone':
-                postVowelPhon = 'ː'
+            postVowelPhon = 'ː'
         # main vowel code 
         if self.vowel in PhonStateMST.simpleVowMapping:
             vowelPhon = PhonStateMST.simpleVowMapping[self.vowel]
         elif self.vowel == 'a':
-            if self.position == 1 and self.final != 'p':
+            # here we consider that a geminate is an open syllable
+            if self.position == 1 and (geminates or self.final != 'p'):
                 vowelPhon = 'a'
             else:
                 vowelPhon = 'ə'
         elif self.vowel == 'e':
+            # case is unclear for geminates
             if self.final != '' and self.final != 'ng':
                 vowelPhon = 'ɛ'
             else:
                 vowelPhon = 'e'
         elif self.vowel == 'o':
+            # case is unclear for geminates
             if self.final != '' and self.final != 'ng':
                 vowelPhon = 'ɔ'
             else:
