@@ -57,8 +57,8 @@ class PhonStateKVP:
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
-        elif nextrootconsonant == "dz" and self.position > 1:
-            self.phon += "z"
+        #elif nextrootconsonant == "dz" and self.position > 1:
+        #    self.phon += "z"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
