@@ -11,22 +11,16 @@ class PhonStateKVP:
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
-        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["dune", "dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
         if not self.end:
             return
-        slashi = self.end.find('/')
-        if slashi != -1:
-            self.end = self.end[:slashi]
-        # suffix ba is always b (encoded in ends.csv)
-        # be’u -> "bé u""   ;   mchi’o -> "chi o" (encoded in ends.csv)
-        # e at the end of a word becomes é when there's a risk of confusion with an existing English word
-        # (dome, tone, chime, etc.)
+        # ' from ends.csv should be replaced with a space
+        self.end = self.end.replace("'", ' ')
+        # e at the end of a word becomes é
         if self.end.endswith("e") and endofword:
-            if self.phon+'e' in self.accentuateWL:
-                self.end = self.end[:-1]+"é"
+            self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"

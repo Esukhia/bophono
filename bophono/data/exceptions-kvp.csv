@@ -1,6 +1,6 @@
-# these are pretty obvious
-2:བ/Ca,w-
-2:བོ/Co,w-
+# transforming all the time, will be fixed manually
+བ/Ca,w-
+བོ/Co,w-
 # Existing english words, is it still an issue?
 དྲག,dr-ak
 གྲགས,dr-ak
@@ -24,23 +24,23 @@
 བཅུ་གཅིག,chugch-ik
 བཅུ་གཉིས,chugny-i
 བཅུ་གསུམ,chugs-um
-བཅུ་བཞི/Ci,chubzh-
+བཅུ་བཞི/Ci,chubsh-
 བཅུ་བདུན,chubd-un
 བཅོ་བརྒྱད,chobgy-e
-རྩ་བཞི/Ci,tsabzh-
+རྩ་བཞི/Ci,tsabsh-
 རྩ་བདུན,tsabd-un
 རྩ་བརྒྱད,tsabgy-e
 སོ་བརྒྱད,sobgy-e
-བཞི་བཅུ/Cu,zhibch-
+བཞི་བཅུ/Cu,shibch-
 ལྔ་བཅུ/Cu,ngabch-
-ང་བཞི/Ci,ngabzh-
+ང་བཞི/Ci,ngabsh-
 དགུ་བཅུ/Cu,gubch-
 # Sanskrit (TODO: check)
 པདྨ/Ca,padm-
 ཀརྨ/Ca,karm-
 # NT Annex 1, nasalizer
-ཞབས་འདེགས,zhamd-ek
-ཞིབ་འཇུག,zhimj-uk
+ཞབས་འདེགས,shamd-ek
+ཞིབ་འཇུག,shimj-uk
 མིག་འཁྲུལ,mingtr-ul
 སྔོན་འགྲོ/Co,ngöndr-
 སྨོན་འདུན,mönd-un
@@ -56,7 +56,6 @@
 རྒྱ་མཚོ/Co,gyamts-
 བོད་ཟླ/Ca,bönd-
 ད་ལྟ/Ca,dant-
-# དཔལ་ལྡན,pend-en (notes palden in the document)
 #སྟོབས་ལྡན,tomd-en
 #ཡུལ་ལྗོངས,yunj-ong
 འབྲས་ལྗོངས,drenj-ong
@@ -64,25 +63,24 @@
 དགའ་ལྡན,gand-en
 #གསོལ་འདེབས,sönd-eb
 དུད་འགྲོ/Co,dundr-
-ཞིབ་འཇུག,zhimj-uk
-འཐབ་འཛིང,tamz-ing
+འཐབ་འཛིང,tamdz-ing
 སྐུ་འབུམ,kumb-um
 ཡར་འབྲོ/Co,yamdr-
 གཡུ་མཚོ/Co,yumts-
-བདག་འཛིན,danz-in
+བདག་འཛིན,dandz-in
 #སྐྱབས་འགྲོ/Co,kyabdr-
 ཁ་འདོན,khand-ön
-#ཞལ་འདེབས,zhend-eb
+ཞལ་འདེབས,shend-eb
 རྟེན་འབྲེལ,tendr-el
 #རྒྱལ་མཚན,gyents-en
 སྐུ་མདུན,kund-un
 ཕྱག་མཛོད,changts-ö
-ལྷ་མཛེས,lhanz-e
+ལྷ་མཛེས,lhandz-e
 ལོ་མཆོད,lomch-ö
 # THL nasalizations
 བཀའ་འགྱུར,kangy-ur
-ངོས་འཛིན,ngönz-in
-རིག་འཛིན,rinz-in
+ངོས་འཛིན,ngöndz-in
+རིག་འཛིན,rindz-in
 མཁའ་འགྲོ/Co,khandr-
 #དཀྱིལ་འཁོར,kyinkh-or
 # ཆོས་འཕེལ,chömp-el (noted chöpel in the document)
@@ -101,7 +99,7 @@
 # l not pronounced
 #གསལ་པོ/Co,sep-
 # Epenthesis, other difficulties, some from rigpa_exceptions.txt
-ཡ་བཞི/Ci,yapzh-
+ཡ་བཞི/Ci,yapsh-
 ས་བཅད,sapch-e
 #ཡང་ལེ་བེར, ?
 སྡེ་དགེ/Ce,derg-
@@ -117,7 +115,7 @@
 སྐྱེ་འགྲོ/Co,kyendr-
 སྐྱེ་མཆེད,kyemch-e
 སྤྱོད་འཇུག,chönj-uk
-ཞེ་འདོད,zhend-ön
+ཞེ་འདོད,shend-ön
 # from Perl module, rigpa_exceptions.txt
 དེ་འབྲེལ,dendr-el
 དེ་འདྲ/Ca,dendr-
@@ -128,7 +126,7 @@
 མཁས་འཇུག,khenj-uk
 རེ་འདོད,rend-ö
 སྒྲོ་འདོགས,drönd-ok
-ཚེ་འཛིན,tsenz-in
+ཚེ་འཛིན,tsendz-in
 བདེ་མཆོག,demch-ok
 ཆེ་མཆོག,chemch-ok
 བདེ་འགྲོ/Co,demdr-
@@ -143,5 +141,3 @@
 སྤྲོ་བསྡུ/Co,tront-
 ན་བཟ/Cb,namz-
 མ་འགགས,mank-ak
-# From KVP rules
-སློབ་དཔོན,lop-ön
