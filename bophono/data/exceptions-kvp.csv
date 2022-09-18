@@ -1,14 +1,25 @@
 # transforming all the time, will be fixed manually
 བ/Ca,w-
 བོ/Co,w-
-# Existing english words, is it still an issue?
-དྲག,dr-ak
-གྲགས,dr-ak
-དྲུག,dr-uk
-འབྲུག,dr-uk
-# drip, drop ?
+# KVP exceptions
+བཀྲ་ཤིས,ta-shi
+སྤྲུལ་སྐུ/Cu,tulk-
+སློབ་དཔོན,lop-ön
+འབྲུག་པ/Ca,drukp-
+མི་ཕམ,miph-am
+ངག་དབང,ngaw-ang
+སྤྱན་རས་གཟིགས,chenrez-ig
+སྣར་ཐང,narth-ang
+ཞེ་ཆེན,shech-en
+ཞྭ་ལུ/Cu,shal-u
+གཏོང་ལེན,tongl-en
+རིན་པོ་ཆེ/Ce,rinpoch-
+འཕོ་བ/Ca,pow-
+ཐང་ཀ/Ca,tangkh-
+བར་དོ/Co,bard-
+གཅོད,ch-öd
 # Exception from THL (not taking nasalizations)
-རྡོ་རྗེ/Ce,dor-j
+རྡོ་རྗེ/Ce,dorj-
 བླ་བྲང,lab-rang
 འབྲི་རུ/Cu,bir-
 ལྷ་རྗེ/Ce,lharj-

@@ -11,6 +11,7 @@ class PhonStateKVP:
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
+        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["rime", "de", "ame", "chone", "dune", "dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
@@ -20,13 +21,14 @@ class PhonStateKVP:
         self.end = self.end.replace("'", ' ')
         # e at the end of a word becomes é
         if self.end.endswith("e") and endofword:
-            self.end = self.end[:-1]+"é"
+            if self.phon+'e' in self.accentuateWL:
+                self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"
         # nng or ngg -> ng
         if self.end.endswith("g") and nrc.startswith("g"):
-            self.end = self.end[:-1]
+            self.end = self.end[:-1]+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
         # I suppose? TODO: check
@@ -57,8 +59,10 @@ class PhonStateKVP:
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
-        #elif nextrootconsonant == "dz" and self.position > 1:
-        #    self.phon += "z"
+        elif nextrootconsonant.startswith("dz") and self.position > 1:
+            self.phon += "z"
+        elif nextrootconsonant.startswith("tr") and self.position == 1:
+            self.phon += "dr"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
