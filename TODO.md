@@ -1,5 +1,9 @@
 ## TODO
 
+- option (MST 438) : /p/ between two vowels can be pronounced β
+
+- how is nyon mongs pronounced? [ɲø:moŋ] or [ɲønmoŋ]? MST gives phonology nyönmong but doesn't really give a phonetic equivalent
+
 - བཟས་སོང་། (passe) va etre prononce ཟ་སོང་། (mange passe)
 - glottal stop + k-| ?
 - study behavior for ambiguous syllables (probably list some as exceptions)

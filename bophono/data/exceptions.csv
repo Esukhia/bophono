@@ -19,16 +19,22 @@
 ས་གདན,s+ap|tän
 ཁ་གཅོད,kh+ap|cö'
 དབ/Cb,w+
-རྗེས་འཇུག,c-en|cu'
+རྗེས་འཇུག,c-en|cuk
 #
-# numbers, from NT Annex 1, completed by Drupchen
+# NT, spoken Tibetan only
 #
-བཅུ་གཅིག,c+uk|c+ik
-བཅུ་གཉིས,c+uk|ny+i'
+ཡོད་རེད,y-o:|re'
+#
+# numbers, from NT Annex 1 and p. 132, completed by Drupchen
+#
+#བཅུ་གཅིག,c+uk|c+ik # not indicated in NT, skipping this one and the next one
+#བཅུ་གཉིས,c+uk|ny+i'
 བཅུ་གསུམ,c+uk|s+um
 བཅུ་བཞི/Ci,c+up|sh-
+བཅོ་ལྔ/Ca,c+ö|ng+
 བཅུ་བདུན,c+up|t-ün
 བཅོ་བརྒྱད,c+op|ky-ä'
+བཅུ་དགུ/Cu,c+ur|k-
 རྩ་བཞི/Ci,ts+ap|sh-
 རྩ་བདུན,ts+ap|t-ün
 རྩ་བརྒྱད,ts+ap|ky-ä'
@@ -36,7 +42,7 @@
 བཞི་བཅུ/Cu,sh-ip|c+
 ལྔ་བཅུ/Cu,ng+ap|c+
 ང་བཞི/Ci,ng-ap|sh-
-དགུ་བཅུ/Cu,k-u|c+
+དགུ་བཅུ/Cu,k-up|c+
 # possible according to accent, not always (source: Drupchen)
 ལྔ་ཁྲི/Ci,ng+ap|thr+
 གོ་བཞི/Ci,k-op|sh-
@@ -49,6 +55,8 @@
 # Sanskrit (TODO: check)
 པདྨ/Ca,p+e|m-
 ཀརྨ/Ca,k+ar|m-
+སེངྒེ/Ce,s+eng|kh-
+བཛྲ/Ca,p-en|ts-# ?
 #
 # NT Annex 1, nasalizer
 #
@@ -92,6 +100,8 @@
 ཕྱག་མཛོད,ch+ang|~ts-ö'
 ལྷ་མཛེས,lh+an|~ts-e'
 ལོ་མཆོད,l-om|~ch+ö'
+#མཆོད་འབུལ,ch+öm|p-ul # TODO: in NT p. 380 pul has a tone...
+སྒྲ་སྙན,tr-ap|ny+än
 #
 # THL nasalizations
 #
@@ -131,7 +141,7 @@
 ཡ་བཞི/Ci,y-ap|sh-
 ས་བཅད,s+ap|c+ä'
 #ཡང་ལེ་བེར,y-ang|l-e|w-er
-#མཆོད་རྟེན,ch+ör|t+en (only in some dialects)
+#མཆོད་རྟེན,ch+ör|t+en (only in some dialects, but also in NT p. 380)
 སྡེ་དགེ/Ce,t-er|k-
 སློ་བཟང,l+op|s-ang
 # not sure about these:

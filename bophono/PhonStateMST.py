@@ -51,7 +51,9 @@ class PhonStateMST:
         self.eatR = options['eatR'] if 'eatR' in options else False
         self.eatL = options['eatL'] if 'eatL' in options else False
         self.eatP = options['eatP'] if 'eatP' in options else True
-        self.eatK = options['eatK'] if 'eatK' in options else True
+        # this is rather complex: basically 
+        self.gsuffixstrategy = options['gsuffixstrategy'] if 'gsuffixstrategy' in options else "simple"
+        self.gsuffixchar = options['gsuffixchar'] if 'gsuffixchar' in options else "simple"
         self.aiAffixchar = options['aiAffixchar'] if 'aiAffixchar' in options else 'ːɪ̯'
         self.aiAffixmonochar = options['aiAffixmonochar'] if 'aiAffixmonochar' in options else self.syllablesepchar+'ɪ'
         # does the འི affix in monosyllabic words change the vowel sound (a -> ä) or not (defaults to not)
