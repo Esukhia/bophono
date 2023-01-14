@@ -1,7 +1,7 @@
 import sys
 import csv
 import os
-from.sdtrie import *
+from .sdtrie import *
 from .PhonStateMST import *
 from .PhonStateCAT import *
 from .PhonStateKVP import *

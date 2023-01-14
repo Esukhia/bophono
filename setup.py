@@ -6,6 +6,8 @@ from __future__ import print_function
 import os
 import sys
 from setuptools import setup, find_packages
+import setuptools
+from pkg_resources import parse_version
 
 assert(parse_version(setuptools.__version__) >= parse_version("38.6.0"))
 
@@ -14,7 +16,7 @@ def read(fname):
 
 setup(
     name="bophono",
-    version="0.1.0",  #edit version in __init__.py
+    version="0.1.1",  #edit version in __init__.py
     author="Esukhia development team",
     author_email="esukhiadev@gmail.com",
     description="Python utils for Tibetan phonetics in different dialects",
