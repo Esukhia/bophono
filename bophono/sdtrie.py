@@ -1,9 +1,5 @@
 import csv
 
-# Simple decorated Trie with helper functions
-
-## inspired from https://gist.github.com/nickstanisha/733c134a0171a00f66d4
-
 class Node:
     def __init__(self, label=None, data=None, canbefinal=True):
         self.label = label

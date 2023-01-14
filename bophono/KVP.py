@@ -1,4 +1,4 @@
-class PhonStateKVP:
+class KVP:
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
         self.pos = pos
