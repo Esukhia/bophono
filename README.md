@@ -39,13 +39,15 @@ pip install bophono
 To get the IPA for a word according to the `MST` scheme:
 
 ```python
-# see https://github.com/Esukhia/bophono/blob/master/bophono/PhonStateMST.py#L36 for other options
+import bophono
+
+# see PhonStateMST.py for other options
 options = {
   'aspirateLowTones': True
 }
 
 mstconverter = bophono.UnicodeToApi(schema="MST", options = options)
-mstipa = converter.get_api("སྐུ")
+mstipa = mstconverter.get_api("སྐུ")
 print(mstipa) # kú
 ```
 
