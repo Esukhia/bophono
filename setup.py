@@ -6,11 +6,11 @@ from __future__ import print_function
 import os
 import sys
 from setuptools import setup, find_packages
-import pypandoc
+
+assert(parse_version(setuptools.__version__) >= parse_version("38.6.0"))
 
 def read(fname):
-    rst = pypandoc.convert_file(os.path.join(os.path.dirname(__file__), fname), 'rst', format='md')
-    return rst
+    return open(os.path.join(os.path.dirname(__file__), fname)).read()
 
 setup(
     name="bophono",
