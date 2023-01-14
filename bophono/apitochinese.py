@@ -4,9 +4,15 @@ from .sdtrie import *
 def _get_trie_path(name):
     return os.path.join(os.path.split(__file__)[0], 'data', 'chinese', name)
 
-zhuyin_csv = get_trie_from_file(_get_trie_path("zhuyin.csv"), "zhuyin_csv")
-chinese_trad_csv = get_trie_from_file(_get_trie_path("chinese_trad.csv"), "chinese_trad_csv")
-exception_csv = get_trie_from_file(_get_trie_path("exception.csv"), "exception_csv")
+zhuyin_csv = None
+chinese_trad_csv = None
+exception_csv = None
+
+def init():
+    if zhuyin_csv is None:
+        zhuyin_csv = get_trie_from_file(_get_trie_path("zhuyin.csv"), "zhuyin_csv")
+        chinese_trad_csv = get_trie_from_file(_get_trie_path("chinese_trad.csv"), "chinese_trad_csv")
+        exception_csv = get_trie_from_file(_get_trie_path("exception.csv"), "exception_csv")
 
 space = " "*2
 
@@ -36,7 +42,8 @@ def _simplify_api(s):
         s = s.replace("y", "i")
     return s
 
-def api2chinese(api, phon={"zhuyin":[], "chinese_trad":[]}) :
+def api2chinese(api, phon={"zhuyin":[], "chinese_trad":[]}):
+    init()
     ws = [api.split(".")]
     for index, w in enumerate(ws):
         #Exception

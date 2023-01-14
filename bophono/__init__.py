@@ -4,4 +4,4 @@ from .PhonStateMST import *
 from .PhonStateCAT import *
 from .apitochinese import *
 
-VERSION = "0.1.1"
+VERSION = "0.1.2"
