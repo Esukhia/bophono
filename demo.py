@@ -76,12 +76,16 @@ with open(filename, 'r', encoding="utf8") as f:
         if line.startswith('#'):
             print(line[1:])
             continue
+        print("Unicode:      "+line)
         words = line.split()
-        res = ""
+        res_kvp = ""
+        res_api = ""
         for word in words:
-            res += converter_kvp.get_api(word)+'  '
-        #res = toEnglish(res, "expert")    
-        print(res)
+            res_kvp += converter_kvp.get_api(word)+'  '
+            res_api += converter_fast.get_api(word)+' '
+        print("MST-schema:   "+res_api)
+        print("KVP-schema:   "+res_kvp)
+        
 
 #Chinese transcription
 sentence = "བཀྲ་ཤིས་"
