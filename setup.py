@@ -18,13 +18,14 @@ setup(
     name="bophono",
     version="0.1.1",  #edit version in __init__.py
     author="Esukhia development team",
-    author_email="esukhiadev@gmail.com",
+    author_email="roux.elie@gmail.com",
     description="Python utils for Tibetan phonetics in different dialects",
     license="MIT",
-    keywords="phonetics ipa tibetan",
+    keywords="phonetics IPA tibetan",
     url="https://github.com/Esukhia/bophono",
     packages=find_packages(),
     long_description=read('README.md'),
+    long_description_content_type="text/markdown",
     project_urls={
         'Source': 'https://github.com/Esukhia/bophono',
         'Tracker': 'https://github.com/Esukhia/bophono/issues',
