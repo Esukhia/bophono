@@ -1,26 +1,40 @@
-import sys
-import csv
 import os
 from .sdtrie import *
 from .PhonStateMST import *
 from .PhonStateCAT import *
 from .PhonStateKVP import *
+from .PhonStateLKT import *
 
 class UnicodeToApi:
+    
     def __init__(self, schema="MST", options={}):
-        self.schema = schema
-        self.options = options
-        self.columnIndex = 1
-        if schema == "CAT":
+
+        if schema == 'MST':
+            self.columnIndex = 1
+            exceptions = "exceptions.csv"
+        
+        elif schema == "CAT":
             self.columnIndex = 2
-        if schema == "KVP":
+            exceptions = "exceptions.csv"
+        
+        elif schema == "KVP":
             self.columnIndex = 3
+            exceptions = "exceptions-kvp.csv"
+        
+        elif schema == 'LKT':
+            self.columnIndex = 4
+            exceptions = "exceptions-lkt.csv"
+            
+        else:
+            raise ValueError("schema must be MST, CAT, KVP, or LKT")
+
+        self.options = options
+        self.schema = schema
+        
         self.roots = get_trie_from_file(self.__get_trie_path("roots.csv"), "roots", self.columnIndex)
         self.ends = get_trie_from_file(self.__get_trie_path("ends.csv"), "ends", self.columnIndex)
-        if schema == "KVP":
-            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions-kvp.csv"), "exceptions", 1, self.ends)
-        else:
-            self.exceptions = get_trie_from_file(self.__get_trie_path("exceptions.csv"), "exceptions", 1, self.ends)
+        self.exceptions = get_trie_from_file(self.__get_trie_path(exceptions), "exceptions", 1, self.ends)
+
         self.ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
 
     def __get_trie_path(self, name):
@@ -46,12 +60,6 @@ class UnicodeToApi:
                 return i
         return -1
 
-    # def _combine(previous, rootinfo, endinfo=None):
-    #     rootinfod = rootinfo['d']
-    #     previousendinfod = previous and previous['endinfod'] or None
-    #     curphon = previous and previous['phon'] or ''
-    #     res = previous and previous['phon']+rootinfo['d'] or rootinfo['d']
-    #     return endinfo and res+endinfo['d'] or res
     def __combine_next_syll_phon(self, tibstr, bindex, state, eindex):
         # here we consider that we deal with a syllable starting at bindex, ending at eindex
         rootinfo = self.roots.get_longest_match_with_data(tibstr, bindex, eindex, self.ignored_chars)
@@ -72,14 +80,16 @@ class UnicodeToApi:
         i = self.__get_next_letter_index(tibstr, bindex, eindex)
         if (i==-1):
             return ''
-        state = None
         # recreating one each time is suboptimal
-        if self.schema == 'CAT':
+        if self.schema == 'MST':
+            state = PhonStateMST(self.options, pos, endOfSentence)
+        elif self.schema == 'CAT':
             state = PhonStateCAT(self.options, pos, endOfSentence)
         elif self.schema == 'KVP':
             state = PhonStateKVP(self.options, pos, endOfSentence)
-        else:
-            state = PhonStateMST(self.options, pos, endOfSentence)
+        elif self.schema == 'LKT':
+            state = PhonStateLKT(self.options, pos, endOfSentence)
+
         while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
             exceptioninfo = self.exceptions.get_longest_match_with_data(tibstr, i, eindex, self.ignored_chars)
             if (exceptioninfo and (state.position > 0 or not exceptioninfo['d'].startswith('2:'))) and (

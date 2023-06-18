@@ -1,0 +1,154 @@
+# transforming all the time, will be fixed manually
+བ/Ca,w-
+བོ/Co,w-
+# KVP exceptions
+བཀྲ་ཤིས,ta-shi
+སྤྲུལ་སྐུ/Cu,tulk-
+སློབ་དཔོན,lop-ön
+འབྲུག་པ/Ca,drukp-
+མི་ཕམ,miph-am
+ངག་དབང,ngaw-ang
+སྤྱན་རས་གཟིགས,chenrez-ig
+སྣར་ཐང,narth-ang
+ཞེ་ཆེན,shech-en
+ཞྭ་ལུ/Cu,shal-u
+གཏོང་ལེན,tongl-en
+རིན་པོ་ཆེ/Ce,rinpoch-
+འཕོ་བ/Ca,pow-
+ཐང་ཀ/Ca,tangkh-
+བར་དོ/Co,bard-
+གཅོད,ch-öd
+# Exception from THL (not taking nasalizations)
+རྡོ་རྗེ/Ce,dorj-
+བླ་བྲང,lab-rang
+འབྲི་རུ/Cu,bir-
+ལྷ་རྗེ/Ce,lharj-
+ཨུ་རྒྱན,urgy-en
+ཨོ་རྒྱན,orgy-en
+# NT p. 60
+ཨ་གསར,ags-ar
+ས་གདན,sabd-en
+ཁ་གཅོད,khabch-ö
+# dba becomes wa
+དབ/Cb,w-
+# numbers, from NT Annex 1, completed by Drupchen
+བཅུ་གཅིག,chugch-ik
+བཅུ་གཉིས,chugny-i
+བཅུ་གསུམ,chugs-um
+བཅུ་བཞི/Ci,chubsh-
+བཅུ་བདུན,chubd-un
+བཅོ་བརྒྱད,chobgy-e
+རྩ་བཞི/Ci,tsabsh-
+རྩ་བདུན,tsabd-un
+རྩ་བརྒྱད,tsabgy-e
+སོ་བརྒྱད,sobgy-e
+བཞི་བཅུ/Cu,shibch-
+ལྔ་བཅུ/Cu,ngabch-
+ང་བཞི/Ci,ngabsh-
+དགུ་བཅུ/Cu,gubch-
+# Sanskrit (TODO: check)
+པདྨ/Ca,padm-
+ཀརྨ/Ca,karm-
+# NT Annex 1, nasalizer
+ཞབས་འདེགས,shamd-ek
+ཞིབ་འཇུག,shimj-uk
+མིག་འཁྲུལ,mingtr-ul
+སྔོན་འགྲོ/Co,ngöndr-
+སྨོན་འདུན,mönd-un
+#དཔལ་འབར,pemb-ar
+དམའ་འབེབས,mamb-eb
+ཤ་འབྲས,shamdr-e
+དགེ་འདུན,gend-un
+མི་འདུག,mind-uk
+བོད་ལྗོངས,bönj-ong
+དུས་འཁོར,thungkh-or
+གསར་འགྱུར,sangy-ur
+རྒྱུ་མཚན,gyumts-en
+རྒྱ་མཚོ/Co,gyamts-
+བོད་ཟླ/Ca,bönd-
+ད་ལྟ/Ca,dant-
+#སྟོབས་ལྡན,tomd-en
+#ཡུལ་ལྗོངས,yunj-ong
+འབྲས་ལྗོངས,drenj-ong
+#ཡལ་ག/Ca,yeng-
+དགའ་ལྡན,gand-en
+#གསོལ་འདེབས,sönd-eb
+དུད་འགྲོ/Co,dundr-
+འཐབ་འཛིང,tamdz-ing
+སྐུ་འབུམ,kumb-um
+ཡར་འབྲོ/Co,yamdr-
+གཡུ་མཚོ/Co,yumts-
+བདག་འཛིན,dandz-in
+#སྐྱབས་འགྲོ/Co,kyabdr-
+ཁ་འདོན,khand-ön
+ཞལ་འདེབས,shend-eb
+རྟེན་འབྲེལ,tendr-el
+#རྒྱལ་མཚན,gyents-en
+སྐུ་མདུན,kund-un
+ཕྱག་མཛོད,changts-ö
+ལྷ་མཛེས,lhandz-e
+ལོ་མཆོད,lomch-ö
+# THL nasalizations
+བཀའ་འགྱུར,kangy-ur
+ངོས་འཛིན,ngöndz-in
+རིག་འཛིན,rindz-in
+མཁའ་འགྲོ/Co,khandr-
+#དཀྱིལ་འཁོར,kyinkh-or
+# ཆོས་འཕེལ,chömp-el (noted chöpel in the document)
+#དཔལ་འབྱོར,penj-or
+རྒྱུ་འབྲས,gyundr-e
+ཨ་མདོ/Co,amd-
+མེ་མད/Cc,mend-
+#རྒྱལ་རྩེ/Ce,gyents-
+ཆབ་མདོ/Co,chamd-
+རྟ་མགྲིན,tamdr-in
+# Nasalizations from Esukhia doc
+འདི་ཚོ/Co,dimts-
+དེ་ཚོ/Co,dents-
+སྐུ་འདྲ/Ca,kundr-
+གང་འདྲ/Ca,gandr-
+# l not pronounced
+#གསལ་པོ/Co,sep-
+# Epenthesis, other difficulties, some from rigpa_exceptions.txt
+ཡ་བཞི/Ci,yapsh-
+ས་བཅད,sapch-e
+#ཡང་ལེ་བེར, ?
+སྡེ་དགེ/Ce,derg-
+སློ་བཟང,lobz-ang
+# from Perl module, padmakara_exceptions.txt
+མི་འབྲལ,mindr-el
+མི་འབྱུང,minj-ung
+མི་འདོད,mind-ö
+མི་འགག,ming-ak
+མི་འགྱུར,mingy-ur
+རྒྱས་འདེབས,gyendeb
+རྒྱུ་འགྲུལ,gyundr-ul
+སྐྱེ་འགྲོ/Co,kyendr-
+སྐྱེ་མཆེད,kyemch-e
+སྤྱོད་འཇུག,chönj-uk
+ཞེ་འདོད,shend-ön
+# from Perl module, rigpa_exceptions.txt
+དེ་འབྲེལ,dendr-el
+དེ་འདྲ/Ca,dendr-
+འདི་འདྲ/Ca,dindr-
+དཀའ་འགྲེལ,kandr-el
+ག་འདྲ/Ca,gandr-
+མི་ལྡོག,mind-ok
+མཁས་འཇུག,khenj-uk
+རེ་འདོད,rend-ö
+སྒྲོ་འདོགས,drönd-ok
+ཚེ་འཛིན,tsendz-in
+བདེ་མཆོག,demch-ok
+ཆེ་མཆོག,chemch-ok
+བདེ་འགྲོ/Co,demdr-
+# Other sources (oral)
+བུ་འདོད,bund-ö
+# from མཚོ་མེ་འབར
+མེ་འབར,memb-ar
+# from Dordogne
+ཡ་མཚན,yamts-an
+གོ་འཕང,gomp-ang
+འཕྲོ་འདུ/Cu,tront-
+སྤྲོ་བསྡུ/Co,tront-
+ན་བཟ/Cb,namz-
+མ་འགགས,mank-ak
