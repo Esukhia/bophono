@@ -16,7 +16,7 @@ def read(fname):
 
 setup(
     name="bophono",
-    version="0.1.2",  #edit version in __init__.py
+    version="0.2.0",  #edit version in __init__.py
     author="Esukhia development team",
     author_email="roux.elie@gmail.com",
     description="Python utils for Tibetan phonetics in different dialects",
