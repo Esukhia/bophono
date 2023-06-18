@@ -1,5 +1,6 @@
-class PhonStateKVP:
+class PhonStateLKT:
     def __init__(self, options={}, pos=None, endOfSentence=False):
+        
         self.position = 0
         self.pos = pos
         self.endOfSentence = endOfSentence
@@ -43,7 +44,6 @@ class PhonStateKVP:
             self.end += " "
         self.phon += self.end
 
-
     def combineWithException(self, exception):
         syllables = exception.split('|')
         for syl in syllables:
@@ -78,3 +78,11 @@ class PhonStateKVP:
     
     def finish(self):
         self.doCombineCurEnd(True)
+
+if __name__ == '__main__':
+
+    s = PhonStateLKT()
+    s.combineWith("dz-", "og")
+    s.combineWith("dz-", "og")
+    s.finish()
+    print(s.phon)
