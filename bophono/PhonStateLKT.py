@@ -79,10 +79,3 @@ class PhonStateLKT:
     def finish(self):
         self.doCombineCurEnd(True)
 
-if __name__ == '__main__':
-
-    s = PhonStateLKT()
-    s.combineWith("dz-", "og")
-    s.combineWith("dz-", "og")
-    s.finish()
-    print(s.phon)
