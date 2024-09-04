@@ -29,7 +29,7 @@ class PhonStateTMD:
             self.end = self.end[:-1]+"g"
         # nng or ngg -> ng
         if self.end.endswith("g") and nrc.startswith("g"):
-            self.end = self.end[:-1]+"k"
+            self.end = self.end[:-1]  #+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
         # I suppose? TODO: check
