@@ -1,9 +1,11 @@
 import os
+
 from .sdtrie import *
 from .PhonStateMST import *
 from .PhonStateCAT import *
 from .PhonStateKVP import *
 from .PhonStateLKT import *
+from .PhonStateTMD import *
 
 class UnicodeToApi:
     
@@ -24,9 +26,13 @@ class UnicodeToApi:
         elif schema == 'LKT':
             self.columnIndex = 4
             exceptions = "exceptions-lkt.csv"
+
+        elif schema == 'TMD':
+            self.columnIndex = 5
+            exceptions = "exceptions-tmd.csv"
             
         else:
-            raise ValueError("schema must be MST, CAT, KVP, or LKT")
+            raise ValueError("schema must be MST, CAT, KVP, TMD or LKT")
 
         self.options = options
         self.schema = schema
@@ -89,6 +95,8 @@ class UnicodeToApi:
             state = PhonStateKVP(self.options, pos, endOfSentence)
         elif self.schema == 'LKT':
             state = PhonStateLKT(self.options, pos, endOfSentence)
+        elif self.schema == 'TMD':
+            state = PhonStateTMD(self.options, pos, endOfSentence)
 
         while i < eindex and i >= 0: # > 0 covers the case where next_letter_index returns -1
             exceptioninfo = self.exceptions.get_longest_match_with_data(tibstr, i, eindex, self.ignored_chars)
