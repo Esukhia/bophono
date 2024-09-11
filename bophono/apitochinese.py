@@ -9,6 +9,7 @@ chinese_trad_csv = None
 exception_csv = None
 
 def init():
+    global zhuyin_csv, chinese_trad_csv, exception_csv
     if zhuyin_csv is None:
         zhuyin_csv = get_trie_from_file(_get_trie_path("zhuyin.csv"), "zhuyin_csv")
         chinese_trad_csv = get_trie_from_file(_get_trie_path("chinese_trad.csv"), "chinese_trad_csv")
