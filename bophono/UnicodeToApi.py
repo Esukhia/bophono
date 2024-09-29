@@ -35,7 +35,7 @@ class UnicodeToApi:
         self.ends = get_trie_from_file(self.__get_trie_path("ends.csv"), "ends", self.columnIndex)
         self.exceptions = get_trie_from_file(self.__get_trie_path(exceptions), "exceptions", 1, self.ends)
 
-        self.ignored_chars = {'\u0FAD': True, '\u0F35': True, '\u0F37': True}
+        self.ignored_chars = {'\u0F35': True, '\u0F37': True}
 
     def __get_trie_path(self, name):
         return os.path.join(os.path.split(__file__)[0], 'data', name)
