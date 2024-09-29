@@ -20,9 +20,23 @@ wasur_cases = load_wasur_cases()
 
 
 def test_cases_without_wasur():
-    assert_equal_phonetics("KVP", "དགས", "gé")
+    assert_equal_phonetics("KVP", "མངས", "ngé")
+    assert_equal_phonetics("KVP", "མགས", "gé")
+    assert_equal_phonetics("KVP", "དབས", "wé")
     assert_equal_phonetics("KVP", "དངས", "ngé")
-    assert_equal_phonetics("KVP", "ཁགས", "khak")
+    assert_equal_phonetics("KVP", "དགས", "gé")
+    assert_equal_phonetics("KVP", "དམས", "mé")
+    assert_equal_phonetics("KVP", "བགས", "gé")
+    assert_equal_phonetics("KVP", "འབས", "bé")
+    assert_equal_phonetics("KVP", "འགས", "gé")
+    
+def test_wasur_cases_with_root_position_change():
+    assert_equal_phonetics("KVP", "མྭངས", "mang")
+    assert_equal_phonetics("KVP", "མྭགས", "mak")
+    assert_equal_phonetics("KVP", "དྭབས", "dab")
+    assert_equal_phonetics("KVP", "དྭངས", "dang")
+    assert_equal_phonetics("KVP", "དྭགས", "dak")
+    assert_equal_phonetics("KVP", "དྭམས", "dam")
 
 @pytest.mark.parametrize("tibetan, expected", wasur_cases)
 def test_wasur_case(tibetan, expected):
