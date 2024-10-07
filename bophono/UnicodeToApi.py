@@ -35,7 +35,7 @@ class UnicodeToApi:
         self.ends = get_trie_from_file(self.__get_trie_path("ends.csv"), "ends", self.columnIndex)
         self.exceptions = get_trie_from_file(self.__get_trie_path(exceptions), "exceptions", 1, self.ends)
 
-        self.ignored_chars = {'\u0F35': True, '\u0F37': True}
+        self.ignored_chars = {'\u0F35': True, '\u0F37': True, '\u0F71': True}
 
     def __get_trie_path(self, name):
         return os.path.join(os.path.split(__file__)[0], 'data', name)
@@ -70,7 +70,7 @@ class UnicodeToApi:
             return -1
         if endinfo['i'] < eindex and self.__is_tib_letter(tibstr[endinfo['i']]) and (tibstr[endinfo['i']] not in self.ignored_chars):
             return -1
-        state.combineWith(rootinfo['d'], endinfo['d'])
+        state.combineWith(rootinfo['d'], endinfo['d'], tibstr[bindex:eindex])
         assert(endinfo['i']>bindex)
         return endinfo['i']
 
@@ -97,7 +97,7 @@ class UnicodeToApi:
                 # if it starts with '2:' and we're in the first syllable, we ignore it:
                 if exceptioninfo['d'].startswith('2:'):
                     exceptioninfo['d'] = exceptioninfo['d'][2:]
-                state.combineWithException(exceptioninfo['d'])
+                state.combineWithException(exceptioninfo['d'], tibstr[bindex:eindex])
                 nextidx = self.__get_next_letter_index(tibstr, exceptioninfo['i']+1, eindex)
                 if nextidx == -1:
                     nextidx = eindex

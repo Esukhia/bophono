@@ -1,3 +1,5 @@
+import re
+
 class PhonStateKVP:
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
@@ -20,21 +22,17 @@ class PhonStateKVP:
             return
         # ' from ends.csv should be replaced with a space
         self.end = self.end.replace("'", ' ')
-        # e at the end of a word becomes é
-        if self.end.endswith("e") and endofword:
-            if self.accentuateall or self.phon+'e' in self.accentuateWL:
-                self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"
-        # nng or ngg -> ng
+        if self.end.endswith("ng") and nrc.startswith("g"):
+            self.end = self.end[:-1]
+        if self.end.endswith("ng") and nrc.startswith("ng"):
+            self.end = self.end[:-2]
         if self.end.endswith("g") and nrc.startswith("g"):
             self.end = self.end[:-1]+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
-        # I suppose? TODO: check
-        if self.end.endswith("ng") and nrc.startswith("ng"):
-            self.end = self.end[:-2]
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"
@@ -44,25 +42,27 @@ class PhonStateKVP:
         self.phon += self.end
 
 
-    def combineWithException(self, exception):
+    def combineWithException(self, exception, tibetanSyllable):
         syllables = exception.split('|')
         for syl in syllables:
             indexplusminus = syl.find('-')
             if indexplusminus == -1:
                 print("invalid exception syllable: "+syl)
                 continue
-            self.combineWith(syl[:indexplusminus], syl[indexplusminus+1:])
+            self.combineWith(syl[:indexplusminus], syl[indexplusminus+1:], tibetanSyllable)
 
-    def combineWith(self, nextroot, nextend):
+    def combineWith(self, nextroot, nextend, tibetanSyllable):
         nextrootconsonant = nextroot
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
+        elif re.search(r'^བ[ོ]?[རསད]?(འི)?$', tibetanSyllable) and self.position == 1:
+            self.phon += "w"
         elif nextrootconsonant.startswith("dz") and self.position > 1:
             self.phon += "z"
-        elif nextrootconsonant.startswith("tr") and self.position == 1:
+        elif "གྲ" in tibetanSyllable and nextrootconsonant.startswith("tr") and self.position == 2:
             self.phon += "dr"
         else:
             self.phon += nextrootconsonant
@@ -72,7 +72,7 @@ class PhonStateKVP:
             self.end = ends[0]
             for endsyl in ends[1:]:
                 # we suppose that roots are always null
-                self.combineWith(endsyl[:1], endsyl[1:])
+                self.combineWith(endsyl[:1], endsyl[1:], tibetanSyllable)
         else:
             self.end = nextend
     

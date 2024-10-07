@@ -1,6 +1,6 @@
 # transforming all the time, will be fixed manually
-བ/Ca,w-
-བོ/Co,w-
+2:བ/Ca,w-
+2:བོ/Co,w-
 # KVP exceptions
 བཀྲ་ཤིས,ta-shi
 སྤྲུལ་སྐུ/Cu,tulk-
@@ -10,15 +10,28 @@
 ངག་དབང,ngaw-ang
 སྤྱན་རས་གཟིགས,chenrez-ig
 སྣར་ཐང,narth-ang
+བུམ་ཐང་,bumth-ang
 ཞེ་ཆེན,shech-en
-ཞྭ་ལུ/Cu,shal-u
+ཞྭ་ལུ/Cu,shal-
+ཞྭ་དམར་,sham-ar
+ཞྭ་དམར་པ་,shamarp-a
+འཕྲིན་ལས་ ནོར་བུ་,Thin-ley Norbu
 གཏོང་ལེན,tongl-en
 རིན་པོ་ཆེ/Ce,rinpoch-
 འཕོ་བ/Ca,pow-
 ཐང་ཀ/Ca,tangkh-
-བར་ཆད,barch-é
+བར་དུ,bard-u
+བར་ཆད,barch-e
 བར་དོ/Co,bard-
 གཅོད,ch-öd
+འཆི་མེད་,chim-é
+མདོ་མེད་,dom-é
+རིས་མེད་,rim-é
+ཨ་མེས་,am-é
+ཅོ་ནེ་,chon-é
+བལ་ལྡན་,pald-en
+གན་ལྡན་,gand-en
+བློ་བཟང་,lobz-ang
 # Exception from THL (not taking nasalizations)
 རྡོ་རྗེ/Ce,dorj-
 བླ་བྲང,lab-rang
@@ -31,6 +44,7 @@
 ས་གདན,sabd-en
 ཁ་གཅོད,khabch-ö
 # dba becomes wa
+དབ,w-a
 དབ/Cb,w-
 # numbers, from NT Annex 1, completed by Drupchen
 བཅུ་གཅིག,chugch-ik
@@ -48,7 +62,8 @@
 ང་བཞི/Ci,ngabsh-
 དགུ་བཅུ/Cu,gubch-
 # Sanskrit (TODO: check)
-པདྨ/Ca,padm-
+པདྨ/Ca,pem-
+པདྨོ/Co,pem-
 ཀརྨ/Ca,karm-
 # NT Annex 1, nasalizer
 ཞབས་འདེགས,shamd-ek
@@ -89,6 +104,7 @@
 ཕྱག་མཛོད,changts-ö
 ལྷ་མཛེས,lhandz-e
 ལོ་མཆོད,lomch-ö
+པཎ་ཆེན་,panch-en
 # THL nasalizations
 བཀའ་འགྱུར,kangy-ur
 ངོས་འཛིན,ngöndz-in
