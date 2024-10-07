@@ -22,7 +22,7 @@ wasur_cases = load_wasur_cases()
 def test_cases_without_wasur():
     assert_equal_phonetics("KVP", "མངས", "nge")
     assert_equal_phonetics("KVP", "མགས", "ge")
-    assert_equal_phonetics("KVP", "དབས", "we")
+    assert_equal_phonetics("KVP", "དབས", "e")
     assert_equal_phonetics("KVP", "དངས", "nge")
     assert_equal_phonetics("KVP", "དགས", "ge")
     assert_equal_phonetics("KVP", "དམས", "me")

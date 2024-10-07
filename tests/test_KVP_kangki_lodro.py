@@ -20,14 +20,14 @@ def test_kangki_lodro_one_by_one():
         བཅུ་ ཕྲག་ བཅུ་ དང་ བཅུ་ གཉིས་ རྒྱན་ སྤྲས་ བདག་ བློའི་ མུན་ སེལ་ འཇམ་ པའི་ དབྱངས་ ལ་ རབ་ ཏུ་ འདུད།། 
     """
     expected = """
-        gang gi lo trö drib nyi trin dral nyi tar nam dak rab sal we
-        ji nye dön kun ji zhin zik chir nyi kyi tuk kar lek bam dzin
-        gang dak si pe tsön rar ma rik mun tum duk ngal gyi zir we
-        dro tsok kun la bu chik tar tse yen lak druk chu yang den sung
+        gang gi lo trö drib nyi trin dral nyi tar nam dak rab sal be
+        ji nye dön kün ji zhin zik chir nyi kyi tuk kar lek bam dzin
+        gang dak si pe tsön rar ma rik mün tum duk ngal gyi zir be
+        dro tsok kün la bu chik tar tse yen lak druk chü yang den sung
         druk tar cher drok nyön mong nyi long le kyi chak drok dröl dze ching
-        ma rik mun sel duk ngal nyu gu ji nye chöd dze ral tri nam
-        dö ne dak ching sa chu tar sön yön ten lu dzok gyal se tu wö ku
-        chu trak chu dang chu nyi gyen tre dak lö mun sel jam pe yang la rab tu du
+        ma rik mün sel duk ngal nyu gu ji nye chöd dze ral tri nam
+        dö ne dak ching sa chü tar sön yön ten lü dzok gyal se tu bö ku
+        chu trak chu dang chu nyi gyen tre dak lö mün sel jam pe yang la rab tu dü
     """
     assert_equal_phonetics("KVP", tibetan, expected)
 
@@ -44,13 +44,13 @@ def test_kangki_lodro_two_by_two():
     """
     expected = """
         gangi lodrö dribnyi trindral nyitar namdak rabsalwe
-        jinye dönkun jizhin zigchir nyikyi tugkar legbamzin
-        gangdak sipe tsönrar marik muntum dugngal gyizirwe
-        drotsok kunla buchik tartse yenlak drugchu yangdensung
+        jinye dönkün jizhin zigchir nyikyi tugkar legbamzin
+        gangdak sipe tsönrar marik müntum dugngal gyizirwe
+        drotsok künla buchik tartse yenlak drugchü yangdensung
         drugtar cherdrok nyönmong nyilong lekyi chagdrok drölzeching
-        marik munsel dugngal nyugu jinye chödze raldrinam
-        döne dagching sachu tarsön yönten luzok gyalse tuwöku
-        chutrak chudang chugnyi gyentre daglö munsel jampe yangla rabtudu
+        marik münsel dugngal nyugu jinye chödze raldrinam
+        döne dagching sachü tarsön yönten lüzok gyalse tuwöku
+        chutrak chudang chugnyi gyentre daglö münsel jampe yangla rabtudü
     """
     assert_equal_phonetics("KVP", tibetan, expected)
 
@@ -67,12 +67,12 @@ def test_kangki_lodro_word_by_word():
     """
     expected = """
         gangi lodrö dribnyi trindral nyi tar namdak rabsalwe
-        jinye dön kun jizhin zik chir nyikyi tugkar legbam dzin
-        gangdak sipe tsönrarmarik mun tum dugngal gyi zirwe
-        dro tsok kun la bu chik tar tse yenlak druk chu yangden sung
+        jinye dön kün jizhin zik chir nyikyi tugkar legbam dzin
+        gangdak sipe tsönrarmarik mün tum dugngal gyi zirwe
+        dro tsok kün la bu chik tar tse yenlak druk chü yangden sung
         druk tar cher drok nyönmong nyi long lekyi chagdrok dröl dze ching
-        marik munsel dugngal nyugu jinye chöd dze raldri nam
-        dö ne dak ching sachu tar sön yönten luzok gyalse tuwö ku
-        chutrak chu dang chugnyi gyen tre dak lö munsel jampe yang la rabtu du
+        marik münsel dugngal nyugu jinye chöd dze raldri nam
+        dö ne dak ching sachü tar sön yönten lüzok gyalse tuwö ku
+        chutrak chu dang chugnyi gyen tre dak lö münsel jampe yang la rabtu dü
     """
     assert_equal_phonetics("KVP", tibetan, expected)

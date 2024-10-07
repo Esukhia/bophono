@@ -58,8 +58,6 @@ class PhonStateKVP:
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
-        elif re.search(r'^བ[ོ]?[རསད]?(འི)?$', tibetanSyllable) and self.position == 1:
-            self.phon += "w"
         elif nextrootconsonant.startswith("dz") and self.position > 1:
             self.phon += "z"
         elif "གྲ" in tibetanSyllable and nextrootconsonant.startswith("tr") and self.position == 2:

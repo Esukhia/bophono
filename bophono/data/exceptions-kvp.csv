@@ -10,19 +10,12 @@
 ངག་དབང,ngaw-ang
 སྤྱན་རས་གཟིགས,chenrez-ig
 སྣར་ཐང,narth-ang
-བུམ་ཐང་,bumth-ang
+བུམ་ཐང,bumth-ang
 ཞེ་ཆེན,shech-en
-ཞྭ་ལུ/Cu,shal-
-ཞྭ་དམར་,sham-ar
-ཞྭ་དམར་པ་,shamarp-a
-འཕྲིན་ལས་ ནོར་བུ་,Thin-ley Norbu
 གཏོང་ལེན,tongl-en
 རིན་པོ་ཆེ/Ce,rinpoch-
 འཕོ་བ/Ca,pow-
 ཐང་ཀ/Ca,tangkh-
-བར་དུ,bard-u
-བར་ཆད,barch-e
-བར་དོ/Co,bard-
 གཅོད,ch-öd
 འཆི་མེད་,chim-é
 མདོ་མེད་,dom-é
@@ -43,9 +36,8 @@
 ཨ་གསར,ags-ar
 ས་གདན,sabd-en
 ཁ་གཅོད,khabch-ö
-# dba becomes wa
-དབ,w-a
-དབ/Cb,w-
+# dba becomes wa except if exactly dba (no vowel, no suffix)
+དབ*/Cb,w-
 # numbers, from NT Annex 1, completed by Drupchen
 བཅུ་གཅིག,chugch-ik
 བཅུ་གཉིས,chugny-i
