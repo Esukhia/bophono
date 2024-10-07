@@ -246,7 +246,7 @@ def test_ngg_yields_ng():
 def test_a_followed_by_n_or_l():
     assert_equal_phonetics("KVP", "འགན་", "gen")
     assert_equal_phonetics("KVP", "རྒྱན་", "gyen")
-    assert_equal_phonetics("KVP", "བལ་ལྡན་", "palden")
+    assert_equal_phonetics("KVP", "དཔལ་ལྡན་", "palden")
     assert_equal_phonetics("KVP", "རྣམ་རྒྱལ་", "namgyal")
     assert_equal_phonetics("KVP", "པཎ་ཆེན་", "panchen")
 
