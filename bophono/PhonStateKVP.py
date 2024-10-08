@@ -1,3 +1,5 @@
+import re
+
 class PhonStateKVP:
     def __init__(self, options={}, pos=None, endOfSentence=False):
         self.position = 0
@@ -20,21 +22,17 @@ class PhonStateKVP:
             return
         # ' from ends.csv should be replaced with a space
         self.end = self.end.replace("'", ' ')
-        # e at the end of a word becomes é
-        if self.end.endswith("e") and endofword:
-            if self.accentuateall or self.phon+'e' in self.accentuateWL:
-                self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"
-        # nng or ngg -> ng
+        if self.end.endswith("ng") and nrc.startswith("g"):
+            self.end = self.end[:-1]
+        if self.end.endswith("ng") and nrc.startswith("ng"):
+            self.end = self.end[:-2]
         if self.end.endswith("g") and nrc.startswith("g"):
             self.end = self.end[:-1]+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
-        # I suppose? TODO: check
-        if self.end.endswith("ng") and nrc.startswith("ng"):
-            self.end = self.end[:-2]
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"
@@ -62,8 +60,18 @@ class PhonStateKVP:
             self.phon += ""
         elif nextrootconsonant.startswith("dz") and self.position > 1:
             self.phon += "z"
-        elif nextrootconsonant.startswith("tr") and self.position == 1:
-            self.phon += "dr"
+        elif nextrootconsonant.startswith("tdr"):
+            # Here the KVP rules have the rather puzzling convention to have different rules
+            # for syllables that have the exact same phonology in Tibetan. It has:
+            # བྲ -> always dra
+            # དྲ -> dra in second position, tra in first position
+            # which doesn't make sense as Tibetans make no difference between བྲ and དྲ.
+            # We thus have to artificially differentiate them at the phonological level recorded in roots.csv
+            # By having "tdra" for དྲ.
+            if self.position == 1:
+                self.phon += "tr"
+            else:
+                self.phon += "dr"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
