@@ -70,7 +70,7 @@ class UnicodeToApi:
             return -1
         if endinfo['i'] < eindex and self.__is_tib_letter(tibstr[endinfo['i']]) and (tibstr[endinfo['i']] not in self.ignored_chars):
             return -1
-        state.combineWith(rootinfo['d'], endinfo['d'], tibstr[bindex:eindex])
+        state.combineWith(rootinfo['d'], endinfo['d'])
         assert(endinfo['i']>bindex)
         return endinfo['i']
 
@@ -97,7 +97,7 @@ class UnicodeToApi:
                 # if it starts with '2:' and we're in the first syllable, we ignore it:
                 if exceptioninfo['d'].startswith('2:'):
                     exceptioninfo['d'] = exceptioninfo['d'][2:]
-                state.combineWithException(exceptioninfo['d'], tibstr[bindex:eindex])
+                state.combineWithException(exceptioninfo['d'])
                 nextidx = self.__get_next_letter_index(tibstr, exceptioninfo['i']+1, eindex)
                 if nextidx == -1:
                     nextidx = eindex

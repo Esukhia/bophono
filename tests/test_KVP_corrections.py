@@ -189,14 +189,14 @@ def test_ratas():
 
 def test_dao_wa():
     assert_equal_phonetics("KVP", "དབ", "dab")
-    assert_equal_phonetics("KVP", "དབོ", "o")
-    assert_equal_phonetics("KVP", "དབོས", "ö")
     assert_equal_phonetics("KVP", "དབུ", "u")
     assert_equal_phonetics("KVP", "དབུས", "ü")
     assert_equal_phonetics("KVP", "དབི", "i")
     assert_equal_phonetics("KVP", "དབེ", "e")
-    assert_equal_phonetics("KVP", "དབང", "ang")
     assert_equal_phonetics("KVP", "དབྱང", "yang")
+    assert_equal_phonetics("KVP", "དབོ", "wo")
+    assert_equal_phonetics("KVP", "དབོས", "wö")
+    assert_equal_phonetics("KVP", "དབང", "wang")
 
 ### Additional Phonetics Instructions:
 
@@ -276,7 +276,6 @@ def test_specific_cases():
     assert_equal_phonetics("KVP", "བར་དུ", "bardu")
     assert_equal_phonetics("KVP", "བར་ཆད", "barche")
     assert_equal_phonetics("KVP", "བར་དོ", "bardo")
-
 
 ### Checking that things work as expected in KVP_corrections.csv
 

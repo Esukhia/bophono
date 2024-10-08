@@ -42,16 +42,16 @@ class PhonStateKVP:
         self.phon += self.end
 
 
-    def combineWithException(self, exception, tibetanSyllable):
+    def combineWithException(self, exception):
         syllables = exception.split('|')
         for syl in syllables:
             indexplusminus = syl.find('-')
             if indexplusminus == -1:
                 print("invalid exception syllable: "+syl)
                 continue
-            self.combineWith(syl[:indexplusminus], syl[indexplusminus+1:], tibetanSyllable)
+            self.combineWith(syl[:indexplusminus], syl[indexplusminus+1:])
 
-    def combineWith(self, nextroot, nextend, tibetanSyllable):
+    def combineWith(self, nextroot, nextend):
         nextrootconsonant = nextroot
         nextvowel = ''
         self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
@@ -60,8 +60,18 @@ class PhonStateKVP:
             self.phon += ""
         elif nextrootconsonant.startswith("dz") and self.position > 1:
             self.phon += "z"
-        elif "གྲ" in tibetanSyllable and nextrootconsonant.startswith("tr") and self.position == 2:
-            self.phon += "dr"
+        elif nextrootconsonant.startswith("tdr"):
+            # Here the KVP rules have the rather puzzling convention to have different rules
+            # for syllables that have the exact same phonology in Tibetan. It has:
+            # བྲ -> always dra
+            # དྲ -> dra in second position, tra in first position
+            # which doesn't make sense as Tibetans make no difference between བྲ and དྲ.
+            # We thus have to artificially differentiate them at the phonological level recorded in roots.csv
+            # By having "tdra" for དྲ.
+            if self.position == 1:
+                self.phon += "tr"
+            else:
+                self.phon += "dr"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
@@ -70,7 +80,7 @@ class PhonStateKVP:
             self.end = ends[0]
             for endsyl in ends[1:]:
                 # we suppose that roots are always null
-                self.combineWith(endsyl[:1], endsyl[1:], tibetanSyllable)
+                self.combineWith(endsyl[:1], endsyl[1:])
         else:
             self.end = nextend
     
