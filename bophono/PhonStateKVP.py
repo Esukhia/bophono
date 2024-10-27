@@ -60,18 +60,6 @@ class PhonStateKVP:
             self.phon += ""
         elif nextrootconsonant.startswith("dz") and self.position > 1:
             self.phon += "z"
-        elif nextrootconsonant.startswith("tdr"):
-            # Here the KVP rules have the rather puzzling convention to have different rules
-            # for syllables that have the exact same phonology in Tibetan. It has:
-            # བྲ -> always dra
-            # དྲ -> dra in second position, tra in first position
-            # which doesn't make sense as Tibetans make no difference between བྲ and དྲ.
-            # We thus have to artificially differentiate them at the phonological level recorded in roots.csv
-            # By having "tdra" for དྲ.
-            if self.position == 1:
-                self.phon += "tr"
-            else:
-                self.phon += "dr"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
