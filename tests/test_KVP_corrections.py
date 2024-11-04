@@ -177,9 +177,9 @@ def test_ratas():
     assert_equal_phonetics("KVP", "བཀྲ་བ་", "trawa")
     assert_equal_phonetics("KVP", "ཀྲོག་ཀྲོག་", "trogtrok")
     assert_equal_phonetics("KVP", "བཀྲ་ཤིས་", "tashi")
-    assert_equal_phonetics("KVP", "གྲ", "tra") # tra at the beginning of a word
-    assert_equal_phonetics("KVP", "གྲ་པ་", "trapa")
-    assert_equal_phonetics("KVP", "ལྷུན་གྲུབ་", "lhündrub") # dra if not beginning of a word
+    assert_equal_phonetics("KVP", "གྲ", "dra")
+    assert_equal_phonetics("KVP", "གྲ་པ་", "drapa")
+    assert_equal_phonetics("KVP", "ལྷུན་གྲུབ་", "lhündrub")
     assert_equal_phonetics("KVP", "པྲ", "tra")
     assert_equal_phonetics("KVP", "ཕྲ", "tra")
     assert_equal_phonetics("KVP", "འཕྲིན་ལས་", "trinle")

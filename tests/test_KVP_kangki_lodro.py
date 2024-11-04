@@ -20,12 +20,12 @@ def test_kangki_lodro_one_by_one():
         བཅུ་ ཕྲག་ བཅུ་ དང་ བཅུ་ གཉིས་ རྒྱན་ སྤྲས་ བདག་ བློའི་ མུན་ སེལ་ འཇམ་ པའི་ དབྱངས་ ལ་ རབ་ ཏུ་ འདུད།། 
     """
     expected = """
-        gang gi lo trö drib nyi trin dral nyi tar nam dak rab sal be
+        gang gi lo drö drib nyi trin dral nyi tar nam dak rab sal be
         ji nye dön kün ji zhin zik chir nyi kyi tuk kar lek bam dzin
         gang dak si pe tsön rar ma rik mün tum duk ngal gyi zir be
         dro tsok kün la bu chik tar tse yen lak druk chü yang den sung
         druk tar cher drok nyön mong nyi long le kyi chak drok dröl dze ching
-        ma rik mün sel duk ngal nyu gu ji nye chöd dze ral tri nam
+        ma rik mün sel duk ngal nyu gu ji nye chöd dze ral dri nam
         dö ne dak ching sa chü tar sön yön ten lü dzok gyal se tu bö ku
         chu trak chu dang chu nyi gyen tre dak lö mün sel jam pe yang la rab tu dü
     """
