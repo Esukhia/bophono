@@ -276,6 +276,7 @@ def test_specific_cases():
     assert_equal_phonetics("KVP", "བར་དུ", "bardu")
     assert_equal_phonetics("KVP", "བར་ཆད", "barche")
     assert_equal_phonetics("KVP", "བར་དོ", "bardo")
+    assert_equal_phonetics("KVP", "གཏིབས", "tib")
 
 ### Checking that things work as expected in KVP_corrections.csv
 
