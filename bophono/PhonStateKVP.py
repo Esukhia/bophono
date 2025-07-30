@@ -13,8 +13,6 @@ class PhonStateKVP:
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
-        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["rime", "de", "ame", "chone", "dune", "dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
-        self.accentuateall = options['accentuateWL'] if 'accentuateWL' in options else True
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
@@ -22,6 +20,9 @@ class PhonStateKVP:
             return
         # ' from ends.csv should be replaced with a space
         self.end = self.end.replace("'", ' ')
+        # e at the end of a word becomes é
+        if self.end.endswith("e") and endofword:
+            self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"

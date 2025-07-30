@@ -20,15 +20,15 @@ wasur_cases = load_wasur_cases()
 
 
 def test_cases_without_wasur():
-    assert_equal_phonetics("KVP", "མངས", "nge")
-    assert_equal_phonetics("KVP", "མགས", "ge")
-    assert_equal_phonetics("KVP", "དབས", "we")
-    assert_equal_phonetics("KVP", "དངས", "nge")
-    assert_equal_phonetics("KVP", "དགས", "ge")
-    assert_equal_phonetics("KVP", "དམས", "me")
-    assert_equal_phonetics("KVP", "བགས", "ge")
-    assert_equal_phonetics("KVP", "འབས", "be")
-    assert_equal_phonetics("KVP", "འགས", "ge")
+    assert_equal_phonetics("KVP", "མངས", "ngé")
+    assert_equal_phonetics("KVP", "མགས", "gé")
+    assert_equal_phonetics("KVP", "དབས", "é")
+    assert_equal_phonetics("KVP", "དངས", "ngé")
+    assert_equal_phonetics("KVP", "དགས", "gé")
+    assert_equal_phonetics("KVP", "དམས", "mé")
+    assert_equal_phonetics("KVP", "བགས", "gé")
+    assert_equal_phonetics("KVP", "འབས", "bé")
+    assert_equal_phonetics("KVP", "འགས", "gé")
     
 def test_wasur_cases_with_root_position_change():
     assert_equal_phonetics("KVP", "མྭངས", "mang")
