@@ -34,6 +34,8 @@ class PhonStateKVP:
             self.end = self.end[:-1]+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
+        if self.end.endswith("d") and nrc.startswith("dz"): # chödzé instead of chöddzé
+            self.end = self.end[:-1]
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"
@@ -59,8 +61,6 @@ class PhonStateKVP:
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
-        elif nextrootconsonant.startswith("dz") and self.position > 1:
-            self.phon += "z"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:

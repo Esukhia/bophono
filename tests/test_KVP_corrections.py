@@ -131,7 +131,7 @@ def test_tsa_consonant():
 def test_dza_consonant():
     assert_equal_phonetics("KVP", "ཛ", "dza") # dza at the beginning of a word
     assert_equal_phonetics("KVP", "འཛི་སྒར་", "dzigar") # dza at the beginning of a word
-    assert_equal_phonetics("KVP", "ར་ཛ་", "raza") # za in the middle of a word
+    assert_equal_phonetics("KVP", "ར་ཛ་", "radza") # dza in the middle of a word
 
 def test_zha_consonant():
     assert_equal_phonetics("KVP", "ཞ", "zha")
