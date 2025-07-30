@@ -36,6 +36,8 @@ class PhonStateKVP:
             self.end = self.end[:-1]
         if self.end.endswith("d") and nrc.startswith("dz"): # chödzé instead of chöddzé
             self.end = self.end[:-1]
+        if re.match("[aeiou]$", self.end) and (nrc == "-" or re.match("^[aeiou]", nrc)): # za'ok instead of zaok (don't know why nrc is '-' sometimes but with this it works)
+            self.end += "'"
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"
