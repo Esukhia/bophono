@@ -11,7 +11,6 @@
 སྤྱན་རས་གཟིགས,chenrez-ig
 སྣར་ཐང,narth-ang
 བུམ་ཐང,bumth-ang
-ཞེ་ཆེན,shech-en
 གཏོང་ལེན,tongl-en
 རིན་པོ་ཆེ/Ce,rinpoch-
 འཕོ་བ/Ca,pow-
@@ -38,21 +37,6 @@
 # dba doesn't become wa if it has vowel i, e or u
 དབང,wang-
 དབངས,wang-
-# numbers, from NT Annex 1, completed by Drupchen
-བཅུ་གཅིག,chugch-ik
-བཅུ་གཉིས,chugny-i
-བཅུ་གསུམ,chugs-um
-བཅུ་བཞི/Ci,chubsh-
-བཅུ་བདུན,chubd-un
-བཅོ་བརྒྱད,chobgy-e
-རྩ་བཞི/Ci,tsabsh-
-རྩ་བདུན,tsabd-un
-རྩ་བརྒྱད,tsabgy-e
-སོ་བརྒྱད,sobgy-e
-བཞི་བཅུ/Cu,shibch-
-ལྔ་བཅུ/Cu,ngabch-
-ང་བཞི/Ci,ngabsh-
-དགུ་བཅུ/Cu,gubch-
 # Sanskrit (TODO: check)
 པདྨ/Ca,pem-
 པདྨོ/Co,pem-

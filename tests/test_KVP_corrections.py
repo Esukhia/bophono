@@ -136,7 +136,6 @@ def test_dza_consonant():
 def test_zha_consonant():
     assert_equal_phonetics("KVP", "ཞ", "zha")
     assert_equal_phonetics("KVP", "བཞ", "zha")
-    assert_equal_phonetics("KVP", "ཞེ་ཆེན་", "shechen") # Exception
     
 def test_za_consonant():
     assert_equal_phonetics("KVP", "ཟ", "za")
@@ -260,7 +259,6 @@ def test_a_followed_by_n_or_l():
 
 # Names of contemporary masters, places, schools, and words that are commonly spelled in English (such as Dzongsar Khyentse, Drukpa Kagyu, Shechen, Shigatse, tonglen, chöd, rinpoche, and tulku) should be spelled according to convention.
 def test_names_and_common_spellings():
-    assert_equal_phonetics("KVP", "ཞེ་ཆེན་", "shechen")
     assert_equal_phonetics("KVP", "གཏོང་ལེན་", "tonglen")
     assert_equal_phonetics("KVP", "གཅོད་", "chöd")
     assert_equal_phonetics("KVP", "རིན་པོ་ཆེ་", "rinpoché")
