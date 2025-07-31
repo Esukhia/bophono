@@ -1,11 +1,3 @@
-import sys
-import os
-import inspect
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import bophono
-import csv
-
 from test_helpers import assert_equal_phonetics
 
 def test_kangki_lodro_one_by_one():
