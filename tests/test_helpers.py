@@ -1,8 +1,11 @@
 import inspect
-import bophono
+import bophono as bophono
 
 def assert_equal_phonetics(schema, tibetan, expected):
-    assert phonetics_for(schema, inspect.cleandoc(tibetan)) == inspect.cleandoc(expected)
+    clean_tibetan = inspect.cleandoc(tibetan)
+    clean_expected = inspect.cleandoc(expected)
+    phonetics = phonetics_for(schema, clean_tibetan)
+    assert phonetics == clean_expected, f"Tibetan: {clean_tibetan} | Expected: {clean_expected} | Got: {phonetics}"
 
 def phonetics_for(schema, text):
     lines = text.split("\n")
