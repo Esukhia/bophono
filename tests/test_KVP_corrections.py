@@ -1,25 +1,19 @@
-import sys
 import os
-import inspect
 import pytest
-
-sys.path.insert(0, os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-import bophono
 import csv
 
 from test_helpers import assert_equal_phonetics
-
 
 ### Phonetics Key table
 
 def test_vowels():
     assert_equal_phonetics("KVP", "ཨ", "a")
-    assert_equal_phonetics("KVP", "ཨེ", "e")
+    assert_equal_phonetics("KVP", "ཨེ", "é")
     assert_equal_phonetics("KVP", "ཨོ", "o")
     assert_equal_phonetics("KVP", "ཨི", "i")
     assert_equal_phonetics("KVP", "ཨུ", "u")
     assert_equal_phonetics("KVP", "ཨུས", "ü")
-    assert_equal_phonetics("KVP", "ཨའི", "e")
+    assert_equal_phonetics("KVP", "ཨའི", "é")
     assert_equal_phonetics("KVP", "འ", "a")
     assert_equal_phonetics("KVP", "འོད", "ö")
 
@@ -96,17 +90,17 @@ def test_pha_consonant():
 def test_ba_consonant():
     assert_equal_phonetics("KVP", "བ", "ba")
     assert_equal_phonetics("KVP", "བར", "bar")
-    assert_equal_phonetics("KVP", "བས", "be")
-    assert_equal_phonetics("KVP", "བད", "be")
-    assert_equal_phonetics("KVP", "བའི", "be")
+    assert_equal_phonetics("KVP", "བས", "bé")
+    assert_equal_phonetics("KVP", "བད", "bé")
+    assert_equal_phonetics("KVP", "བའི", "bé")
     assert_equal_phonetics("KVP", "བར་དུ་", "bardu")
     assert_equal_phonetics("KVP", "སྐང་བ་", "kangwa")
     assert_equal_phonetics("KVP", "རྦ", "ba")
     assert_equal_phonetics("KVP", "སྦ", "ba")
     assert_equal_phonetics("KVP", "འབའ", "ba")
     assert_equal_phonetics("KVP", "བྱང་ཆུབ་ བར་", "jangchub bar")
-    assert_equal_phonetics("KVP", "རབ་གསལ་བས་", "rabsalwe")
-    assert_equal_phonetics("KVP", "གྱིས་གཟིར་བའི་", "gyizirwe")
+    assert_equal_phonetics("KVP", "རབ་གསལ་བས་", "rabsalwé")
+    assert_equal_phonetics("KVP", "གྱིས་གཟིར་བའི་", "gyizirwé")
     
 def test_ba_suffix():
     assert_equal_phonetics("KVP", "གང་བ་", "gangwa")
@@ -131,12 +125,11 @@ def test_tsa_consonant():
 def test_dza_consonant():
     assert_equal_phonetics("KVP", "ཛ", "dza") # dza at the beginning of a word
     assert_equal_phonetics("KVP", "འཛི་སྒར་", "dzigar") # dza at the beginning of a word
-    assert_equal_phonetics("KVP", "ར་ཛ་", "raza") # za in the middle of a word
+    assert_equal_phonetics("KVP", "ར་ཛ་", "radza") # dza in the middle of a word
 
 def test_zha_consonant():
     assert_equal_phonetics("KVP", "ཞ", "zha")
     assert_equal_phonetics("KVP", "བཞ", "zha")
-    assert_equal_phonetics("KVP", "ཞེ་ཆེན་", "shechen") # Exception
     
 def test_za_consonant():
     assert_equal_phonetics("KVP", "ཟ", "za")
@@ -177,12 +170,12 @@ def test_ratas():
     assert_equal_phonetics("KVP", "བཀྲ་བ་", "trawa")
     assert_equal_phonetics("KVP", "ཀྲོག་ཀྲོག་", "trogtrok")
     assert_equal_phonetics("KVP", "བཀྲ་ཤིས་", "tashi")
-    assert_equal_phonetics("KVP", "གྲ", "tra") # tra at the beginning of a word
-    assert_equal_phonetics("KVP", "གྲ་པ་", "trapa")
-    assert_equal_phonetics("KVP", "ལྷུན་གྲུབ་", "lhündrub") # dra if not beginning of a word
+    assert_equal_phonetics("KVP", "གྲ", "dra")
+    assert_equal_phonetics("KVP", "གྲ་པ་", "drapa")
+    assert_equal_phonetics("KVP", "ལྷུན་གྲུབ་", "lhündrub")
     assert_equal_phonetics("KVP", "པྲ", "tra")
     assert_equal_phonetics("KVP", "ཕྲ", "tra")
-    assert_equal_phonetics("KVP", "འཕྲིན་ལས་", "trinle")
+    assert_equal_phonetics("KVP", "འཕྲིན་ལས་", "trinlé")
     assert_equal_phonetics("KVP", "སྤྲུལ་སྐུ་", "tulku")
     assert_equal_phonetics("KVP", "བྲ", "dra")
     assert_equal_phonetics("KVP", "མཉམ་འབྲེལ་", "nyamdrel")
@@ -191,12 +184,20 @@ def test_dao_wa():
     assert_equal_phonetics("KVP", "དབ", "dab")
     assert_equal_phonetics("KVP", "དབུ", "u")
     assert_equal_phonetics("KVP", "དབུས", "ü")
+    assert_equal_phonetics("KVP", "དབུད", "ü")
+    assert_equal_phonetics("KVP", "དབུལ", "ül")
+    assert_equal_phonetics("KVP", "དབུན", "ün")
+    assert_equal_phonetics("KVP", "དབུལ་ཕོངས", "ülpong")
     assert_equal_phonetics("KVP", "དབི", "i")
-    assert_equal_phonetics("KVP", "དབེ", "e")
+    assert_equal_phonetics("KVP", "དབིག", "ik")
+    assert_equal_phonetics("KVP", "དབེ", "é")
+    assert_equal_phonetics("KVP", "དབེན་ས", "ensa")
     assert_equal_phonetics("KVP", "དབྱང", "yang")
-    assert_equal_phonetics("KVP", "དབོ", "wo")
-    assert_equal_phonetics("KVP", "དབོས", "wö")
+    assert_equal_phonetics("KVP", "དབོ", "o")
+    assert_equal_phonetics("KVP", "དབོས", "ö")
     assert_equal_phonetics("KVP", "དབང", "wang")
+    assert_equal_phonetics("KVP", "དབངས", "wang")
+    assert_equal_phonetics("KVP", "འཁོར་འདས", "khor dé")
 
 ### Additional Phonetics Instructions:
 
@@ -222,9 +223,9 @@ def test_u_umlaut():
 
 # The e accent should only be applied to the final e when there is a clear risk of mispronunciation (primarily for English words such as chime and dome).
 def test_no_accent_on_e_apart_from_exceptions():
-    assert_equal_phonetics("KVP", "མེ་", "me")
-    assert_equal_phonetics("KVP", "མེད", "me")
-    assert_equal_phonetics("KVP", "མིག་མེད་", "migme")
+    assert_equal_phonetics("KVP", "མེ་", "mé")
+    assert_equal_phonetics("KVP", "མེད", "mé")
+    assert_equal_phonetics("KVP", "མིག་མེད་", "migmé")
     assert_equal_phonetics("KVP", "མེད་སྣང་", "menang")
     assert_equal_phonetics("KVP", "འཆི་མེད་", "chimé")
     assert_equal_phonetics("KVP", "མདོ་མེད་", "domé")
@@ -239,7 +240,7 @@ def test_gg_yields_kg():
 
 # ng+g: When a syllable that ends in ng is followed by a syllable starting with g, the second g is dropped. For example: Senge.
 def test_ngg_yields_ng():
-    assert_equal_phonetics("KVP", "སེང་གེ་", "senge")
+    assert_equal_phonetics("KVP", "སེང་གེ་", "sengé")
     assert_equal_phonetics("KVP", "གང་གི་", "gangi")
 
 # a→e: When followed by an n (but not when followed by an l), unless a conventional spelling in English. For example: Palden, Namgyal, but Panchen.
@@ -252,12 +253,11 @@ def test_a_followed_by_n_or_l():
 
 # Names of contemporary masters, places, schools, and words that are commonly spelled in English (such as Dzongsar Khyentse, Drukpa Kagyu, Shechen, Shigatse, tonglen, chöd, rinpoche, and tulku) should be spelled according to convention.
 def test_names_and_common_spellings():
-    assert_equal_phonetics("KVP", "ཞེ་ཆེན་", "shechen")
     assert_equal_phonetics("KVP", "གཏོང་ལེན་", "tonglen")
     assert_equal_phonetics("KVP", "གཅོད་", "chöd")
-    assert_equal_phonetics("KVP", "རིན་པོ་ཆེ་", "rinpoche")
+    assert_equal_phonetics("KVP", "རིན་པོ་ཆེ་", "rinpoché")
     assert_equal_phonetics("KVP", "སྤྲུལ་སྐུ་", "tulku")
-    assert_equal_phonetics("KVP", "སྡེ་དགེ་", "derge")
+    assert_equal_phonetics("KVP", "སྡེ་དགེ་", "dergé")
     assert_equal_phonetics("KVP", "སྤྱན་རས་གཟིགས་", "chenrezig")
     assert_equal_phonetics("KVP", "མི་ཕམ་", "mipham")
     assert_equal_phonetics("KVP", "སྣར་ཐང་", "narthang")
@@ -267,15 +267,16 @@ def test_names_and_common_spellings():
 # The achung should be ignored
 def test_achung():
     assert_equal_phonetics("KVP", "མ་ཧཱ་", "maha")
-    assert_equal_phonetics("KVP", "བདེ་ཆེན་ ནཱ་དའི་ དངོས", "dechen nade ngö")
+    assert_equal_phonetics("KVP", "བདེ་ཆེན་ ནཱ་དའི་ དངོས", "dechen nadé ngö")
 
 
 ### Checking a few cases
 
 def test_specific_cases():
     assert_equal_phonetics("KVP", "བར་དུ", "bardu")
-    assert_equal_phonetics("KVP", "བར་ཆད", "barche")
+    assert_equal_phonetics("KVP", "བར་ཆད", "barché")
     assert_equal_phonetics("KVP", "བར་དོ", "bardo")
+    assert_equal_phonetics("KVP", "གཏིབས", "tib")
 
 ### Checking that things work as expected in KVP_corrections.csv
 

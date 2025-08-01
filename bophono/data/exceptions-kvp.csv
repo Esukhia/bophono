@@ -11,7 +11,6 @@
 སྤྱན་རས་གཟིགས,chenrez-ig
 སྣར་ཐང,narth-ang
 བུམ་ཐང,bumth-ang
-ཞེ་ཆེན,shech-en
 གཏོང་ལེན,tongl-en
 རིན་པོ་ཆེ/Ce,rinpoch-
 འཕོ་བ/Ca,pow-
@@ -36,24 +35,8 @@
 ས་གདན,sabd-en
 ཁ་གཅོད,khabch-ö
 # dba doesn't become wa if it has vowel i, e or u
-དབེ/Ce,-
-དབུ/Cu,-
-དབི/Ci,-
-# numbers, from NT Annex 1, completed by Drupchen
-བཅུ་གཅིག,chugch-ik
-བཅུ་གཉིས,chugny-i
-བཅུ་གསུམ,chugs-um
-བཅུ་བཞི/Ci,chubsh-
-བཅུ་བདུན,chubd-un
-བཅོ་བརྒྱད,chobgy-e
-རྩ་བཞི/Ci,tsabsh-
-རྩ་བདུན,tsabd-un
-རྩ་བརྒྱད,tsabgy-e
-སོ་བརྒྱད,sobgy-e
-བཞི་བཅུ/Cu,shibch-
-ལྔ་བཅུ/Cu,ngabch-
-ང་བཞི/Ci,ngabsh-
-དགུ་བཅུ/Cu,gubch-
+དབང,wang-
+དབངས,wang-
 # Sanskrit (TODO: check)
 པདྨ/Ca,pem-
 པདྨོ/Co,pem-
@@ -73,7 +56,6 @@
 དུས་འཁོར,thungkh-or
 གསར་འགྱུར,sangy-ur
 རྒྱུ་མཚན,gyumts-en
-རྒྱ་མཚོ/Co,gyamts-
 བོད་ཟླ/Ca,bönd-
 ད་ལྟ/Ca,dant-
 #སྟོབས་ལྡན,tomd-en
@@ -101,7 +83,6 @@
 # THL nasalizations
 བཀའ་འགྱུར,kangy-ur
 ངོས་འཛིན,ngöndz-in
-རིག་འཛིན,rindz-in
 མཁའ་འགྲོ/Co,khandr-
 #དཀྱིལ་འཁོར,kyinkh-or
 # ཆོས་འཕེལ,chömp-el (noted chöpel in the document)
@@ -162,3 +143,11 @@
 སྤྲོ་བསྡུ/Co,tront-
 ན་བཟ/Cb,namz-
 མ་འགགས,mank-ak
+མདོ་སྔགས,do ngak-
+ལྡེའུ་བཙན,deu-tsen
+མྱ་ངན་,nya ngen-
+ཉི་ཟླ་,nyi da-
+སྐུ་གསུང་ཐུགས,ku sung tuk-
+བྷནྡྷ/Ca,bhandh-
+ད་ལྟ,da ta-
+འཁོར་འདས,khor dé-

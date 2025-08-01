@@ -13,8 +13,6 @@ class PhonStateKVP:
         self.options = options
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
-        self.accentuateWL = options['accentuateWL'] if 'accentuateWL' in options else ["rime", "de", "ame", "chone", "dune", "dome", "tone", "chime", "done", "mine", "lame", "pale", "mare"]
-        self.accentuateall = options['accentuateWL'] if 'accentuateWL' in options else True
 
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
@@ -22,6 +20,9 @@ class PhonStateKVP:
             return
         # ' from ends.csv should be replaced with a space
         self.end = self.end.replace("'", ' ')
+        # e at the end of a word becomes é
+        if self.end.endswith("e") and endofword:
+            self.end = self.end[:-1]+"é"
         # suffix ga is "k" except in the middle of words
         if self.end.endswith("k") and not endofword:
             self.end = self.end[:-1]+"g"
@@ -33,6 +34,10 @@ class PhonStateKVP:
             self.end = self.end[:-1]+"k"
         if self.end.endswith("n") and nrc.startswith("n"):
             self.end = self.end[:-1]
+        if self.end.endswith("d") and nrc.startswith("dz"): # chödzé instead of chöddzé
+            self.end = self.end[:-1]
+        if re.match("[aeiou]$", self.end) and (nrc == "-" or re.match("^[aeiou]", nrc)): # za'ok instead of zaok (don't know why nrc is '-' sometimes but with this it works)
+            self.end += "'"
         # optional, from Rigpa: kun dga' -> kun-ga
         if self.splitNG and self.end.endswith("n") and nrc.startswith("g"):
             self.end += "-"
@@ -58,8 +63,6 @@ class PhonStateKVP:
         self.position += 1
         if nextrootconsonant == "-":
             self.phon += ""
-        elif nextrootconsonant.startswith("dz") and self.position > 1:
-            self.phon += "z"
         else:
             self.phon += nextrootconsonant
         # decompose multi-syllable ends:
