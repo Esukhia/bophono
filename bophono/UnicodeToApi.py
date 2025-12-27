@@ -111,18 +111,23 @@ class UnicodeToApi:
                 lastidx = eindex
             matchlastidx = self.__combine_next_syll_phon(tibstr, i, state, lastidx)
             if matchlastidx == -1:
-                # Add (?) marker for unrecognized syllables (e.g., Sanskrit) and continue
-                # First, finish any pending ending from previous syllable
-                state.doCombineCurEnd(True)
-                state.end = None
-                # Only add (?) if we haven't just added one (consolidate consecutive unknown syllables)
-                if not state.phon.endswith("(?) "):
-                    # Add space before (?) if there's preceding content
-                    if state.phon and not state.phon.endswith(" "):
-                        state.phon += " "
-                    state.phon += "(?) "
-                i = self.__get_next_letter_index(tibstr, lastidx, eindex)
-                continue
+                if self.options.get('unknownSyllableMarker'):
+                    # Add (?) marker for unrecognized syllables (e.g., Sanskrit) and continue
+                    # First, finish any pending ending from previous syllable
+                    state.doCombineCurEnd(True)
+                    state.end = None
+                    # Only add (?) if we haven't just added one (consolidate consecutive unknown syllables)
+                    if not state.phon.endswith("(?) "):
+                        # Add space before (?) if there's preceding content
+                        if state.phon and not state.phon.endswith(" "):
+                            state.phon += " "
+                        state.phon += "(?) "
+                    i = self.__get_next_letter_index(tibstr, lastidx, eindex)
+                    continue
+                else:
+                    # Original behavior: print warning and stop processing
+                    print("couldn't understand syllable "+tibstr[i:lastidx])
+                    break
             if matchlastidx < lastidx:
                 print("couldn't understand last "+str(lastidx-matchlastidx)+" characters of syllable "+tibstr[i:lastidx])
             i = self.__get_next_letter_index(tibstr, matchlastidx, eindex)
