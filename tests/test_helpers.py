@@ -1,18 +1,18 @@
 import inspect
 import bophono as bophono
 
-def assert_equal_phonetics(schema, tibetan, expected):
+def assert_equal_phonetics(schema, tibetan, expected, options={}):
     clean_tibetan = inspect.cleandoc(tibetan)
     clean_expected = inspect.cleandoc(expected)
-    phonetics = phonetics_for(schema, clean_tibetan)
+    phonetics = phonetics_for(schema, clean_tibetan, options)
     assert phonetics == clean_expected, f"Tibetan: {clean_tibetan} | Expected: {clean_expected} | Got: {phonetics}"
 
-def phonetics_for(schema, text):
+def phonetics_for(schema, text, options={}):
     lines = text.split("\n")
     result = ""
     for l in lines:
         words = l.split()
         for word in words:
-            result += f'{bophono.UnicodeToApi(schema=schema, options={}).get_api(word)} '
+            result += f'{bophono.UnicodeToApi(schema=schema, options=options).get_api(word)} '
         result = result.strip() + "\n"
     return result.strip()

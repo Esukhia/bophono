@@ -14,6 +14,41 @@ class PhonStateKVP:
         self.splitNG = options['splitNG'] if 'splitNG' in options else False
         self.splitKN = options['splitKN'] if 'splitKN' in options else False
 
+    def isEndingParticle(self, nrc, nextend):
+        """ Check if the next syllable is an ending particle (consonant + naro) 
+            Returns: False, 'vowel', or 'consonant' to indicate the type of ending particle
+        """
+        if nextend != 'o':
+            return False
+        if not self.end:
+            return False
+        # vowel endings followed by འོ (root is '-')
+        if nrc == '-' and self.end in ['a', 'i', 'u', 'e', 'o']:
+            return 'vowel'
+        # consonant endings followed by matching consonant + o
+        ending_to_particle = {
+            'k': 'g',   # ག ending → གོ particle
+            'g': 'g',   # ག ending → གོ particle  
+            'n': 'n',   # ན ending → ནོ particle
+            'b': 'w',   # བ ending → བོ particle (བ root is 'w')
+            'p': 'w',   # བ ending → བོ particle
+            'm': 'm',   # མ ending → མོ particle
+            'r': 'r',   # ར ending → རོ particle
+            'l': 'l',   # ལ ending → ལོ particle
+            "'": '-',   # འ ending → འོ particle
+        }
+        # also handle ད/ས endings that become e/e' etc
+        if self.end in ['e', "e'", "ä'"] and nrc == 'd':
+            return 'consonant'
+        # ས suffix gives 'ak' ending in KVP, particle is སོ (root 's')
+        if self.end == 'ak' and nrc == 's':
+            return 'consonant'
+        # check if the ending's final consonant matches the particle root
+        end_final = self.end[-1] if self.end else ''
+        if ending_to_particle.get(end_final) == nrc:
+            return 'consonant'
+        return False
+
     def doCombineCurEnd(self, endofword, nrc='', nextvowel=''): # nrc = next root consonant
         """ combined the self.end into the self.phon """
         if not self.end:
@@ -32,7 +67,7 @@ class PhonStateKVP:
             self.end = self.end[:-2]
         if self.end.endswith("g") and nrc.startswith("g"):
             self.end = self.end[:-1]+"k"
-        if self.end.endswith("n") and nrc.startswith("n"):
+        if self.end.endswith("n") and nrc.startswith("n") and not endofword:
             self.end = self.end[:-1]
         if self.end.endswith("d") and nrc.startswith("dz"): # chödzé instead of chöddzé
             self.end = self.end[:-1]
@@ -59,9 +94,22 @@ class PhonStateKVP:
     def combineWith(self, nextroot, nextend):
         nextrootconsonant = nextroot
         nextvowel = ''
-        self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
+        # Check if next syllable is an ending particle before combining
+        ending_particle_type = self.isEndingParticle(nextrootconsonant, nextend)
+        if ending_particle_type == 'consonant':
+            # For consonant ending particles, treat as end of word to preserve the ending
+            self.doCombineCurEnd(True, nextrootconsonant, nextvowel)
+        else:
+            self.doCombineCurEnd(False, nextrootconsonant, nextvowel)
         self.position += 1
-        if nextrootconsonant == "-":
+        # Add space before consonant ending particle, but not vowel ending particle
+        if ending_particle_type == 'consonant':
+            self.phon += " "
+        # Map particle roots to their phonetic output
+        particle_root_map = {'w': 'b', 'g': 'g', 'n': 'n', 'm': 'm', 'r': 'r', 'l': 'l', 's': 's', 'd': 'd'}
+        if ending_particle_type and nextrootconsonant in particle_root_map:
+            self.phon += particle_root_map[nextrootconsonant]
+        elif nextrootconsonant == "-":
             self.phon += ""
         else:
             self.phon += nextrootconsonant
