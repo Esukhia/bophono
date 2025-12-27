@@ -3,6 +3,7 @@
 ## Description
 
 The goal of this code is to provide a library to:
+
 - implement the conversion of a Tibetan Unicode word into IPA, according to different schemes / dialects
 - implement some conversions between IPA and phonetics readable by people with various language backgrounds (Chinese, English, etc.)
 
@@ -52,6 +53,22 @@ print(mstipa) # kú
 ```
 
 Note that you must first segment your text in words and then convert each word.
+
+## Options
+
+### unknownSyllableMarker
+
+When set to `True`, unrecognized syllables (e.g., Sanskrit) will be replaced with a `(?)` marker instead of stopping the conversion. This is useful for processing texts that contain Sanskrit mantras or other non-standard Tibetan syllables.
+
+```python
+import bophono
+
+converter = bophono.UnicodeToApi(schema="KVP", options={'unknownSyllableMarker': True})
+result = converter.get_api("ཧཱུྃ་")
+print(result)  # (?)
+```
+
+By default, this option is `False` to preserve backward compatibility.
 
 ## Changes
 
