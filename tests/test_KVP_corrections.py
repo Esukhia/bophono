@@ -195,6 +195,7 @@ def test_dao_wa():
     assert_equal_phonetics("KVP", "དབྱང", "yang")
     assert_equal_phonetics("KVP", "དབོ", "o")
     assert_equal_phonetics("KVP", "དབོས", "ö")
+    assert_equal_phonetics("KVP", "དབབ", "wab")
     assert_equal_phonetics("KVP", "དབང", "wang")
     assert_equal_phonetics("KVP", "དབངས", "wang")
     assert_equal_phonetics("KVP", "འཁོར་འདས", "khor dé")
