@@ -7,7 +7,7 @@ The goal of this code is to provide a library to:
 - implement the conversion of a Tibetan Unicode word into IPA, according to different schemes / dialects
 - implement some conversions between IPA and phonetics readable by people with various language backgrounds (Chinese, English, etc.)
 
-The primary focus of this library is litterary pronounciation, ideally representing how an umze would pronounce a traditional text, but contributions for other uses are welcome. We also do not handle Sanskrit transliteration (this can be done through custom exceptions lists).
+The primary focus of this library is litterary pronounciation, ideally representing how an umze would pronounce a traditional text, but contributions for other uses are welcome. Sanskrit in Tibetan script can be transliterated with the `IAST` scheme; pronunciation of Sanskrit is not handled (that can still be done through custom exceptions lists).
 
 Note that this library integrates no segmenter and needs to be applied on each word separately. You can use it in combination with [pybo](https://github.com/Esukhia/pybo/) to get the phonetics of full sentences.
 
@@ -22,6 +22,17 @@ We currently provide the following phonetics schemes:
 
 #### Colloquial Amdo Tibetan (by Kuo-ming Sung and Lha Byams Rgyal)
 
+#### IAST (Sanskrit in Tibetan script)
+
+`IAST` converts Indic text written in Tibetan Unicode to [IAST](https://en.wikipedia.org/wiki/International_Alphabet_of_Sanskrit_Transliteration). This is not a pronunciation scheme: it transliterates Sanskrit (and other Indic) stacks, ignoring characters it cannot convert.
+
+```python
+import bophono
+iast = bophono.UnicodeToApi(schema="IAST")
+print(iast.get_api("ཀརྨ"))  # karma
+print(iast.get_api("པདྨ"))  # padma
+```
+
 ## Outputs
 
 Apart from raw IPA, we provide the following output possibilities:
@@ -31,6 +42,15 @@ Apart from raw IPA, we provide the following output possibilities:
 The Chinese is produced by a streamlined phonetic scheme in order to match the Mandarin phonology (vowels have been simplified and most of the Tibetan suffixes removed).
 
 To produce the final output, we first transform the generated IPA into [Zhuyin](https://en.wikipedia.org/wiki/Bopomofo), and then the Zhuyin into Traditional Chinese characters, with a manually built correspondance list.
+
+#### Tibetan pinyin
+
+`tibetan_to_pinyin()` converts Tibetan Unicode to [Tibetan pinyin](https://en.wikipedia.org/wiki/Tibetan_pinyin) (ZWPY) via the MST IPA. Use `style="diacritic"` (default: ê, ô, ä, ö, ü) or `style="ascii"`.
+
+```python
+from bophono import tibetan_to_pinyin
+print(tibetan_to_pinyin("བཀྲ་ཤིས"))  # zha xi
+```
 
 ## Installation
 

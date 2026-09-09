@@ -6,6 +6,7 @@ This file lists the authors and contributors to the project:
 
 - Thubtenrigzin for the programming of the Chinese transcription
 - Elie Roux <roux.elie@gmail.com>
+- Charles Li for the Tibetan-to-IAST conversion
 
 ## Contributors
 

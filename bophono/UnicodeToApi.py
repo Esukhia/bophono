@@ -5,6 +5,7 @@ from .PhonStateMSTPhonology import *
 from .PhonStateCAT import *
 from .PhonStateKVP import *
 from .PhonStateLKT import *
+from .tibskritconv import tibskrit_to_iast
 
 MST_PHONETIC_SCHEMAS = ('MST', 'MST_phonetics')
 MST_SCHEMAS = MST_PHONETIC_SCHEMAS + ('MST_phonology',)
@@ -28,9 +29,14 @@ class UnicodeToApi:
         elif schema == 'LKT':
             self.columnIndex = 4
             exceptions = "exceptions-lkt.csv"
+
+        elif schema == 'IAST':
+            self.options = options
+            self.schema = schema
+            return
             
         else:
-            raise ValueError("schema must be MST, MST_phonetics, MST_phonology, CAT, KVP, or LKT")
+            raise ValueError("schema must be MST, MST_phonetics, MST_phonology, CAT, KVP, LKT, or IAST")
 
         self.options = options
         self.schema = schema
@@ -81,6 +87,8 @@ class UnicodeToApi:
     def get_api(self, tibstr, bindex=0, eindex=-1, pos=None, endOfSentence=False):
         if eindex == -1:
             eindex = len(tibstr)
+        if self.schema == 'IAST':
+            return tibskrit_to_iast(tibstr[bindex:eindex])
         i = self.__get_next_letter_index(tibstr, bindex, eindex)
         if (i==-1):
             return ''
