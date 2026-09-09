@@ -13,9 +13,12 @@ Note that this library integrates no segmenter and needs to be applied on each w
 
 ## Phonetics methods
 
-We currently provide two phonetics schemes:
+We currently provide the following phonetics schemes:
 
 #### Manual of Standard Tibetan (by Tournadre)
+
+- `MST` / `MST_phonetics`: IPA phonetics (`MST_phonetics` is an alias of `MST`)
+- `MST_phonology`: the intermediate phonological representation, with tone marked on the vowel as in Tournadre (macron `ā` for high tone, understrike `a̱` for low tone) instead of `k+a` / `k-a`
 
 #### Colloquial Amdo Tibetan (by Kuo-ming Sung and Lha Byams Rgyal)
 
@@ -37,7 +40,7 @@ pip install bophono
 
 ## API
 
-To get the IPA for a word according to the `MST` scheme:
+To get the IPA for a word according to the `MST` / `MST_phonetics` scheme:
 
 ```python
 import bophono
@@ -47,9 +50,19 @@ options = {
   'aspirateLowTones': True
 }
 
-mstconverter = bophono.UnicodeToApi(schema="MST", options = options)
+mstconverter = bophono.UnicodeToApi(schema="MST_phonetics", options = options)
 mstipa = mstconverter.get_api("སྐུ")
-print(mstipa) # kú
+print(mstipa) # ku˥
+```
+
+`schema="MST"` remains valid and is equivalent to `MST_phonetics`.
+
+To get the phonological transcription (`MST_phonology`):
+
+```python
+phonology = bophono.UnicodeToApi(schema="MST_phonology")
+print(phonology.get_api("སྐུ"))       # kū
+print(phonology.get_api("བཀྲ་ཤིས"))  # trā|shī'
 ```
 
 Note that you must first segment your text in words and then convert each word.
@@ -69,6 +82,21 @@ print(result)  # (?)
 ```
 
 By default, this option is `False` to preserve backward compatibility.
+
+## How to cite
+
+If you use this library in academic work, please cite:
+
+> Elie Roux. *bophono: Tibetan Phonetics Engine*. https://github.com/Esukhia/bophono
+
+```bibtex
+@software{roux_bophono,
+  author = {Roux, Elie},
+  title = {bophono: Tibetan Phonetics Engine},
+  url = {https://github.com/Esukhia/bophono},
+  year = {2018}
+}
+```
 
 ## Changes
 

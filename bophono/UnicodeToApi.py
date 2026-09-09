@@ -1,15 +1,19 @@
 import os
 from .sdtrie import *
 from .PhonStateMST import *
+from .PhonStateMSTPhonology import *
 from .PhonStateCAT import *
 from .PhonStateKVP import *
 from .PhonStateLKT import *
+
+MST_PHONETIC_SCHEMAS = ('MST', 'MST_phonetics')
+MST_SCHEMAS = MST_PHONETIC_SCHEMAS + ('MST_phonology',)
 
 class UnicodeToApi:
     
     def __init__(self, schema="MST", options={}):
 
-        if schema == 'MST':
+        if schema in MST_SCHEMAS:
             self.columnIndex = 1
             exceptions = "exceptions.csv"
         
@@ -26,7 +30,7 @@ class UnicodeToApi:
             exceptions = "exceptions-lkt.csv"
             
         else:
-            raise ValueError("schema must be MST, CAT, KVP, or LKT")
+            raise ValueError("schema must be MST, MST_phonetics, MST_phonology, CAT, KVP, or LKT")
 
         self.options = options
         self.schema = schema
@@ -81,8 +85,10 @@ class UnicodeToApi:
         if (i==-1):
             return ''
         # recreating one each time is suboptimal
-        if self.schema == 'MST':
+        if self.schema in MST_PHONETIC_SCHEMAS:
             state = PhonStateMST(self.options, pos, endOfSentence)
+        elif self.schema == 'MST_phonology':
+            state = PhonStateMSTPhonology(self.options, pos, endOfSentence)
         elif self.schema == 'CAT':
             state = PhonStateCAT(self.options, pos, endOfSentence)
         elif self.schema == 'KVP':
