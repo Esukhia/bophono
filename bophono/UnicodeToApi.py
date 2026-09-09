@@ -6,6 +6,7 @@ from .PhonStateCAT import *
 from .PhonStateKVP import *
 from .PhonStateLKT import *
 from .tibskritconv import tibskrit_to_iast
+from .PhonStateBDRCLenient import PhoneticSystemBDRCLenient
 
 MST_PHONETIC_SCHEMAS = ('MST', 'MST_phonetics')
 MST_SCHEMAS = MST_PHONETIC_SCHEMAS + ('MST_phonology',)
@@ -34,9 +35,15 @@ class UnicodeToApi:
             self.options = options
             self.schema = schema
             return
+
+        elif schema == 'BDRC_lenient':
+            self.options = options
+            self.schema = schema
+            self._bdrc = PhoneticSystemBDRCLenient(options)
+            return
             
         else:
-            raise ValueError("schema must be MST, MST_phonetics, MST_phonology, CAT, KVP, LKT, or IAST")
+            raise ValueError("schema must be MST, MST_phonetics, MST_phonology, CAT, KVP, LKT, IAST, or BDRC_lenient")
 
         self.options = options
         self.schema = schema
@@ -89,6 +96,8 @@ class UnicodeToApi:
             eindex = len(tibstr)
         if self.schema == 'IAST':
             return tibskrit_to_iast(tibstr[bindex:eindex])
+        if self.schema == 'BDRC_lenient':
+            return self._bdrc.convert(tibstr, bindex, eindex)
         i = self.__get_next_letter_index(tibstr, bindex, eindex)
         if (i==-1):
             return ''

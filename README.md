@@ -33,6 +33,16 @@ print(iast.get_api("ཀརྨ"))  # karma
 print(iast.get_api("པདྨ"))  # padma
 ```
 
+#### BDRC lenient
+
+`BDRC_lenient` is a search-oriented notation used by [lucene-bo](https://github.com/buda-base/lucene-bo): MST phonology with tone, aspiration, nasalization, contour, ས/ད stops, and vowel length ignored, and `ä` folded to `e`. `sh` is written `S`.
+
+```python
+lenient = bophono.UnicodeToApi(schema="BDRC_lenient")
+print(lenient.get_api("གཤན"))        # Sen
+print(lenient.get_api("འཕྲིན་ལས"))  # trinle
+```
+
 ## Outputs
 
 Apart from raw IPA, we provide the following output possibilities:
