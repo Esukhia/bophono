@@ -6,6 +6,7 @@ from .PhonStateCAT import *
 from .PhonStateKVP import *
 from .PhonStateLKT import *
 from .tibskritconv import tibskrit_to_iast
+from .lkt import convert_lkt
 from .PhonStateBDRCLenient import PhoneticSystemBDRCLenient
 
 MST_PHONETIC_SCHEMAS = ('MST', 'MST_phonetics')
@@ -98,6 +99,15 @@ class UnicodeToApi:
             return tibskrit_to_iast(tibstr[bindex:eindex])
         if self.schema == 'BDRC_lenient':
             return self._bdrc.convert(tibstr, bindex, eindex)
+        marker = self.options.get('unknownSyllableMarker', False)
+        if self.schema == 'LKT':
+            def render(text, mark_unknown):
+                return self._get_api(text, 0, len(text), pos, endOfSentence, mark_unknown)
+
+            return convert_lkt(tibstr[bindex:eindex], render, marker)
+        return self._get_api(tibstr, bindex, eindex, pos, endOfSentence, marker)
+
+    def _get_api(self, tibstr, bindex, eindex, pos, endOfSentence, mark_unknown):
         i = self.__get_next_letter_index(tibstr, bindex, eindex)
         if (i==-1):
             return ''
@@ -134,7 +144,7 @@ class UnicodeToApi:
                 lastidx = eindex
             matchlastidx = self.__combine_next_syll_phon(tibstr, i, state, lastidx)
             if matchlastidx == -1:
-                if self.options.get('unknownSyllableMarker'):
+                if mark_unknown:
                     # Add (?) marker for unrecognized syllables (e.g., Sanskrit) and continue
                     # First, finish any pending ending from previous syllable
                     state.doCombineCurEnd(True)

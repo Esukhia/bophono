@@ -7,7 +7,7 @@ The goal of this code is to provide a library to:
 - implement the conversion of a Tibetan Unicode word into IPA, according to different schemes / dialects
 - implement some conversions between IPA and phonetics readable by people with various language backgrounds (Chinese, English, etc.)
 
-The primary focus of this library is litterary pronounciation, ideally representing how an umze would pronounce a traditional text, but contributions for other uses are welcome. Sanskrit in Tibetan script can be transliterated with the `IAST` scheme; pronunciation of Sanskrit is not handled (that can still be done through custom exceptions lists).
+The primary focus of this library is litterary pronounciation, ideally representing how an umze would pronounce a traditional text, but contributions for other uses are welcome. Use the `IAST` scheme to transliterate Sanskrit in Tibetan script. The `LKT` scheme also supports a plain-Latin Sanskrit fallback.
 
 Note that this library integrates no segmenter and needs to be applied on each word separately. You can use it in combination with [pybo](https://github.com/Esukhia/pybo/) to get the phonetics of full sentences.
 
@@ -21,6 +21,10 @@ We currently provide the following phonetics schemes:
 - `MST_phonology`: the intermediate phonological representation, with tone marked on the vowel as in Tournadre (macron `ā` for high tone, understrike `a̱` for low tone) instead of `k+a` / `k-a`
 
 #### Colloquial Amdo Tibetan (by Kuo-ming Sung and Lha Byams Rgyal)
+
+#### Lotus King Translation (`LKT`)
+
+`LKT` retains Tibetan umlauts and omits acute accents. When LKT has no Tibetan reading for a Sanskrit form, it uses Sanskrit transliteration without diacritics. Attested spelling variants such as `བཛྲ` and `སརྦ` give `vajra` and `sarva`. Both `ཧཱུྂ` and `ཧཱུྃ` give `hum`. Unrecognized forms still follow `unknownSyllableMarker`.
 
 #### IAST (Sanskrit in Tibetan script)
 
